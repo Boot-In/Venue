@@ -79,6 +79,7 @@ class AccountScreenViewController: UIViewController {
         do {
             try Auth.auth().signOut()
             UserDefaults.standard.set(false, forKey: "logined")
+            DataService.shared.localUser = nil
             print("Log Out")
         } catch {
             print(error.localizedDescription)

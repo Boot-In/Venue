@@ -53,8 +53,8 @@ class MainScreenPresenter: MainScreenPresenterProtocol {
         Auth.auth().addStateDidChangeListener({[weak self] (auth, user) in
             if user != nil {
                 self?.user = user
-                UserDefaults.standard.set(true, forKey: "logined")
                 NetworkService.loadMyProfile(userId: user!.uid)
+                UserDefaults.standard.set(true, forKey: "logined")
                 print("данные пользователя загружены")
             } else {
                 UserDefaults.standard.set(false, forKey: "logined")
@@ -63,7 +63,7 @@ class MainScreenPresenter: MainScreenPresenterProtocol {
     }
     
     func checkUserStatus() {
-        if self.user != nil {
+        if DataService.shared.localUser != nil {
             print("...user?.uid", user?.uid ?? "")
             self.router.showAccountScreen()
         } else {
