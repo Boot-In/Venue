@@ -26,6 +26,7 @@ class NetworkService {
         print("Event removed!")
     }
     static func saveNewEvent(event: Event) {
+        
         func getEventID() -> String {
             var iD = ""
             iD += String(event.userID[event.userID.startIndex]).lowercased()
@@ -35,6 +36,7 @@ class NetworkService {
             iD += String(Int(event.latEvent))+String(Int(event.lngEvent))
             return iD
         }
+        
         let ref = Database.database().reference()
         let eventRef = ref.child("events").child(getEventID())
         eventRef.setValue([
@@ -98,6 +100,7 @@ class NetworkService {
                 let event = Event(snapshot: item as! DataSnapshot)
                 eventsFromNet.append(event) 
             }
+            eventsFromNet.sort {$0.dateEventTI < $1.dateEventTI }
             DataService.shared.events = eventsFromNet
             print("загружено \(eventsFromNet.count) элементов")
             print("Элементы помещены в массив \(DataService.shared.events.count)")
@@ -129,24 +132,26 @@ class NetworkService {
     }
     
     static func followMe() {
+        print("\n--- Выполнение Follow Me ----")
         let eventID = DataService.shared.eventID
         guard let localUser = DataService.shared.localUser else { return }
-        print("eventID = ", eventID, "ID = ", localUser.userID, "niсkNameUser = ", localUser.niсkNameUser)
+        print("eventID = ", eventID, "\nUserID = ", localUser.userID, "\nniсkNameUser = ", localUser.niсkNameUser)
         let ref = Database.database().reference()
         let eventRefKey = ref.child("events").child(eventID).child("followEventUsers")
         let update = ["\(localUser.userID)": localUser.niсkNameUser]
         eventRefKey.updateChildValues(update)
-        print("save Follow Event Complete !")
+        print("--- save Follow Event Complete ! ---\n")
     }
     
     static func removeFollow() {
+        print("\n--- Удаление Follow ----")
         let eventID = DataService.shared.eventID
         guard let localUser = DataService.shared.localUser else { return }
-        print("eventID = ", eventID, "ID = ", localUser.userID, "niсkNameUser = ", localUser.niсkNameUser)
+        print("eventID = ", eventID, "\nUserID = ", localUser.userID, "\nniсkNameUser = ", localUser.niсkNameUser)
         let ref = Database.database().reference()
         let eventRefKey = ref.child("events").child(eventID).child("followEventUsers").child(localUser.userID)
         eventRefKey.removeValue()
-        print("Follow removed!")
+        print("--- Follow removed! ---\n")
     }
     
     

@@ -37,7 +37,7 @@ class EventsTableViewController: UIViewController {
         rangeSC.setTitleTextAttributes([NSAttributedString.Key.foregroundColor: UIColor.blue], for: .selected)
         rangeSC.setTitleTextAttributes([NSAttributedString.Key.foregroundColor: UIColor.black], for: .normal)
         removeOldButton.setTitle("🗑 Old(\(DataService.shared.oldEventsID?.count ?? 0))", for: .normal)
-        if DataService.shared.localUser.userID == DataService.shared.userAdmin { removeOldButton.isHidden = false } else { removeOldButton.isHidden = true }
+        if DataService.shared.localUser != nil && DataService.shared.localUser.userID == DataService.shared.userAdmin { removeOldButton.isHidden = false } else { removeOldButton.isHidden = true }
         //rangeSC.backgroundColor = .clear
         //rangeSC.selectedSegmentTintColor = .systemGray
     }
@@ -83,7 +83,7 @@ extension EventsTableViewController: UITableViewDataSource, UITableViewDelegate 
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         DataService.shared.event = eventsFiltred[indexPath.row]
         DataService.shared.eventID = eventsFiltred[indexPath.row].eventID
-        presenter.goToEventScreen(index: indexPath.row)
+        presenter.goToEventScreen()
     }
     
 }

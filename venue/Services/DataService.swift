@@ -23,7 +23,7 @@ class DataService {
     var event: Event!
     var eventID = String()
     var localUser: Profile!
-    var fallowUsers: [String] = []
+    //var fallowUsers: [String : String] = [:]
     var markerDidTapped = false
     var marker: GMSMarker!
     
@@ -33,6 +33,7 @@ class DataService {
         var eventsFiltred:[Event] = []
         let today = Date().timeIntervalSince1970
         print("Сегодня: ", today, Date(timeIntervalSince1970: today))
+        DataService.shared.oldEventsID?.removeAll()
         var interval = 0.0
         
         switch range {
@@ -53,6 +54,18 @@ class DataService {
         print("В отфильтрованном массиве \(eventsFiltred.count) элементов")
         print("Старых событий = \(String(describing: DataService.shared.oldEventsID?.count)) ")
         return eventsFiltred
+    }
+    
+    
+    static func searchIndexEvent(event: Event) -> Int {
+        var index = 0
+        let events = DataService.shared.events
+        for i in 0..<events.count {
+            if events[i].eventID == event.eventID {
+                index = i
+            }
+        }
+        return index
     }
     
 }

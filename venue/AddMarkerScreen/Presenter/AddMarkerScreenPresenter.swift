@@ -52,9 +52,9 @@ class AddMarkerScreenPresenter: AddMarkerScreenPresenterProtocol {
         event.iconEvent = iconEvent
         event.discriptionEvent = discrEvent
         event.snipetEvent = DataService.shared.categoryEvent
-        /// DataService.shared.events.append(event)  ????
-        /// Сохранение
+        /// Сохранение в сеть и добавление локально
         NetworkService.saveNewEvent(event: event)
+        DataService.shared.events.append(event)
     }
     
     func updateEvent(event: Event, nameEvent: String, iconEvent: String, discrEvent: String) {
@@ -68,16 +68,10 @@ class AddMarkerScreenPresenter: AddMarkerScreenPresenterProtocol {
         /// Сохранение
         NetworkService.updateEvent(event: eventUpd)
         DataService.shared.event = eventUpd
+        /// Замена в локальном массиве.
+        let i = DataService.searchIndexEvent(event: event)
+        DataService.shared.events[i] = eventUpd
     }
 
-//    func getEventID(_ event: Event) -> String {
-//        var iD = ""
-//        iD += String(event.userID[event.userID.startIndex]).lowercased()
-//        iD += String(Int(event.dateEventTI))
-//        iD += String(event.userID[event.userID.index(before: event.userID.endIndex)]).lowercased()
-//        iD += String(event.nameEvent.count)
-//        iD += String(Int(event.latEvent))+String(Int(event.lngEvent))
-//        return iD
-//    }
 
 }

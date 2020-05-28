@@ -7,7 +7,7 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
-        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="AccountScreenViewController" customModule="venue" customModuleProvider="target">
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="AccountScreenViewController" customModule="Venue" customModuleProvider="target">
             <connections>
                 <outlet property="emailTextField" destination="BYN-et-9nf" id="VJB-0Y-ReE"/>
                 <outlet property="infoLabel" destination="fdM-uB-JJe" id="y59-B2-S8Q"/>
@@ -27,7 +27,7 @@
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
                 <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="20" translatesAutoresizingMaskIntoConstraints="NO" id="nhk-U2-3rJ">
-                    <rect key="frame" x="20" y="30" width="335" height="424"/>
+                    <rect key="frame" x="20" y="30" width="335" height="447"/>
                     <subviews>
                         <stackView opaque="NO" contentMode="scaleToFill" spacing="20" translatesAutoresizingMaskIntoConstraints="NO" id="lt5-JB-zN2">
                             <rect key="frame" x="0.0" y="0.0" width="335" height="30"/>
@@ -48,11 +48,11 @@
                                 </button>
                             </subviews>
                         </stackView>
-                        <stackView opaque="NO" contentMode="scaleToFill" spacing="50" translatesAutoresizingMaskIntoConstraints="NO" id="wxq-40-8rL">
+                        <stackView opaque="NO" contentMode="scaleToFill" spacing="30" translatesAutoresizingMaskIntoConstraints="NO" id="wxq-40-8rL">
                             <rect key="frame" x="0.0" y="50" width="335" height="34"/>
                             <subviews>
                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="E-mail" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="DSZ-xs-ctv">
-                                    <rect key="frame" x="0.0" y="0.0" width="61.5" height="34"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="81.5" height="34"/>
                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                     <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                     <nil key="highlightedColor"/>
@@ -143,33 +143,44 @@
                                 </textField>
                             </subviews>
                         </stackView>
-                        <stackView opaque="NO" contentMode="scaleToFill" spacing="80" translatesAutoresizingMaskIntoConstraints="NO" id="m7Y-p2-9pz">
-                            <rect key="frame" x="0.0" y="320" width="335" height="34"/>
+                        <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="3hf-aM-bnj">
+                            <rect key="frame" x="0.0" y="320" width="335" height="57"/>
                             <subviews>
-                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Ник" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="n37-lJ-K87">
-                                    <rect key="frame" x="0.0" y="0.0" width="31.5" height="34"/>
-                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                    <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <stackView opaque="NO" contentMode="scaleToFill" spacing="30" translatesAutoresizingMaskIntoConstraints="NO" id="m7Y-p2-9pz">
+                                    <rect key="frame" x="0.0" y="0.0" width="335" height="34"/>
+                                    <subviews>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Ник**" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="n37-lJ-K87">
+                                            <rect key="frame" x="0.0" y="0.0" width="81.5" height="34"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                            <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                        <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Ник (обязательно)" textAlignment="center" minimumFontSize="17" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="TTO-SQ-XOW">
+                                            <rect key="frame" x="111.5" y="0.0" width="223.5" height="34"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                            <textInputTraits key="textInputTraits" autocapitalizationType="words" autocorrectionType="no" smartDashesType="no" smartInsertDeleteType="no" textContentType="nickname"/>
+                                            <connections>
+                                                <outlet property="delegate" destination="-1" id="dBu-CB-Vty"/>
+                                            </connections>
+                                        </textField>
+                                    </subviews>
+                                </stackView>
+                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="** Как вас будут видеть другие пользователи" textAlignment="right" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" minimumScaleFactor="0.80000000000000004" translatesAutoresizingMaskIntoConstraints="NO" id="WeV-k7-Nkv">
+                                    <rect key="frame" x="0.0" y="39" width="335" height="18"/>
+                                    <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                                    <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                     <nil key="highlightedColor"/>
                                 </label>
-                                <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Ник (обязательно)" textAlignment="center" minimumFontSize="17" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="TTO-SQ-XOW">
-                                    <rect key="frame" x="111.5" y="0.0" width="223.5" height="34"/>
-                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                    <textInputTraits key="textInputTraits" autocapitalizationType="words" autocorrectionType="no" smartDashesType="no" smartInsertDeleteType="no" textContentType="nickname"/>
-                                    <connections>
-                                        <outlet property="delegate" destination="-1" id="dBu-CB-Vty"/>
-                                    </connections>
-                                </textField>
                             </subviews>
                         </stackView>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" minimumScaleFactor="0.60000002384185791" translatesAutoresizingMaskIntoConstraints="NO" id="fdM-uB-JJe">
-                            <rect key="frame" x="0.0" y="374" width="335" height="0.0"/>
+                            <rect key="frame" x="0.0" y="397" width="335" height="0.0"/>
                             <fontDescription key="fontDescription" type="system" weight="light" pointSize="17"/>
                             <color key="textColor" red="0.002888324389" green="0.054154038940000003" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             <nil key="highlightedColor"/>
                         </label>
                         <stackView opaque="NO" contentMode="scaleToFill" distribution="equalSpacing" spacing="50" translatesAutoresizingMaskIntoConstraints="NO" id="PZl-1K-rmR">
-                            <rect key="frame" x="0.0" y="394" width="335" height="30"/>
+                            <rect key="frame" x="0.0" y="417" width="335" height="30"/>
                             <subviews>
                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="TXr-Xb-awx">
                                     <rect key="frame" x="0.0" y="0.0" width="48" height="30"/>
@@ -195,8 +206,8 @@
                         </stackView>
                     </subviews>
                     <constraints>
-                        <constraint firstItem="TTO-SQ-XOW" firstAttribute="width" secondItem="jSf-7G-81m" secondAttribute="width" id="0Pa-hH-oq3"/>
                         <constraint firstItem="K1r-Zc-hIe" firstAttribute="width" secondItem="BYN-et-9nf" secondAttribute="width" id="4Ze-nC-QUj"/>
+                        <constraint firstItem="TTO-SQ-XOW" firstAttribute="width" secondItem="jSf-7G-81m" secondAttribute="width" id="4u4-FZ-pUH"/>
                         <constraint firstItem="nzy-8e-LEa" firstAttribute="width" secondItem="BYN-et-9nf" secondAttribute="width" id="f8Z-UR-fKP"/>
                         <constraint firstItem="dGr-Zj-NhA" firstAttribute="width" secondItem="nzy-8e-LEa" secondAttribute="width" id="gzZ-EQ-sPH"/>
                         <constraint firstItem="jSf-7G-81m" firstAttribute="width" secondItem="K1r-Zc-hIe" secondAttribute="width" id="l6s-UZ-I54"/>

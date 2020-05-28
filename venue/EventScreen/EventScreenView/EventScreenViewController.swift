@@ -31,6 +31,9 @@ class EventScreenViewController: UIViewController {
         goButton.isHidden = false
         cancelFollowButton.isHidden = true
         
+        eventDiscriptionTV.backgroundColor? = UIColor(white: 1, alpha: 0.3)
+        eventDiscriptionTV.textColor = .black
+        
         infoLabel.alpha = 0
         eventDiscriptionTV.isEditable = false
         if let event = DataService.shared.event {
@@ -43,20 +46,22 @@ class EventScreenViewController: UIViewController {
         super.viewWillAppear(animated)
         if let event = DataService.shared.event {
             presenter.loadEventInfo(event: event )
+            print("отработал viewWillAppear EventScreen")
         }
     }
     
     func checkFollowUserStatus() {
         if let event = DataService.shared.event {
-            print("...event>count>", event.followEventUsers.count)
+            print("...event>Name>", event.nameEvent)
+            print("...event>followEventUsersCount>", event.followEventUsers.count)
             
-            for obj in event.followEventUsers {
-                if obj.key == DataService.shared.localUser.userID {
+            for nick in event.followEventUsers {
+                if DataService.shared.localUser != nil && nick.key == DataService.shared.localUser.userID {
                     goButton.isHidden = true
                     cancelFollowButton.isHidden = false
                     self.displayWarningLabel(withText: "Ваш голос принят !")
                 }
-                print("key>",obj.key, "   value>", obj.value)
+                print("key>",nick.key, "   value>", nick.value)
             }
         }
     }
@@ -66,7 +71,11 @@ class EventScreenViewController: UIViewController {
         NetworkService.removeFollow()
         goButton.isHidden = false
         cancelFollowButton.isHidden = true
+        print("до удаления:", DataService.shared.events[index].followEventUsers)
+        DataService.shared.events[index].followEventUsers.removeValue(forKey: DataService.shared.localUser.userID)
+        print("После удаления:", DataService.shared.events[index].followEventUsers)
         displayWarningLabel(withText: "Жаль, что передумали ...")
+        //checkFollowUserStatus()
     }
     
 
@@ -92,7 +101,10 @@ class EventScreenViewController: UIViewController {
         displayWarningLabel(withText: "Ваш голос принят !")
         goButton.isHidden = true
         cancelFollowButton.isHidden = false
-      //  DataService.shared.events[index].followEventUsers ???
+        print("До добавления:", DataService.shared.events[index].followEventUsers)
+        DataService.shared.events[index].followEventUsers[DataService.shared.localUser.userID] = DataService.shared.localUser.niсkNameUser
+        print("После добавления:", DataService.shared.events[index].followEventUsers)
+        checkFollowUserStatus()
     }
     
     func animeOffLabel() {
@@ -118,13 +130,14 @@ class EventScreenViewController: UIViewController {
 
 extension EventScreenViewController: EventScreenProtocol {
     
-    func setTextToView(nickName: String, eventData: String, eventName: String, eventCategory: String, eventDiscription: String) {
+    func setTextToView(nickName: String, eventData: String, eventName: String, eventCategory: String, eventDiscription: String, index: Int) {
         
         nickNameLabel.text = nickName
         eventDataLabel.text = "Дата проведения: \(eventData)"
         eventNameLabel.text = "Название: \(eventName)"
         eventCategoryLabel.text = "Категория: \(eventCategory)"
         eventDiscriptionTV.text = eventDiscription
+        self.index = index;   print("index = ", index)
         checkFollowUserStatus()
     }
     
@@ -136,6 +149,10 @@ extension EventScreenViewController: EventScreenProtocol {
             removeButton.isHidden = false
             editButton.isHidden = false
         }
+    }
+    
+    func hideFollowButton() {
+        goButton.isHidden = true
     }
     
 }

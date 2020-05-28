@@ -22,7 +22,7 @@ struct Event {
     var discriptionEvent: String = ""
     var iconEvent: String = "marker-icon"
     var lifeTimeEvent: Double = 86400
-    var followEventUsers = [String: String]()
+    var followEventUsers = [String : String]()
     let ref: DatabaseReference?
     
     init(userID: String, userNick: String, nameEvent: String, coordinate: CLLocationCoordinate2D, date: Date ) {

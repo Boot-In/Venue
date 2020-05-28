@@ -78,6 +78,7 @@ class AccountScreenViewController: UIViewController {
     @IBAction func logOut() {
         do {
             try Auth.auth().signOut()
+            UserDefaults.standard.set(false, forKey: "logined")
             print("Log Out")
         } catch {
             print(error.localizedDescription)

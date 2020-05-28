@@ -16,7 +16,7 @@ protocol EventsTableViewPresenterProtocol: class {
     init(view: EventsTableViewProtocol, router: EventsTableViewRouterProtocol)
     
    // func markerFiltred(range: Int) -> [Event]
-    func goToEventScreen(index: Int)
+    func goToEventScreen()
 }
 
 class EventsTableViewPresenter: EventsTableViewPresenterProtocol {
@@ -30,8 +30,8 @@ class EventsTableViewPresenter: EventsTableViewPresenterProtocol {
     }///////////////////////////////////////////////////
    
     
-    func goToEventScreen(index: Int) {
-        router.showEventScreen(index: index)
+    func goToEventScreen() {
+        router.showEventScreen()
     }
     
     

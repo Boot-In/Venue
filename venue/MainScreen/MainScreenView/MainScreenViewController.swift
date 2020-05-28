@@ -12,7 +12,6 @@ import GoogleMaps
 class MainScreenViewController: UIViewController {
     
     var presenter: MainScreenPresenterProtocol!
-    var isMark: Bool = false  // установка маркера на экран
     
     @IBOutlet weak var markerButton: UIButton!
     @IBOutlet weak var accountButton: UIButton!
@@ -31,7 +30,7 @@ class MainScreenViewController: UIViewController {
         presenter.startLocationService()
        
         presenter.checkUserLoginStatus()
-        
+        zoomLabel.textColor = .black
         markerButton.isHidden = true
         intervalSC.setTitleTextAttributes([NSAttributedString.Key.foregroundColor: UIColor.blue], for: .selected)
         intervalSC.setTitleTextAttributes([NSAttributedString.Key.foregroundColor: UIColor.black], for: .normal)
@@ -48,14 +47,14 @@ class MainScreenViewController: UIViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        print("viewWillAppear")
+        print("viewWillAppear MainScreen")
         checkAccount()
        // presenter.markerFiltred(range: intervalSC.selectedSegmentIndex)
-        if isMark {
+      //  if isMark {
             mapView.clear()
             print("Карта очищена")
             presenter.getOfflineMarkers(range:  intervalSC.selectedSegmentIndex)
-        }
+      //  }
     }
     
     override func viewWillDisappear(_ animated: Bool) {
@@ -127,14 +126,9 @@ class MainScreenViewController: UIViewController {
     
     func addNewMarker() {
         if UserDefaults.standard.bool(forKey: "logined") {
-            if isMark {
-                presenter.goAddMarkerScreen()
-            } else {
-                zoomLabel.text = "укажите точку на карте"
-            }
+            presenter.goAddMarkerScreen()
         } else {
             zoomLabel.text = "создайте или войдите в свой аккаунт"
-            // убрать активность кнопки
         }
     }
     
@@ -146,7 +140,6 @@ extension MainScreenViewController: GMSMapViewDelegate {
         let marker = GMSMarker(position: coordinate)
         mapView.clear()
         presenter.getOfflineMarkers(range:  intervalSC.selectedSegmentIndex)
-        isMark = true
         DataService.shared.markerDidTapped = false
         updateMarkerButton()
         DataService.shared.coordinateEvent = coordinate
@@ -164,7 +157,6 @@ extension MainScreenViewController: GMSMapViewDelegate {
     
     // Attach an info window to the POI using the GMSMarker.
     func mapView(_ mapView: GMSMapView, didTapPOIWithPlaceID placeID: String, name: String, location: CLLocationCoordinate2D) {
-        isMark = true
         infoMarker.position = location
         infoMarker.title = name
         infoMarker.opacity = 0

@@ -53,8 +53,11 @@ class MainScreenPresenter: MainScreenPresenterProtocol {
         Auth.auth().addStateDidChangeListener({[weak self] (auth, user) in
             if user != nil {
                 self?.user = user
+                UserDefaults.standard.set(true, forKey: "logined")
                 NetworkService.loadMyProfile(userId: user!.uid)
                 print("данные пользователя загружены")
+            } else {
+                UserDefaults.standard.set(false, forKey: "logined")
             }
         })
     }
@@ -92,7 +95,7 @@ class MainScreenPresenter: MainScreenPresenterProtocol {
             let marker = GMSMarker(position: CLLocationCoordinate2D(latitude: event.latEvent, longitude: event.lngEvent) )
             marker.icon = UIImage(named: event.iconEvent)
             marker.title = "\(event.dateEventString) \(event.nameEvent)"
-            marker.snippet = event.snipetEvent
+            marker.snippet = "Желающих: \(event.followEventUsers.count)\nКатегория: \(event.snipetEvent)"
             markers.append(marker)
         }
         view.setMarkers(markers: markers)
@@ -112,33 +115,6 @@ class MainScreenPresenter: MainScreenPresenterProtocol {
             }
         })
     }
-    
-//    func markerFiltred(events: [Event], range: Int) {
-//        print("В исходном массиве = \(events.count) элементов")
-//        var eventsFiltred:[Event] = []
-//        //eventsFiltred.removeAll()
-//        let today = Date().timeIntervalSince1970
-//        print("Сегодня: ", today, Date(timeIntervalSince1970: today))
-//        var interval = 0.0
-//        
-//        switch range {
-//        case 0: interval = today + 86400           //день
-//        case 1: interval = today + (86400*7)       //неделя
-//        case 2: interval = today + (86400*30)      //месяц
-//        default: interval = today + (86400*365)    //год
-//        }
-//        for event in events {
-//            if interval - event.dateEventTI > 0 && (event.dateEventTI + event.lifeTimeEvent - today) > 0 {
-//                eventsFiltred.append(event)
-//            }
-//            if event.dateEventTI + event.lifeTimeEvent < today {
-//                DataService.shared.oldEventsID?.append(event.eventID)
-//            }
-//        }
-//        print("В отфильтрованном массиве \(eventsFiltred.count) элементов")
-//        print("Старых событий = \(String(describing: DataService.shared.oldEventsID?.count)) ")
-//        createMarkers(eventsForMarker: eventsFiltred)
-//    }
     
 
 }

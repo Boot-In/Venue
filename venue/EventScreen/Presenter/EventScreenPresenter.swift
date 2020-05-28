@@ -11,8 +11,9 @@ import Firebase
 /// Вывод информации
 protocol EventScreenProtocol: class {
     
+    func hideFollowButton()
     func removeButtonSetting(hide: Bool)
-    func setTextToView(nickName: String, eventData: String, eventName: String, eventCategory: String, eventDiscription: String)
+    func setTextToView(nickName: String, eventData: String, eventName: String, eventCategory: String, eventDiscription: String, index: Int)
 }
 
 // это как мы принимаем информацию
@@ -36,11 +37,17 @@ class EventScreenPresenter: EventScreenPresenterProtocol {
     }///////////////////////////////////////////////////
    
     func loadEventInfo(event: Event) {
+        print("eventID: ", event.eventID)
+        let index = DataService.searchIndexEvent(event: event)
+        view.setTextToView(nickName: "Организатор: \(event.userNick)", eventData: event.dateEventString, eventName: event.nameEvent, eventCategory: event.snipetEvent, eventDiscription: event.discriptionEvent, index: index)
+        
+        guard DataService.shared.localUser != nil else {
+            view.removeButtonSetting(hide: true)
+            view.hideFollowButton(); return }
+        
         if event.userID == DataService.shared.localUser.userID {
             view.removeButtonSetting(hide: false)
         } else { view.removeButtonSetting(hide: true) }
-        print("eventID: ", event.eventID)
-        view.setTextToView(nickName: "Организатор: \(event.userNick)", eventData: event.dateEventString, eventName: event.nameEvent, eventCategory: event.snipetEvent, eventDiscription: event.discriptionEvent)
     }
 
     func markerToEvent() {
@@ -68,6 +75,7 @@ class EventScreenPresenter: EventScreenPresenterProtocol {
         }
         return events_.last
     }
+    
     
     func goToEdit() {
         router.showAddMarkerScreen()

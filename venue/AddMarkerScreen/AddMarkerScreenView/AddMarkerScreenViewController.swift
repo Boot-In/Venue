@@ -77,6 +77,13 @@ class AddMarkerScreenViewController: UIViewController {
           discriptionEventTV.isSelectable = true
       }
     
+    func changeIconColor(imageName: String) { ///// !!!!!!!!!!!
+        let origImage = UIImage(named: imageName)
+        let tintedImage = origImage?.withRenderingMode(.alwaysTemplate)
+        iconEventIV.image = tintedImage
+        iconEventIV.tintColor = .red
+    }
+    
     func loadTextFieldFromEvent() {
         if let event = DataService.shared.event {
             presenter.loadTFFromEvent(event: event)
@@ -86,12 +93,12 @@ class AddMarkerScreenViewController: UIViewController {
     func loadDataForTextField() {
         let userDefault = UserDefaults.standard
         userNickLabel.text = "Организатор: \(userDefault.string(forKey: "nickNameUser") ?? "без названия")"
-        let stringDate = formatter.string(from: Date())
+        //let stringDate = formatter.string(from: Date())
         nameEventTF.text = DataService.shared.placeEvent
         iconEventIV.image = UIImage(named: iconArray[i])
-        dateEventTF.text = stringDate
-        DataService.shared.dateEvent = Date()
-        DataService.shared.dataEventString = stringDate
+        dateEventTF.text = ""
+        //DataService.shared.dateEvent = Date()
+        //DataService.shared.dataEventString = stringDate
     }
     
     func createDatePicker() {
@@ -127,6 +134,7 @@ class AddMarkerScreenViewController: UIViewController {
         i += 1
         if i == iconArray.count {i = 0}
         iconEventIV.image = UIImage(named: iconArray[i])
+        //changeIconColor(imageName: iconArray[i])
     }
     
     
@@ -170,13 +178,14 @@ extension AddMarkerScreenViewController: AddMarkerScreenProtocol {
         }
         userNickLabel.text = "Организатор: \(nik)"
         nameEventTF.text = name
-        dateEventTF.text = formatter.string(from: Date())
+        dateEventTF.text = ""
+        //dateEventTF.text = formatter.string(from: Date())
         categoryEventTF.text = caregiry
         iconEventIV.image = UIImage(named: iconArray[i])
         discriptionEventTV.text = discription
         infoLabel.text = "Внесите изменения, проверьте дату"
-        DataService.shared.dateEvent = Date()
-        DataService.shared.dataEventString = formatter.string(from: Date())
+        //DataService.shared.dateEvent = Date()
+        //DataService.shared.dataEventString = formatter.string(from: Date())
     }
     
 }
