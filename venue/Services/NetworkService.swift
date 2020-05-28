@@ -33,7 +33,7 @@ class NetworkService {
             iD += String(Int(event.dateEventTI))
             iD += String(event.userID[event.userID.index(before: event.userID.endIndex)]).lowercased()
             iD += String(event.nameEvent.count)
-            iD += String(Int(event.latEvent)) + String(Int(event.lngEvent))
+            iD += String(Int(abs(event.latEvent))) + String(Int(abs(event.lngEvent)))
             return iD
         }
         
