@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>CLIENT_ID</key>
+	<string>919042011399-97fgm0o9ie08dj0ssln2h86nshfv6im5.apps.googleusercontent.com</string>
+	<key>REVERSED_CLIENT_ID</key>
+	<string>com.googleusercontent.apps.919042011399-97fgm0o9ie08dj0ssln2h86nshfv6im5</string>
+	<key>API_KEY</key>
+	<string>AIzaSyAXbVak9j5q0GAiLG7TS1_C2tRIOeJGr3Q</string>
+	<key>GCM_SENDER_ID</key>
+	<string>919042011399</string>
+	<key>PLIST_VERSION</key>
+	<string>1</string>
+	<key>BUNDLE_ID</key>
+	<string>db.venue</string>
+	<key>PROJECT_ID</key>
+	<string>venue-18b89</string>
+	<key>STORAGE_BUCKET</key>
+	<string>venue-18b89.appspot.com</string>
+	<key>IS_ADS_ENABLED</key>
+	<false></false>
+	<key>IS_ANALYTICS_ENABLED</key>
+	<false></false>
+	<key>IS_APPINVITE_ENABLED</key>
+	<true></true>
+	<key>IS_GCM_ENABLED</key>
+	<true></true>
+	<key>IS_SIGNIN_ENABLED</key>
+	<true></true>
+	<key>GOOGLE_APP_ID</key>
+	<string>1:919042011399:ios:1991a61c5b5fa6fdcc15a2</string>
+	<key>DATABASE_URL</key>
+	<string>https://venue-18b89.firebaseio.com</string>
+</dict>
+</plist>

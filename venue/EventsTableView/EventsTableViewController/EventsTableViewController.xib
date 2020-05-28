@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="16097" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="16087"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="EventsTableViewController" customModule="Venue" customModuleProvider="target">
+            <connections>
+                <outlet property="eventsTableView" destination="hDW-ue-LcM" id="C6D-Im-kTZ"/>
+                <outlet property="rangeSC" destination="AvP-FN-y1b" id="ETp-fZ-qdu"/>
+                <outlet property="removeOldButton" destination="iZ5-y2-iiW" id="n2H-9t-irI"/>
+                <outlet property="searchBar" destination="0Jm-xo-N2T" id="b9A-lU-xsW"/>
+                <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
+            </connections>
+        </placeholder>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view clearsContextBeforeDrawing="NO" contentMode="scaleToFill" id="i5M-Pr-FkT">
+            <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="AvP-FN-y1b">
+                    <rect key="frame" x="20" y="20" width="335" height="32"/>
+                    <segments>
+                        <segment title="День"/>
+                        <segment title="Неделя"/>
+                        <segment title="Месяц"/>
+                        <segment title="Год"/>
+                    </segments>
+                    <connections>
+                        <action selector="rangeSCAction:" destination="-1" eventType="valueChanged" id="mgH-xJ-KbP"/>
+                    </connections>
+                </segmentedControl>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="VT6-uz-K3l">
+                    <rect key="frame" x="134" y="617" width="107" height="30"/>
+                    <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
+                    <state key="normal" title="Назад к карте">
+                        <color key="titleColor" systemColor="systemBlueColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                    </state>
+                    <connections>
+                        <action selector="backButtonTap" destination="-1" eventType="touchUpInside" id="LfJ-bI-uMr"/>
+                    </connections>
+                </button>
+                <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="hDW-ue-LcM">
+                    <rect key="frame" x="5" y="71" width="365" height="526"/>
+                    <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                    <searchBar key="tableHeaderView" contentMode="redraw" id="0Jm-xo-N2T">
+                        <rect key="frame" x="0.0" y="0.0" width="365" height="57"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <textInputTraits key="textInputTraits"/>
+                    </searchBar>
+                    <connections>
+                        <outlet property="dataSource" destination="-1" id="jtG-xi-kzF"/>
+                        <outlet property="delegate" destination="-1" id="xrS-qs-1XZ"/>
+                    </connections>
+                </tableView>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="iZ5-y2-iiW">
+                    <rect key="frame" x="300" y="615" width="59" height="34"/>
+                    <fontDescription key="fontDescription" type="boldSystem" pointSize="18"/>
+                    <state key="normal" title="🗑 Old">
+                        <color key="titleColor" red="1" green="0.064624095630000003" blue="0.066512802849999997" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                    </state>
+                    <connections>
+                        <action selector="removeOldEvents" destination="-1" eventType="touchUpInside" id="17m-fK-rNi"/>
+                    </connections>
+                </button>
+            </subviews>
+            <color key="backgroundColor" red="0.81293554638926924" green="1" blue="0.82950898275714025" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <constraints>
+                <constraint firstItem="iZ5-y2-iiW" firstAttribute="centerY" secondItem="VT6-uz-K3l" secondAttribute="centerY" id="9UF-F8-Tf9"/>
+                <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="AvP-FN-y1b" secondAttribute="trailing" constant="20" id="CLG-HG-xDr"/>
+                <constraint firstItem="AvP-FN-y1b" firstAttribute="top" secondItem="fnl-2z-Ty3" secondAttribute="top" constant="20" id="Hno-md-JzS"/>
+                <constraint firstItem="VT6-uz-K3l" firstAttribute="top" secondItem="hDW-ue-LcM" secondAttribute="bottom" constant="20" id="IyX-Zu-bY2"/>
+                <constraint firstItem="hDW-ue-LcM" firstAttribute="top" secondItem="AvP-FN-y1b" secondAttribute="bottom" constant="20" id="NVD-fM-81m"/>
+                <constraint firstItem="fnl-2z-Ty3" firstAttribute="bottom" secondItem="VT6-uz-K3l" secondAttribute="bottom" constant="20" id="Neq-ij-wDQ"/>
+                <constraint firstItem="VT6-uz-K3l" firstAttribute="centerX" secondItem="i5M-Pr-FkT" secondAttribute="centerX" id="bLB-Zt-Hsh"/>
+                <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="hDW-ue-LcM" secondAttribute="trailing" constant="5" id="bhk-gS-pbp"/>
+                <constraint firstItem="hDW-ue-LcM" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" constant="5" id="tgM-lq-4Gm"/>
+                <constraint firstItem="AvP-FN-y1b" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" constant="20" id="uDf-17-X1U"/>
+                <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="iZ5-y2-iiW" secondAttribute="trailing" constant="16" id="za8-oa-ICE"/>
+            </constraints>
+            <viewLayoutGuide key="safeArea" id="fnl-2z-Ty3"/>
+            <point key="canvasLocation" x="138.40000000000001" y="130.88455772113943"/>
+        </view>
+    </objects>
+</document>
