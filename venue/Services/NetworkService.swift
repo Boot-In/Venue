@@ -20,28 +20,30 @@ class NetworkService {
     }
     
     static func removeEvent(event: Event) {
+        print("начинаем удалять событие 1:", event.eventID)
         let ref = Database.database().reference()
+        print("начинаем удалять событие 2:", event.eventID)
         let eventRef = ref.child("events").child(event.eventID)
+        print("начинаем удалять событие 3:", event.eventID)
         eventRef.removeValue()
         print("Event removed!")
     }
+    
+//    static func removeEvent(event: Event, completion: @escaping (_ success: Bool) -> Void) {
+//        let ref = Database.database().reference()
+//        let eventRef = ref.child("events").child(event.eventID)
+//        eventRef.removeValue()
+//        print("Event removed!")
+//        completion(true)
+//    }
+    
     static func saveNewEvent(event: Event) {
         
-        func getEventID() -> String {
-            var iD = ""
-            iD += String(event.userID[event.userID.startIndex]).lowercased()
-            iD += String(Int(event.dateEventTI))
-            iD += String(event.userID[event.userID.index(before: event.userID.endIndex)]).lowercased()
-            iD += String(event.nameEvent.count)
-            iD += String(Int(abs(event.latEvent))) + String(Int(abs(event.lngEvent)))
-            return iD
-        }
-        
         let ref = Database.database().reference()
-        let eventRef = ref.child("events").child(getEventID())
+        let eventRef = ref.child("events").child(event.eventID)
         eventRef.setValue([
             "userID" : event.userID,
-            "eventID" : getEventID(),
+            "eventID" : event.eventID,
             "userNick": event.userNick,
             "nameEvent" : event.nameEvent,
             "latEvent" : event.latEvent,
@@ -54,8 +56,9 @@ class NetworkService {
             "lifeTimeEvent" : event.lifeTimeEvent
         ])
         print("saveEvent Complete !")
-        print("EventID = \(getEventID())")
+        print("EventID = \(event.eventID)")
     }
+    
     
     static func updateEvent(event: Event) {
         let ref = Database.database().reference()
@@ -88,6 +91,7 @@ class NetworkService {
         }
     }
 
+    
     static func loadAllEvents( completion: @escaping (_ list: [Event], _ success: Bool) -> Void) {
         let ref = Database.database().reference().child("events")
         print("... loadAllEvents > events")

@@ -37,7 +37,7 @@ class EventScreenViewController: UIViewController {
         infoLabel.alpha = 0
         eventDiscriptionTV.isEditable = false
         if let event = DataService.shared.event {
-            presenter.loadEventInfo(event: event )
+            presenter.loadEventInfo(event: event)
         } else { presenter.markerToEvent() }
         
     }
@@ -90,9 +90,12 @@ class EventScreenViewController: UIViewController {
     
     @IBAction func removeEventButtonTap() {
         guard let event = DataService.shared.event else { return }
+        print("нажали кнопку удалять:", event.eventID)
         NetworkService.removeEvent(event: event)
-        DataService.shared.event = nil
-        DataService.shared.events.remove(at: index)
+        DataService.shared.event = nil /// сделать после обработки удаления !
+        print("событие обнулено!")
+        DataService.shared.events.remove(at: self.index)
+        print("событие удалено из массива!")
         self.dismiss(animated: true)
     }
     

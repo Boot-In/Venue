@@ -49,15 +49,8 @@ struct Event {
             iconEvent = snapshotValue["iconEvent"] as! String
             lifeTimeEvent = snapshotValue["lifeTimeEvent"] as! Double
             
-//            let userNick = snapshotValue["userNick"] as! [String: AnyObject]
-//            let surname = userNick["surname"]  as! [String: AnyObject]
-//            let rfgtfg = sur
-     
             if snapshotValue["followEventUsers"] != nil {
                 followEventUsers = snapshotValue["followEventUsers"] as! [String: String]
-                //followEventUsers = snapshotValue["followEventUsers"] as! [String: AnyObject]
-            
-                print("name>",nameEvent,">  followEventUsers>", followEventUsers, "count>", followEventUsers.count)
             }
             
             ref = snapshot.ref

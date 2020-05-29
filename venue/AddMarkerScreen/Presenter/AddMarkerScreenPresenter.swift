@@ -52,10 +52,26 @@ class AddMarkerScreenPresenter: AddMarkerScreenPresenterProtocol {
         event.iconEvent = iconEvent
         event.discriptionEvent = discrEvent
         event.snipetEvent = DataService.shared.categoryEvent
+        event.eventID = DataService.getEventID(event: event)
         /// Сохранение в сеть и добавление локально
         NetworkService.saveNewEvent(event: event)
+        ///
+        print("В массив из \(DataService.shared.events.count) элементов добавлен")
         DataService.shared.events.append(event)
+        DataService.shared.event = event
+        print(DataService.shared.event.eventID)
+        print("стало элементов: ", DataService.shared.events.count, " элементов")
     }
+    
+//    func getEventID(event: Event) -> String {
+//        var iD = ""
+//        iD += String(event.userID[event.userID.startIndex]).lowercased()
+//        iD += String(Int(event.dateEventTI))
+//        iD += String(event.userID[event.userID.index(before: event.userID.endIndex)]).lowercased()
+//        iD += String(event.nameEvent.count)
+//        iD += String(Int(abs(event.latEvent))) + String(Int(abs(event.lngEvent)))
+//        return iD
+//    }
     
     func updateEvent(event: Event, nameEvent: String, iconEvent: String, discrEvent: String) {
         let date = DataService.shared.dateEvent

@@ -68,4 +68,14 @@ class DataService {
         return index
     }
     
+    static func getEventID(event: Event) -> String {
+        var iD = ""
+        iD += String(event.userID[event.userID.startIndex]).lowercased()
+        iD += String(Int(event.dateEventTI))
+        iD += String(event.userID[event.userID.index(before: event.userID.endIndex)]).lowercased()
+        iD += String(event.nameEvent.count)
+        iD += String(Int(abs(event.latEvent))) + String(Int(abs(event.lngEvent)))
+        return iD
+    }
+    
 }

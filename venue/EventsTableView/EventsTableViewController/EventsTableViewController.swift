@@ -38,8 +38,17 @@ class EventsTableViewController: UIViewController {
         rangeSC.setTitleTextAttributes([NSAttributedString.Key.foregroundColor: UIColor.black], for: .normal)
         removeOldButton.setTitle("🗑 Old(\(DataService.shared.oldEventsID?.count ?? 0))", for: .normal)
         if DataService.shared.localUser != nil && DataService.shared.localUser.userID == DataService.shared.userAdmin { removeOldButton.isHidden = false } else { removeOldButton.isHidden = true }
+        print("user = ", DataService.shared.localUser.userID)
+        print("admin = ", DataService.shared.userAdmin)
         //rangeSC.backgroundColor = .clear
+        print("мои координаты = ", LocationService.shared.latitude, LocationService.shared.longitude)
         //rangeSC.selectedSegmentTintColor = .systemGray
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        eventsFiltred = DataService.filtredDateEvents(events: eventsForTableView, range: rangeSC.selectedSegmentIndex)
+        eventsTableView.reloadData()
     }
     
     @IBAction func rangeSCAction(_ sender: UISegmentedControl) {
@@ -50,6 +59,7 @@ class EventsTableViewController: UIViewController {
     
     @IBAction func removeOldEvents() {
         if let oldEvents = DataService.shared.oldEventsID, oldEvents.count > 0 { NetworkService.removeOldEvent(eventsID: oldEvents)
+            removeOldButton.setTitle("🗑 Old(\(DataService.shared.oldEventsID?.count ?? 0))", for: .normal)
         } else { print("Старых событий нет.") }
     }
     

@@ -25,7 +25,7 @@ extension LocationService: CLLocationManagerDelegate {
     
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
         let locValue: CLLocationCoordinate2D = manager.location!.coordinate
-        print("locValue>",locValue)
+        //print("locValue>",locValue)
         latitude = locValue.latitude
         longitude = locValue.longitude
     }

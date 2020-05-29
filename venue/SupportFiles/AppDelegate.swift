@@ -23,6 +23,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         GMSServices.provideAPIKey(apiKEY)
         FirebaseApp.configure()
         
+        // включение режима офлайн
+        Database.database().isPersistenceEnabled = true
+        
         setRemoteConfigure()
         
         return true
@@ -32,10 +35,13 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         remoteConfig = RemoteConfig.remoteConfig()
             /// Значение ключей по умолчанию (офлайн)
         let remoteConfigDefault = [ "defultZoom" : 16 as NSObject,
-            "user_admin" : "BZcvM3WVKvbcalW4QEC2MH4y3cw1" as NSObject] ///
-        
+            "userAdmin" : "cRFAPbeINtfOtQ67FDxsyvdBRjk2" as NSObject] ///
         remoteConfig.setDefaults(remoteConfigDefault)
-        remoteConfig.configSettings.minimumFetchInterval = 0
+        
+        let setting = RemoteConfigSettings()
+        setting.minimumFetchInterval = 0
+        remoteConfig.configSettings = setting
+        //remoteConfig.configSettings.minimumFetchInterval = 0
         
         remoteConfig.fetchAndActivate { (status, error) in
             
@@ -44,7 +50,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             } else {
                 guard status != .error else { return }
                 let zoom = self.remoteConfig.configValue(forKey: "defultZoom").numberValue as! Int
-                let ua = self.remoteConfig.configValue(forKey: "user_admin").stringValue
+                let ua = self.remoteConfig.configValue(forKey: "userAdmin").stringValue
                 DataService.shared.defaultZoom = zoom
                 DataService.shared.userAdmin = ua ?? "No admin"
                 print("zoom = ", zoom, "Admin: ", DataService.shared.userAdmin)

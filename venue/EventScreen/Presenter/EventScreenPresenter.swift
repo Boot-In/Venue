@@ -45,7 +45,7 @@ class EventScreenPresenter: EventScreenPresenterProtocol {
             view.removeButtonSetting(hide: true)
             view.hideFollowButton(); return }
         
-        if event.userID == DataService.shared.localUser.userID {
+        if event.userID == DataService.shared.localUser.userID || DataService.shared.userAdmin == DataService.shared.localUser.userID{
             view.removeButtonSetting(hide: false)
         } else { view.removeButtonSetting(hide: true) }
     }
@@ -53,6 +53,9 @@ class EventScreenPresenter: EventScreenPresenterProtocol {
     func markerToEvent() {
         guard let marker = DataService.shared.marker else { return }
         guard let event = searchEvent(marker: marker) else { return }
+        DataService.shared.eventID = event.eventID
+        DataService.shared.event = event
+        print("локально сохранено событие ", DataService.shared.event.eventID )
         loadEventInfo(event: event)
     }
     
@@ -69,10 +72,7 @@ class EventScreenPresenter: EventScreenPresenterProtocol {
             i -= 1
         }
         print("Мероприятий = ", events_.count)
-        if let event = events_.last {
-            DataService.shared.eventID = event.eventID
-            DataService.shared.event = event
-        }
+    
         return events_.last
     }
     
