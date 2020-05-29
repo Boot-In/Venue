@@ -37,8 +37,11 @@ class EventsTableViewController: UIViewController {
         rangeSC.setTitleTextAttributes([NSAttributedString.Key.foregroundColor: UIColor.blue], for: .selected)
         rangeSC.setTitleTextAttributes([NSAttributedString.Key.foregroundColor: UIColor.black], for: .normal)
         removeOldButton.setTitle("🗑 Old(\(DataService.shared.oldEventsID?.count ?? 0))", for: .normal)
-        if DataService.shared.localUser != nil && DataService.shared.localUser.userID == DataService.shared.userAdmin { removeOldButton.isHidden = false } else { removeOldButton.isHidden = true }
-        print("user = ", DataService.shared.localUser.userID)
+        if DataService.shared.localUser != nil && DataService.shared.localUser.userID == DataService.shared.userAdmin {
+            removeOldButton.isHidden = false
+            print("user = ", DataService.shared.localUser.userID)
+        } else {
+            removeOldButton.isHidden = true }
         print("admin = ", DataService.shared.userAdmin)
         //rangeSC.backgroundColor = .clear
         print("мои координаты = ", LocationService.shared.latitude, LocationService.shared.longitude)

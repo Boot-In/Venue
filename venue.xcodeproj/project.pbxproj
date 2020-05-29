@@ -27,6 +27,7 @@
 		1B57BC93247CE802000BD8B7 /* CategoryCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B57BC91247CE802000BD8B7 /* CategoryCell.swift */; };
 		1B57BC94247CE802000BD8B7 /* CategoryCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1B57BC92247CE802000BD8B7 /* CategoryCell.xib */; };
 		1B5B7022246826A7004CA039 /* Models.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B5B7021246826A7004CA039 /* Models.swift */; };
+		1B5FA127248106170021022D /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 1B5FA126248106170021022D /* GoogleService-Info.plist */; };
 		1B8E09F92469428F001C5E01 /* AddMarkerScreenViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B8E09F72469428F001C5E01 /* AddMarkerScreenViewController.swift */; };
 		1B8E09FA2469428F001C5E01 /* AddMarkerScreenViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1B8E09F82469428F001C5E01 /* AddMarkerScreenViewController.xib */; };
 		1B8E09FC246942BA001C5E01 /* AddMarkerScreenRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B8E09FB246942BA001C5E01 /* AddMarkerScreenRouter.swift */; };
@@ -49,7 +50,6 @@
 		1BECD70A24679D490000A0C6 /* LocationService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BECD70924679D490000A0C6 /* LocationService.swift */; };
 		1BF4E1A0247A85850027F8A9 /* NetworkService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BF4E19F247A85850027F8A9 /* NetworkService.swift */; };
 		8BE056A22473FE3B00D94CCC /* DataService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BE056A12473FE3B00D94CCC /* DataService.swift */; };
-		8BF35490246ABEC900377DAA /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 8BF3548F246ABEC900377DAA /* GoogleService-Info.plist */; };
 		ADFA0E2C23AEF3D819F393E1 /* Pods_venue.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A6416475AA159C63D9D3B08E /* Pods_venue.framework */; };
 /* End PBXBuildFile section */
 
@@ -74,6 +74,7 @@
 		1B57BC91247CE802000BD8B7 /* CategoryCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryCell.swift; sourceTree = "<group>"; };
 		1B57BC92247CE802000BD8B7 /* CategoryCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CategoryCell.xib; sourceTree = "<group>"; };
 		1B5B7021246826A7004CA039 /* Models.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Models.swift; sourceTree = "<group>"; };
+		1B5FA126248106170021022D /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		1B8E09F72469428F001C5E01 /* AddMarkerScreenViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddMarkerScreenViewController.swift; sourceTree = "<group>"; };
 		1B8E09F82469428F001C5E01 /* AddMarkerScreenViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = AddMarkerScreenViewController.xib; sourceTree = "<group>"; };
 		1B8E09FB246942BA001C5E01 /* AddMarkerScreenRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddMarkerScreenRouter.swift; sourceTree = "<group>"; };
@@ -98,7 +99,6 @@
 		1BECD70924679D490000A0C6 /* LocationService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationService.swift; sourceTree = "<group>"; };
 		1BF4E19F247A85850027F8A9 /* NetworkService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkService.swift; sourceTree = "<group>"; };
 		8BE056A12473FE3B00D94CCC /* DataService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataService.swift; sourceTree = "<group>"; };
-		8BF3548F246ABEC900377DAA /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		A46DD4D347AF479F222570F1 /* Pods-venue.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-venue.release.xcconfig"; path = "Target Support Files/Pods-venue/Pods-venue.release.xcconfig"; sourceTree = "<group>"; };
 		A6416475AA159C63D9D3B08E /* Pods_venue.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_venue.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		AD0ACE1D28F514CF95D99C77 /* Pods-venue.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-venue.debug.xcconfig"; path = "Target Support Files/Pods-venue/Pods-venue.debug.xcconfig"; sourceTree = "<group>"; };
@@ -394,8 +394,8 @@
 				1BECD7052467994B0000A0C6 /* SupportFiles */,
 				1B8E09F324694238001C5E01 /* AddMarkerScreen */,
 				1BECD6FA246799100000A0C6 /* Assets.xcassets */,
-				8BF3548F246ABEC900377DAA /* GoogleService-Info.plist */,
 				1BECD6FF246799100000A0C6 /* Info.plist */,
+				1B5FA126248106170021022D /* GoogleService-Info.plist */,
 			);
 			path = venue;
 			sourceTree = "<group>";
@@ -508,11 +508,11 @@
 				1B48450324713C8700836FB5 /* LoginScreenViewController.xib in Resources */,
 				1B95A09124777BF800CCBE9F /* EventsTableViewController.xib in Resources */,
 				1BECD6FE246799100000A0C6 /* LaunchScreen.storyboard in Resources */,
+				1B5FA127248106170021022D /* GoogleService-Info.plist in Resources */,
 				1BECD6FB246799100000A0C6 /* Assets.xcassets in Resources */,
 				1BECD6F92467990C0000A0C6 /* Main.storyboard in Resources */,
 				1B57BC94247CE802000BD8B7 /* CategoryCell.xib in Resources */,
 				1B8E09FA2469428F001C5E01 /* AddMarkerScreenViewController.xib in Resources */,
-				8BF35490246ABEC900377DAA /* GoogleService-Info.plist in Resources */,
 				1B57BC90247CE4DF000BD8B7 /* CategoryTableViewController.xib in Resources */,
 				1B4EB4AC247610CC002BA2C8 /* EventScreenViewController.xib in Resources */,
 			);

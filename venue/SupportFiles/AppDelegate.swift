@@ -22,26 +22,27 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         GMSServices.provideAPIKey(apiKEY)
         FirebaseApp.configure()
+        setRemoteConfigure()
         
         // включение режима офлайн
         Database.database().isPersistenceEnabled = true
         
-        setRemoteConfigure()
         
         return true
     }
     
     func setRemoteConfigure(){
         remoteConfig = RemoteConfig.remoteConfig()
-            /// Значение ключей по умолчанию (офлайн)
-        let remoteConfigDefault = [ "defultZoom" : 16 as NSObject,
-            "userAdmin" : "cRFAPbeINtfOtQ67FDxsyvdBRjk2" as NSObject] ///
-        remoteConfig.setDefaults(remoteConfigDefault)
-        
         let setting = RemoteConfigSettings()
         setting.minimumFetchInterval = 0
         remoteConfig.configSettings = setting
-        //remoteConfig.configSettings.minimumFetchInterval = 0
+        
+        /// Значение ключей по умолчанию (офлайн)
+        let remoteConfigDefault = [ "defultZoom" : 17 as NSObject,
+            "userAdmin" : "cRFAPbeINtfOtQ67FDxsyvdBRjk2" as NSObject] ///
+        remoteConfig.setDefaults(remoteConfigDefault)
+        
+        // remoteConfig.configSettings.minimumFetchInterval = 0
         
         remoteConfig.fetchAndActivate { (status, error) in
             
@@ -49,24 +50,27 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                 print(error?.localizedDescription ?? "No error available.")
             } else {
                 guard status != .error else { return }
-                let zoom = self.remoteConfig.configValue(forKey: "defultZoom").numberValue as! Int
-                let ua = self.remoteConfig.configValue(forKey: "userAdmin").stringValue
+                let zoom = self.remoteConfig["defultZoom"].numberValue as! Int
+                let ua = self.remoteConfig["userAdmin"].stringValue
+                // let zoom = self.remoteConfig.configValue(forKey: "defultZoom").numberValue as! Int
+                //let ua = self.remoteConfig.configValue(forKey: "userAdmin").stringValue
                 DataService.shared.defaultZoom = zoom
                 DataService.shared.userAdmin = ua ?? "No admin"
                 print("zoom = ", zoom, "Admin: ", DataService.shared.userAdmin)
             }
-            
         }
         
-//        remoteConfig.fetch(withExpirationDuration: TimeInterval(0)) { (status, error) -> Void in
-//            print("remoteConfig.fetch")
-//            if status == .success {  // remoteConfig fetched!"
-//                NetworkService.shared.defaultZoom = self.remoteConfig.configValue(forKey: "defultZoom").numberValue as! Int
-//                print("NetworkService.shared>defaultZoom>", NetworkService.shared.defaultZoom)
-//            } else {  //remoteConfig not fetched
-//                print("Error: \(error?.localizedDescription ?? "No error available.")")
-//            }
-//        }
+        //        remoteConfig.fetch(withExpirationDuration: TimeInterval(0)) { (status, error) -> Void in
+        //            print("remoteConfig.fetch")
+        //            if status == .success {  // remoteConfig fetched!"
+        //                DataService.shared.defaultZoom = self.remoteConfig.configValue(forKey: "defultZoom").numberValue as! Int
+        //                print("NetworkService.shared>defaultZoom>", DataService.shared.defaultZoom)
+        //            } else {  //remoteConfig not fetched
+        //                print("Error: \(error?.localizedDescription ?? "No error available.")")
+        //            }
+        //        }
+        //
+        
     }
     
     // MARK: UISceneSession Lifecycle
