@@ -16,6 +16,8 @@ class EventsTableViewController: UIViewController {
     @IBOutlet weak var rangeSC: UISegmentedControl!
     @IBOutlet weak var searchBar: UISearchBar!
     @IBOutlet weak var eventsTableView: UITableView!
+    @IBOutlet weak var backToMapButton: UIButton!
+    @IBOutlet weak var myEventsButton: UIButton!
     
     var eventsForTableView = DataService.shared.events
     var eventsFiltred: [Event]!
@@ -27,31 +29,33 @@ class EventsTableViewController: UIViewController {
         eventsFiltred = DataService.filtredDateEvents(events: eventsForTableView, range: rangeSC.selectedSegmentIndex)
         eventsTableView.delegate = self
         eventsTableView.dataSource = self
-        searchBar.delegate = self
         eventsTableView.backgroundColor = .clear
         eventsTableView.register(UINib(nibName: "EventTableViewCell", bundle: nil), forCellReuseIdentifier: "Cell")
+        
+        searchBar.delegate = self
+        searchBar.barTintColor = view.backgroundColor
         print("Элементов для таблицы = ", eventsFiltred.count)
         
-        searchBar.barTintColor = view.backgroundColor
-        
-        rangeSC.setTitleTextAttributes([NSAttributedString.Key.foregroundColor: UIColor.blue], for: .selected)
-        rangeSC.setTitleTextAttributes([NSAttributedString.Key.foregroundColor: UIColor.black], for: .normal)
-        removeOldButton.setTitle("🗑 Old(\(DataService.shared.oldEventsID?.count ?? 0))", for: .normal)
+        ConfigUI.buttonConfig(button: removeOldButton, titleColor: .red, alfa: 0.8)
+        ConfigUI.segmentControlConfig(sc: rangeSC)
+        ConfigUI.buttonConfig(button: backToMapButton, titleColor: ConfigUI.shared.greenVenue, alfa: 1)
+    
         if DataService.shared.localUser != nil && DataService.shared.localUser.userID == DataService.shared.userAdmin {
             removeOldButton.isHidden = false
             print("user = ", DataService.shared.localUser.userID)
         } else {
             removeOldButton.isHidden = true }
         print("admin = ", DataService.shared.userAdmin)
-        //rangeSC.backgroundColor = .clear
         print("мои координаты = ", LocationService.shared.latitude, LocationService.shared.longitude)
-        //rangeSC.selectedSegmentTintColor = .systemGray
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        eventsForTableView = DataService.shared.events
         eventsFiltred = DataService.filtredDateEvents(events: eventsForTableView, range: rangeSC.selectedSegmentIndex)
         eventsTableView.reloadData()
+        removeOldButton.setTitle("  🗑 Old(\(DataService.shared.oldEventsID?.count ?? 0))  ", for: .normal)
+        print("отработал viewWillAppear EventsTableViewController")
     }
     
     @IBAction func rangeSCAction(_ sender: UISegmentedControl) {
@@ -62,12 +66,17 @@ class EventsTableViewController: UIViewController {
     
     @IBAction func removeOldEvents() {
         if let oldEvents = DataService.shared.oldEventsID, oldEvents.count > 0 { NetworkService.removeOldEvent(eventsID: oldEvents)
-            removeOldButton.setTitle("🗑 Old(\(DataService.shared.oldEventsID?.count ?? 0))", for: .normal)
+            DataService.shared.oldEventsID?.removeAll()
+            removeOldButton.setTitle("  🗑 Old(\(DataService.shared.oldEventsID?.count ?? 0))  ", for: .normal)
         } else { print("Старых событий нет.") }
     }
     
     @IBAction func backButtonTap() {
         navigationController?.popToRootViewController(animated: true)
+    }
+    
+    
+    @IBAction func myEventButtonTap() {
     }
     
 }

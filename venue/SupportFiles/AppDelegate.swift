@@ -33,16 +33,16 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     
     func setRemoteConfigure(){
         remoteConfig = RemoteConfig.remoteConfig()
-        let setting = RemoteConfigSettings()
-        setting.minimumFetchInterval = 0
-        remoteConfig.configSettings = setting
+//        let setting = RemoteConfigSettings()
+//        setting.minimumFetchInterval = 0
+//        remoteConfig.configSettings = setting
         
         /// Значение ключей по умолчанию (офлайн)
         let remoteConfigDefault = [ "defultZoom" : 17 as NSObject,
-            "userAdmin" : "cRFAPbeINtfOtQ67FDxsyvdBRjk2" as NSObject] ///
+            "admin_User" : "XBXa5zCsAMggdwcODbelcqMLXRi2" as NSObject] ///
         remoteConfig.setDefaults(remoteConfigDefault)
         
-        // remoteConfig.configSettings.minimumFetchInterval = 0
+        remoteConfig.configSettings.minimumFetchInterval = 60
         
         remoteConfig.fetchAndActivate { (status, error) in
             
@@ -51,12 +51,12 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             } else {
                 guard status != .error else { return }
                 let zoom = self.remoteConfig["defultZoom"].numberValue as! Int
-                let ua = self.remoteConfig["userAdmin"].stringValue
+                let ua = self.remoteConfig["admin_User"].stringValue
                 // let zoom = self.remoteConfig.configValue(forKey: "defultZoom").numberValue as! Int
                 //let ua = self.remoteConfig.configValue(forKey: "userAdmin").stringValue
                 DataService.shared.defaultZoom = zoom
                 DataService.shared.userAdmin = ua ?? "No admin"
-                print("zoom = ", zoom, "Admin: ", DataService.shared.userAdmin)
+                print("\nzoom = ", zoom, "Admin: ", DataService.shared.userAdmin)
             }
         }
         

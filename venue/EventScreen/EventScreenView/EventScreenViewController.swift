@@ -23,6 +23,8 @@ class EventScreenViewController: UIViewController {
     @IBOutlet weak var removeButton: UIButton!
     @IBOutlet weak var cancelFollowButton: UIButton!
     @IBOutlet weak var editButton: UIButton!
+    @IBOutlet weak var backButton: UIButton!
+    
     var index: Int = 0
     
     override func viewDidLoad() {
@@ -33,6 +35,12 @@ class EventScreenViewController: UIViewController {
         
         eventDiscriptionTV.backgroundColor? = UIColor(white: 1, alpha: 0.3)
         eventDiscriptionTV.textColor = .black
+        
+        ConfigUI.buttonConfig(button: goButton, titleColor: .systemBlue, alfa: 1)
+        ConfigUI.buttonConfig(button: cancelFollowButton, titleColor: .red, alfa: 1)
+        ConfigUI.buttonConfig(button: editButton, titleColor: .orange, alfa: 0.3)
+        ConfigUI.buttonConfig(button: removeButton, titleColor: .systemRed, alfa: 0.3)
+        ConfigUI.buttonConfig(button: backButton, titleColor: ConfigUI.shared.greenVenue, alfa: 1)
         
         infoLabel.alpha = 0
         eventDiscriptionTV.isEditable = false
@@ -116,8 +124,9 @@ class EventScreenViewController: UIViewController {
     }
     
     func displayWarningLabel(withText text: String) {
+        self.infoLabel.alpha = 0
         infoLabel.text = text
-        infoLabel.textColor = .systemBlue
+        infoLabel.textColor = .yellow
        
         UIView.animate(withDuration: 3, delay: 0, usingSpringWithDamping: 1, initialSpringVelocity: 1, options: .curveEaseInOut, animations: { [weak self] in
             self?.infoLabel.alpha = 1

@@ -16,9 +16,10 @@ class MainScreenViewController: UIViewController {
     @IBOutlet weak var markerButton: UIButton!
     @IBOutlet weak var accountButton: UIButton!
     @IBOutlet weak var intervalSC: UISegmentedControl!
-    @IBOutlet weak var zoomLabel: UILabel!
+    @IBOutlet weak var infoLabel: UILabel!
     @IBOutlet weak var zoomSlider: UISlider!
     @IBOutlet weak var mapView: GMSMapView!
+    @IBOutlet weak var tableButton: UIButton!
     
     let infoMarker = GMSMarker()
     
@@ -28,12 +29,11 @@ class MainScreenViewController: UIViewController {
         ModuleBulder.mainScreenConfigure(view: self)
         intervalSC.selectedSegmentIndex = 2
         presenter.startLocationService()
-       
         presenter.checkUserLoginStatus()
-        zoomLabel.textColor = .black
+        infoLabel.textColor = .black
         markerButton.isHidden = true
-        intervalSC.setTitleTextAttributes([NSAttributedString.Key.foregroundColor: UIColor.blue], for: .selected)
-        intervalSC.setTitleTextAttributes([NSAttributedString.Key.foregroundColor: UIColor.black], for: .normal)
+        ConfigUI.segmentControlConfig(sc: intervalSC)
+        ConfigUI.changeSystemIconColor(button: tableButton, systemName: "table")
         navigationController?.navigationBar.isHidden = true
         sliderSetup()
         mapViewSetup()
@@ -64,17 +64,18 @@ class MainScreenViewController: UIViewController {
 
     func checkAccount() {
         if UserDefaults.standard.bool(forKey: "logined"){
-            zoomLabel.text = ""
-            accountButton.setBackgroundImage(
-                UIImage(systemName: "person.fill"), for: .normal)
+            infoLabel.text = ""
+            ConfigUI.changeSystemIconColor(button: accountButton, systemName: "person.fill")
+            //accountButton.setBackgroundImage(UIImage(systemName: "person.fill"), for: .normal)
         } else {
-            accountButton.setBackgroundImage(
-                UIImage(systemName: "person"), for: .normal)
-            zoomLabel.text = "создайте или войдите в свой аккаунт"
+            ConfigUI.changeSystemIconColor(button: accountButton, systemName: "person")
+            //accountButton.setBackgroundImage(UIImage(systemName: "person"), for: .normal)
+            infoLabel.text = "создайте или войдите в свой аккаунт"
         }
     }
     
     func mapViewSetup() {
+        mapView.layer.cornerRadius = 25
         mapView.isMyLocationEnabled = true
         mapView.settings.compassButton = true
         mapView.settings.myLocationButton = true
@@ -82,6 +83,7 @@ class MainScreenViewController: UIViewController {
     }
     
     func sliderSetup() {
+        zoomSlider.isHidden = true /// скрыт слайдер !!!
         zoomSlider.minimumValue = 0
         zoomSlider.maximumValue = 20
         zoomSlider.value = Float(DataService.shared.defaultZoom)
@@ -94,7 +96,7 @@ class MainScreenViewController: UIViewController {
     
     @IBAction func zoomSliderAction(_ sender: UISlider) {
         mapView.animate(toZoom: zoomSlider.value)
-        zoomLabel.text = String(format: "Zoom: %.1f ",
+        infoLabel.text = String(format: "Zoom: %.1f ",
                                 zoomSlider.value * 5) + "%"
     }
     
@@ -108,10 +110,12 @@ class MainScreenViewController: UIViewController {
         markerButton.isHidden = false
         if DataService.shared.markerDidTapped {
             markerButton.setTitle("Подробно", for: .normal)
-            markerButton.backgroundColor = .lightGray
+            markerButton.backgroundColor = UIColor(white: 1, alpha: 0.3)
+            markerButton.setTitleColor(.white, for: .normal)
         } else {
             markerButton.setTitle("Добавить событие", for: .normal)
-            markerButton.backgroundColor = .systemYellow
+            markerButton.backgroundColor = UIColor(white: 1, alpha: 1)
+            markerButton.setTitleColor(ConfigUI.shared.greenVenue, for: .normal)
         }
     }
     
@@ -128,7 +132,7 @@ class MainScreenViewController: UIViewController {
         if UserDefaults.standard.bool(forKey: "logined") {
             presenter.goAddMarkerScreen()
         } else {
-            zoomLabel.text = "создайте или войдите в свой аккаунт"
+            infoLabel.text = "создайте или войдите в свой аккаунт"
         }
     }
     

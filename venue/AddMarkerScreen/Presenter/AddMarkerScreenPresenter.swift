@@ -77,6 +77,7 @@ class AddMarkerScreenPresenter: AddMarkerScreenPresenterProtocol {
         let date = DataService.shared.dateEvent
         var eventUpd = event
         eventUpd.dateEventString = DataService.shared.dataEventString
+        eventUpd.nameEvent = nameEvent
         eventUpd.iconEvent = iconEvent
         eventUpd.discriptionEvent = discrEvent
         eventUpd.snipetEvent = DataService.shared.categoryEvent
@@ -86,7 +87,9 @@ class AddMarkerScreenPresenter: AddMarkerScreenPresenterProtocol {
         DataService.shared.event = eventUpd
         /// Замена в локальном массиве.
         let i = DataService.searchIndexEvent(event: event)
+        print("\nстарое имя = ", DataService.shared.events[i].nameEvent)
         DataService.shared.events[i] = eventUpd
+        print("новое имя = ", DataService.shared.events[i].nameEvent)
     }
 
 

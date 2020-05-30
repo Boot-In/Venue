@@ -12,7 +12,7 @@ import Firebase
 struct Event {
     let userID: String
     let userNick: String
-    let nameEvent: String
+    var nameEvent: String
     let latEvent: Double
     let lngEvent: Double
     var dateEventTI: Double

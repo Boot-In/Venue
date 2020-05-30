@@ -11,6 +11,7 @@
 		1B01EC832468D40800FA52F1 /* AccountScreenViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1B01EC812468D40800FA52F1 /* AccountScreenViewController.xib */; };
 		1B01EC872468D45E00FA52F1 /* AccountScreenPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B01EC862468D45E00FA52F1 /* AccountScreenPresenter.swift */; };
 		1B01EC892468D47200FA52F1 /* AccountScreenRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B01EC882468D47200FA52F1 /* AccountScreenRouter.swift */; };
+		1B4242722481455100A216AB /* ConfigUI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B4242712481455100A216AB /* ConfigUI.swift */; };
 		1B48450224713C8700836FB5 /* LoginScreenViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B48450024713C8700836FB5 /* LoginScreenViewController.swift */; };
 		1B48450324713C8700836FB5 /* LoginScreenViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1B48450124713C8700836FB5 /* LoginScreenViewController.xib */; };
 		1B48450524713CA500836FB5 /* LoginScreenPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B48450424713CA500836FB5 /* LoginScreenPresenter.swift */; };
@@ -58,6 +59,7 @@
 		1B01EC812468D40800FA52F1 /* AccountScreenViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = AccountScreenViewController.xib; sourceTree = "<group>"; };
 		1B01EC862468D45E00FA52F1 /* AccountScreenPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountScreenPresenter.swift; sourceTree = "<group>"; };
 		1B01EC882468D47200FA52F1 /* AccountScreenRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountScreenRouter.swift; sourceTree = "<group>"; };
+		1B4242712481455100A216AB /* ConfigUI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConfigUI.swift; sourceTree = "<group>"; };
 		1B48450024713C8700836FB5 /* LoginScreenViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginScreenViewController.swift; sourceTree = "<group>"; };
 		1B48450124713C8700836FB5 /* LoginScreenViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = LoginScreenViewController.xib; sourceTree = "<group>"; };
 		1B48450424713CA500836FB5 /* LoginScreenPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginScreenPresenter.swift; sourceTree = "<group>"; };
@@ -438,6 +440,7 @@
 				1BECD70924679D490000A0C6 /* LocationService.swift */,
 				8BE056A12473FE3B00D94CCC /* DataService.swift */,
 				1BF4E19F247A85850027F8A9 /* NetworkService.swift */,
+				1B4242712481455100A216AB /* ConfigUI.swift */,
 			);
 			path = Services;
 			sourceTree = "<group>";
@@ -613,6 +616,7 @@
 				1BE688CE2467E0BE00F641F2 /* MainScreenRouter.swift in Sources */,
 				1BE688CC2467DFFC00F641F2 /* ModuleBuilder.swift in Sources */,
 				1BECD6F42467990C0000A0C6 /* SceneDelegate.swift in Sources */,
+				1B4242722481455100A216AB /* ConfigUI.swift in Sources */,
 				1BF4E1A0247A85850027F8A9 /* NetworkService.swift in Sources */,
 				1B48450724713CB300836FB5 /* LoginScreenRouter.swift in Sources */,
 			);
