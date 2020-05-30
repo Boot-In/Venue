@@ -50,7 +50,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                 print(error?.localizedDescription ?? "No error available.")
             } else {
                 guard status != .error else { return }
-                let zoom = self.remoteConfig["defultZoom"].numberValue as! Int
+                let zoom = self.remoteConfig["defultZoom"].numberValue as! Float
                 let ua = self.remoteConfig["admin_User"].stringValue
                 // let zoom = self.remoteConfig.configValue(forKey: "defultZoom").numberValue as! Int
                 //let ua = self.remoteConfig.configValue(forKey: "userAdmin").stringValue

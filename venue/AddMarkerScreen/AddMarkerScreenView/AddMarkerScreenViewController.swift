@@ -17,6 +17,7 @@ class AddMarkerScreenViewController: UIViewController {
     @IBOutlet weak var iconEventIV: UIImageView!
     @IBOutlet weak var infoLabel: UILabel!
     @IBOutlet weak var saveButton: UIButton!
+    @IBOutlet weak var backButton: UIButton!
     
     var presenter: AddMarkerScreenPresenterProtocol!
     let picker = UIDatePicker()
@@ -29,13 +30,15 @@ class AddMarkerScreenViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         saveButton.isHidden = false
+        ConfigUI.buttonConfig(button: saveButton, titleColor: .white, alfa: 0.3)
+        ConfigUI.buttonConfig(button: backButton, titleColor: .systemBlue, alfa: 1)
         
         formatter.locale = .init(identifier: "Russian")
         formatter.dateStyle = .short
         formatter.timeStyle = .none
         enableTextField()
         infoLabel.text = "Заполните поля"
-        infoLabel.textColor = .red
+        infoLabel.textColor = .yellow
         createDatePicker()
         addDoneButtonTo(nameEventTF, categoryEventTF)
         addDoneButtonToTV(discriptionEventTV)
@@ -146,7 +149,7 @@ class AddMarkerScreenViewController: UIViewController {
         guard let discr = discriptionEventTV.text else { return }
         //guard let category = categoryEventTF.text else { return }
         DataService.shared.categoryEvent = categoryEventTF.text ?? ""
-        infoLabel.textColor = .systemBlue
+        infoLabel.textColor = .white
         infoLabel.text = "Сохраняем ...."
         if isEdit {
             guard let event = DataService.shared.event else { return }

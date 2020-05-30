@@ -26,13 +26,19 @@ class AccountScreenViewController: UIViewController {
     @IBOutlet weak var rePasswordTextField: UITextField!
     @IBOutlet weak var logOutButton: UIButton!
     @IBOutlet weak var saveButton: UIButton!
+    @IBOutlet weak var backButton: UIButton!
     
     override func viewDidLoad() {
         super.viewDidLoad()
         enableTF()
         logOutButton.isHidden = true
-        infoLabel.textColor = .red
+        infoLabel.textColor = .yellow
         saveButton.isHidden = false
+        
+        ConfigUI.buttonConfig(button: backButton, titleColor: .systemBlue, alfa: 1)
+        ConfigUI.buttonConfig(button: saveButton, titleColor: ConfigUI.shared.greenVenue, alfa: 1)
+        ConfigUI.buttonConfig(button: logOutButton, titleColor: .red, alfa: 0.3)
+        
         if let profile = presenter.getProfile() {
             print("...profile", profile.firstUserName)
             updateProfileInfo(profile: profile)
@@ -49,7 +55,7 @@ class AccountScreenViewController: UIViewController {
         passwordTextField.text = profile.password
         rePasswordTextField.text = profile.password
         logOutButton.isHidden = false
-        infoLabel.text = ""
+        infoLabel.text = " "
         saveButton.isHidden = true
     }
     
@@ -109,7 +115,7 @@ class AccountScreenViewController: UIViewController {
         if passwordTextField.text != rePasswordTextField.text {
             infoLabel.text = "Пароли не совпадают" ; return
         }
-        infoLabel.textColor = .systemBlue
+        infoLabel.textColor = .white
         infoLabel.text = "Подождите....."
         
         presenter.createUser(email: email, password: password, fName: firstUN, sName: secondUN, nik: nickUN)

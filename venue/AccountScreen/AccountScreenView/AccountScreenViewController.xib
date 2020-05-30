@@ -9,6 +9,7 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="AccountScreenViewController" customModule="Venue" customModuleProvider="target">
             <connections>
+                <outlet property="backButton" destination="TXr-Xb-awx" id="75B-lL-x6P"/>
                 <outlet property="emailTextField" destination="BYN-et-9nf" id="VJB-0Y-ReE"/>
                 <outlet property="infoLabel" destination="fdM-uB-JJe" id="y59-B2-S8Q"/>
                 <outlet property="logOutButton" destination="Ewv-WY-uVm" id="SYA-VY-hMH"/>
@@ -27,21 +28,21 @@
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
                 <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="20" translatesAutoresizingMaskIntoConstraints="NO" id="nhk-U2-3rJ">
-                    <rect key="frame" x="20" y="30" width="335" height="447"/>
+                    <rect key="frame" x="20" y="30" width="335" height="417.5"/>
                     <subviews>
                         <stackView opaque="NO" contentMode="scaleToFill" spacing="20" translatesAutoresizingMaskIntoConstraints="NO" id="lt5-JB-zN2">
                             <rect key="frame" x="0.0" y="0.0" width="335" height="30"/>
                             <subviews>
                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" horizontalCompressionResistancePriority="749" text="Информация о пользователе" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.59999999999999998" translatesAutoresizingMaskIntoConstraints="NO" id="Qla-Ky-bMY">
-                                    <rect key="frame" x="0.0" y="0.0" width="261" height="30"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="254" height="30"/>
                                     <fontDescription key="fontDescription" type="boldSystem" pointSize="20"/>
                                     <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                     <nil key="highlightedColor"/>
                                 </label>
                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Ewv-WY-uVm">
-                                    <rect key="frame" x="281" y="0.0" width="54" height="30"/>
+                                    <rect key="frame" x="274" y="0.0" width="61" height="30"/>
                                     <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
-                                    <state key="normal" title="LogOut"/>
+                                    <state key="normal" title=" LogOut "/>
                                     <connections>
                                         <action selector="logOut" destination="-1" eventType="touchUpInside" id="EDy-bP-WD3"/>
                                     </connections>
@@ -168,42 +169,17 @@
                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="** Как вас будут видеть другие пользователи" textAlignment="right" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" minimumScaleFactor="0.80000000000000004" translatesAutoresizingMaskIntoConstraints="NO" id="WeV-k7-Nkv">
                                     <rect key="frame" x="0.0" y="39" width="335" height="18"/>
                                     <fontDescription key="fontDescription" type="system" pointSize="15"/>
-                                    <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                    <color key="textColor" systemColor="systemGray4Color" red="0.81960784310000001" green="0.81960784310000001" blue="0.83921568629999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                     <nil key="highlightedColor"/>
                                 </label>
                             </subviews>
                         </stackView>
-                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" minimumScaleFactor="0.60000002384185791" translatesAutoresizingMaskIntoConstraints="NO" id="fdM-uB-JJe">
-                            <rect key="frame" x="0.0" y="397" width="335" height="0.0"/>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text=" " textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" minimumScaleFactor="0.60000002384185791" translatesAutoresizingMaskIntoConstraints="NO" id="fdM-uB-JJe">
+                            <rect key="frame" x="0.0" y="397" width="335" height="20.5"/>
                             <fontDescription key="fontDescription" type="system" weight="light" pointSize="17"/>
                             <color key="textColor" red="0.002888324389" green="0.054154038940000003" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             <nil key="highlightedColor"/>
                         </label>
-                        <stackView opaque="NO" contentMode="scaleToFill" distribution="equalSpacing" spacing="50" translatesAutoresizingMaskIntoConstraints="NO" id="PZl-1K-rmR">
-                            <rect key="frame" x="0.0" y="417" width="335" height="30"/>
-                            <subviews>
-                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="TXr-Xb-awx">
-                                    <rect key="frame" x="0.0" y="0.0" width="48" height="30"/>
-                                    <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
-                                    <state key="normal" title="Назад">
-                                        <color key="titleColor" red="0.86405652759999996" green="0.24311631919999999" blue="0.29670241479999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                    </state>
-                                    <connections>
-                                        <action selector="closeWindow" destination="-1" eventType="touchUpInside" id="L00-uN-FO4"/>
-                                    </connections>
-                                </button>
-                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="MYI-0f-J2g">
-                                    <rect key="frame" x="253" y="0.0" width="82" height="30"/>
-                                    <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
-                                    <state key="normal" title="Сохранить">
-                                        <color key="titleColor" systemColor="systemBlueColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                    </state>
-                                    <connections>
-                                        <action selector="saveButtonTap" destination="-1" eventType="touchUpInside" id="lK0-YO-M46"/>
-                                    </connections>
-                                </button>
-                            </subviews>
-                        </stackView>
                     </subviews>
                     <constraints>
                         <constraint firstItem="K1r-Zc-hIe" firstAttribute="width" secondItem="BYN-et-9nf" secondAttribute="width" id="4Ze-nC-QUj"/>
@@ -213,12 +189,38 @@
                         <constraint firstItem="jSf-7G-81m" firstAttribute="width" secondItem="K1r-Zc-hIe" secondAttribute="width" id="l6s-UZ-I54"/>
                     </constraints>
                 </stackView>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="MYI-0f-J2g">
+                    <rect key="frame" x="242.5" y="467.5" width="112.5" height="30"/>
+                    <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
+                    <state key="normal" title="Сохранить">
+                        <color key="titleColor" systemColor="systemBlueColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                    </state>
+                    <connections>
+                        <action selector="saveButtonTap" destination="-1" eventType="touchUpInside" id="lK0-YO-M46"/>
+                    </connections>
+                </button>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="TXr-Xb-awx">
+                    <rect key="frame" x="20" y="467.5" width="112.5" height="30"/>
+                    <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
+                    <state key="normal" title="Назад">
+                        <color key="titleColor" red="0.86405652759999996" green="0.24311631919999999" blue="0.29670241479999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                    </state>
+                    <connections>
+                        <action selector="closeWindow" destination="-1" eventType="touchUpInside" id="L00-uN-FO4"/>
+                    </connections>
+                </button>
             </subviews>
-            <color key="backgroundColor" red="0.7606702900062009" green="0.8459115832463282" blue="0.98154765369999997" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <color key="backgroundColor" red="0.0" green="0.59808194640000001" blue="0.0042739505879999997" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
             <constraints>
+                <constraint firstItem="MYI-0f-J2g" firstAttribute="width" secondItem="TXr-Xb-awx" secondAttribute="width" id="4Zu-hc-jJU"/>
                 <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="nhk-U2-3rJ" secondAttribute="trailing" constant="20" id="6hi-8S-F9s"/>
+                <constraint firstItem="TXr-Xb-awx" firstAttribute="width" secondItem="i5M-Pr-FkT" secondAttribute="width" multiplier="0.3" id="7NP-1I-R2X"/>
+                <constraint firstItem="TXr-Xb-awx" firstAttribute="top" secondItem="nhk-U2-3rJ" secondAttribute="bottom" constant="20" id="AA9-DC-3q1"/>
                 <constraint firstItem="nhk-U2-3rJ" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" constant="20" id="Gqp-WW-Nty"/>
+                <constraint firstItem="TXr-Xb-awx" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" constant="20" id="Iok-UN-ST2"/>
+                <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="MYI-0f-J2g" secondAttribute="trailing" constant="20" id="NJe-J5-nUf"/>
                 <constraint firstItem="nhk-U2-3rJ" firstAttribute="top" secondItem="fnl-2z-Ty3" secondAttribute="top" constant="30" id="NSt-AM-pcX"/>
+                <constraint firstItem="MYI-0f-J2g" firstAttribute="centerY" secondItem="TXr-Xb-awx" secondAttribute="centerY" id="oc6-mO-sC6"/>
             </constraints>
             <viewLayoutGuide key="safeArea" id="fnl-2z-Ty3"/>
             <point key="canvasLocation" x="139" y="126"/>

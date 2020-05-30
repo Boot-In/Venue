@@ -9,6 +9,7 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="AddMarkerScreenViewController" customModule="Venue" customModuleProvider="target">
             <connections>
+                <outlet property="backButton" destination="8TQ-UO-jUp" id="KJd-PW-K6t"/>
                 <outlet property="categoryEventTF" destination="XJW-99-0vJ" id="RJi-pp-ccs"/>
                 <outlet property="dateEventTF" destination="uUw-vI-ZAZ" id="yoH-nJ-Cis"/>
                 <outlet property="discriptionEventTV" destination="23m-4p-2kf" id="2ZP-e2-kwk"/>
@@ -25,31 +26,26 @@
             <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
-                <stackView opaque="NO" contentMode="scaleToFill" distribution="equalSpacing" spacing="20" translatesAutoresizingMaskIntoConstraints="NO" id="jKa-1u-4Zg">
-                    <rect key="frame" x="20" y="604" width="335" height="33"/>
-                    <subviews>
-                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="8TQ-UO-jUp">
-                            <rect key="frame" x="0.0" y="0.0" width="54" height="33"/>
-                            <fontDescription key="fontDescription" type="boldSystem" pointSize="17"/>
-                            <state key="normal" title="Назад">
-                                <color key="titleColor" red="1" green="0.064624095630000003" blue="0.066512802849999997" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                            </state>
-                            <connections>
-                                <action selector="closeButtonTap" destination="-1" eventType="touchUpInside" id="9l8-he-8fT"/>
-                            </connections>
-                        </button>
-                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="xbP-tY-21p">
-                            <rect key="frame" x="243" y="0.0" width="92" height="33"/>
-                            <fontDescription key="fontDescription" type="boldSystem" pointSize="17"/>
-                            <state key="normal" title="Сохранить">
-                                <color key="titleColor" systemColor="systemBlueColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                            </state>
-                            <connections>
-                                <action selector="saveButtonTap" destination="-1" eventType="touchUpInside" id="f0m-WX-4ft"/>
-                            </connections>
-                        </button>
-                    </subviews>
-                </stackView>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="8TQ-UO-jUp">
+                    <rect key="frame" x="20" y="604" width="112.5" height="33"/>
+                    <fontDescription key="fontDescription" type="boldSystem" pointSize="17"/>
+                    <state key="normal" title="Назад">
+                        <color key="titleColor" red="1" green="0.064624095630000003" blue="0.066512802849999997" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                    </state>
+                    <connections>
+                        <action selector="closeButtonTap" destination="-1" eventType="touchUpInside" id="9l8-he-8fT"/>
+                    </connections>
+                </button>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="xbP-tY-21p">
+                    <rect key="frame" x="242.5" y="604" width="112.5" height="33"/>
+                    <fontDescription key="fontDescription" type="boldSystem" pointSize="17"/>
+                    <state key="normal" title="Сохранить">
+                        <color key="titleColor" systemColor="systemBlueColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                    </state>
+                    <connections>
+                        <action selector="saveButtonTap" destination="-1" eventType="touchUpInside" id="f0m-WX-4ft"/>
+                    </connections>
+                </button>
                 <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="20" translatesAutoresizingMaskIntoConstraints="NO" id="e4q-xu-DIN">
                     <rect key="frame" x="10" y="20" width="355" height="554"/>
                     <subviews>
@@ -193,16 +189,19 @@
                     </constraints>
                 </stackView>
             </subviews>
-            <color key="backgroundColor" red="0.86649578311321906" green="0.98039215690000003" blue="0.84026129913680747" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <color key="backgroundColor" red="0.0" green="0.59808194640000001" blue="0.0042739505879999997" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
             <constraints>
-                <constraint firstItem="jKa-1u-4Zg" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" constant="20" id="56c-oW-kCO"/>
-                <constraint firstItem="fnl-2z-Ty3" firstAttribute="bottom" secondItem="jKa-1u-4Zg" secondAttribute="bottom" constant="30" id="7AX-hx-veV"/>
+                <constraint firstItem="xbP-tY-21p" firstAttribute="width" secondItem="8TQ-UO-jUp" secondAttribute="width" id="1WU-YN-ueg"/>
+                <constraint firstItem="8TQ-UO-jUp" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" constant="20" id="5z2-3i-pZs"/>
+                <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="xbP-tY-21p" secondAttribute="trailing" constant="20" id="Dqr-v2-4l2"/>
                 <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="e4q-xu-DIN" secondAttribute="trailing" constant="10" id="Ict-Ev-a51"/>
+                <constraint firstItem="xbP-tY-21p" firstAttribute="centerY" secondItem="8TQ-UO-jUp" secondAttribute="centerY" id="OAn-rh-md4"/>
                 <constraint firstItem="e4q-xu-DIN" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" constant="10" id="WRX-aF-WXI"/>
+                <constraint firstItem="8TQ-UO-jUp" firstAttribute="width" secondItem="fnl-2z-Ty3" secondAttribute="width" multiplier="0.3" id="Xcm-gh-711"/>
+                <constraint firstItem="fnl-2z-Ty3" firstAttribute="bottom" secondItem="8TQ-UO-jUp" secondAttribute="bottom" constant="30" id="YPH-18-XH6"/>
                 <constraint firstItem="e4q-xu-DIN" firstAttribute="top" secondItem="fnl-2z-Ty3" secondAttribute="top" constant="20" id="dYv-z9-tfp"/>
-                <constraint firstItem="jKa-1u-4Zg" firstAttribute="top" secondItem="e4q-xu-DIN" secondAttribute="bottom" constant="30" id="suB-95-fLA"/>
+                <constraint firstItem="8TQ-UO-jUp" firstAttribute="top" secondItem="e4q-xu-DIN" secondAttribute="bottom" constant="30" id="s6R-VZ-uRC"/>
                 <constraint firstItem="AUe-or-LYM" firstAttribute="width" secondItem="i5M-Pr-FkT" secondAttribute="width" multiplier="0.6" id="tZf-cF-57W"/>
-                <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="jKa-1u-4Zg" secondAttribute="trailing" constant="20" id="uch-MD-wmu"/>
             </constraints>
             <viewLayoutGuide key="safeArea" id="fnl-2z-Ty3"/>
             <point key="canvasLocation" x="138.40000000000001" y="125.4872563718141"/>

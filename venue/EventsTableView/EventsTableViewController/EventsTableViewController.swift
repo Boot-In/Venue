@@ -38,7 +38,7 @@ class EventsTableViewController: UIViewController {
         
         ConfigUI.buttonConfig(button: removeOldButton, titleColor: .red, alfa: 0.8)
         ConfigUI.segmentControlConfig(sc: rangeSC)
-        ConfigUI.buttonConfig(button: backToMapButton, titleColor: ConfigUI.shared.greenVenue, alfa: 1)
+        ConfigUI.buttonConfig(button: backToMapButton, titleColor: .systemBlue, alfa: 1)
     
         if DataService.shared.localUser != nil && DataService.shared.localUser.userID == DataService.shared.userAdmin {
             removeOldButton.isHidden = false

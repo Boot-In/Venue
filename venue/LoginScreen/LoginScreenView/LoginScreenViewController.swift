@@ -16,22 +16,33 @@ class LoginScreenViewController: UIViewController {
     @IBOutlet weak var warnLabel: UILabel!
     @IBOutlet weak var emailTextField: UITextField!
     @IBOutlet weak var passwordTextField: UITextField!
+    @IBOutlet weak var loginButton: UIButton!
+    @IBOutlet weak var backButton: UIButton!
+    @IBOutlet weak var registrationButton: UIButton!
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
         navigationController?.navigationBar.isHidden = true
-        warnLabel.textColor = .red
+        warnLabel.textColor = .yellow
         warnLabel.alpha = 0
+        
+        ConfigUI.buttonConfig(button: loginButton, titleColor: ConfigUI.shared.greenVenue, alfa: 1)
+        ConfigUI.buttonConfig(button: registrationButton, titleColor: .white, alfa: 0.3)
+        ConfigUI.buttonConfig(button: backButton, titleColor: .systemBlue, alfa: 1)
+        
     }
     
     
     func displayWarningLabel(withText text: String) {
+        self.warnLabel.alpha = 0
         warnLabel.text = text
         UIView.animate(withDuration: 3, delay: 0, usingSpringWithDamping: 1, initialSpringVelocity: 1, options: .curveEaseInOut, animations: { [weak self] in
             self?.warnLabel.alpha = 1
-        }) { [weak self] complete in
-            self?.warnLabel.alpha = 0
-        }
+        })
+//        { [weak self] complete in
+//            self?.warnLabel.alpha = 0
+//        }
     }
 
     @IBAction func loginButtonTap(_ sender: UIButton) {

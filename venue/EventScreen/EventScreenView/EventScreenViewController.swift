@@ -36,11 +36,11 @@ class EventScreenViewController: UIViewController {
         eventDiscriptionTV.backgroundColor? = UIColor(white: 1, alpha: 0.3)
         eventDiscriptionTV.textColor = .black
         
-        ConfigUI.buttonConfig(button: goButton, titleColor: .systemBlue, alfa: 1)
+        ConfigUI.buttonConfig(button: goButton, titleColor: ConfigUI.shared.greenVenue, alfa: 1)
         ConfigUI.buttonConfig(button: cancelFollowButton, titleColor: .red, alfa: 1)
         ConfigUI.buttonConfig(button: editButton, titleColor: .orange, alfa: 0.3)
         ConfigUI.buttonConfig(button: removeButton, titleColor: .systemRed, alfa: 0.3)
-        ConfigUI.buttonConfig(button: backButton, titleColor: ConfigUI.shared.greenVenue, alfa: 1)
+        ConfigUI.buttonConfig(button: backButton, titleColor: .systemBlue, alfa: 1)
         
         infoLabel.alpha = 0
         eventDiscriptionTV.isEditable = false

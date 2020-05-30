@@ -80,6 +80,7 @@ class MainScreenViewController: UIViewController {
         mapView.settings.compassButton = true
         mapView.settings.myLocationButton = true
         mapView.settings.indoorPicker = true
+        mapView.animate(toZoom: DataService.shared.defaultZoom)
     }
     
     func sliderSetup() {

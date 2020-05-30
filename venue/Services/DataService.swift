@@ -12,7 +12,7 @@ class DataService {
     static var shared = DataService()
     
     var userAdmin: String = "No Admin"
-    var defaultZoom: Int = 16
+    var defaultZoom: Float = 16
     var coordinateEvent = CLLocationCoordinate2D()
     var placeEvent = String()
     var dateEvent = Date()

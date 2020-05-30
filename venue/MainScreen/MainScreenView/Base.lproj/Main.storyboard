@@ -56,7 +56,7 @@
                                 </subviews>
                             </stackView>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ToA-zb-sao" customClass="GMSMapView">
-                                <rect key="frame" x="0.0" y="94" width="375" height="443"/>
+                                <rect key="frame" x="5" y="94" width="365" height="443"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                             </view>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="20" translatesAutoresizingMaskIntoConstraints="NO" id="vpO-nh-Hqz">
@@ -118,10 +118,10 @@
                             <constraint firstItem="vpO-nh-Hqz" firstAttribute="top" secondItem="ToA-zb-sao" secondAttribute="bottom" constant="20" id="8ph-jY-zRg"/>
                             <constraint firstItem="0QN-g6-Zqc" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="5" id="BoK-xH-wPb"/>
                             <constraint firstItem="83x-64-wV0" firstAttribute="width" secondItem="8bC-Xf-vdC" secondAttribute="width" multiplier="0.44" id="IP1-dR-kGm"/>
-                            <constraint firstItem="ToA-zb-sao" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="Qe6-1R-0a5"/>
+                            <constraint firstItem="ToA-zb-sao" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="5" id="Qe6-1R-0a5"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="0QN-g6-Zqc" secondAttribute="trailing" constant="15" id="UPP-5U-RKX"/>
                             <constraint firstItem="ToA-zb-sao" firstAttribute="top" secondItem="0QN-g6-Zqc" secondAttribute="bottom" constant="15" id="eAP-E8-5DV"/>
-                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="ToA-zb-sao" secondAttribute="trailing" id="pNf-ZJ-mnl"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="ToA-zb-sao" secondAttribute="trailing" constant="5" id="pNf-ZJ-mnl"/>
                             <constraint firstItem="0QN-g6-Zqc" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="15" id="uOD-61-ear"/>
                             <constraint firstItem="vpO-nh-Hqz" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="10" id="wUL-KV-bHL"/>
                         </constraints>
