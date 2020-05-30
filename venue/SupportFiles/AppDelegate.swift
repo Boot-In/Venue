@@ -38,7 +38,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 //        remoteConfig.configSettings = setting
         
         /// Значение ключей по умолчанию (офлайн)
-        let remoteConfigDefault = [ "defultZoom" : 17 as NSObject,
+        let remoteConfigDefault = [ "defultZoom" : 11 as NSObject,
             "admin_User" : "XBXa5zCsAMggdwcODbelcqMLXRi2" as NSObject] ///
         remoteConfig.setDefaults(remoteConfigDefault)
         

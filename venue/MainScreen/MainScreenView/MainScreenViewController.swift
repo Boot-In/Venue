@@ -49,12 +49,9 @@ class MainScreenViewController: UIViewController {
         super.viewWillAppear(animated)
         print("viewWillAppear MainScreen")
         checkAccount()
-       // presenter.markerFiltred(range: intervalSC.selectedSegmentIndex)
-      //  if isMark {
-            mapView.clear()
-            print("Карта очищена")
-            presenter.getOfflineMarkers(range:  intervalSC.selectedSegmentIndex)
-      //  }
+        mapView.clear()
+        print("Карта очищена")
+        presenter.getOfflineMarkers(range:  intervalSC.selectedSegmentIndex)
     }
     
     override func viewWillDisappear(_ animated: Bool) {
@@ -80,7 +77,8 @@ class MainScreenViewController: UIViewController {
         mapView.settings.compassButton = true
         mapView.settings.myLocationButton = true
         mapView.settings.indoorPicker = true
-        mapView.animate(toZoom: DataService.shared.defaultZoom)
+        mapView.animate(toZoom: 11) // поменять !!!
+        //mapView.animate(toZoom: DataService.shared.defaultZoom)
     }
     
     func sliderSetup() {

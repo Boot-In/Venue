@@ -24,7 +24,7 @@
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
                 <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="AvP-FN-y1b">
-                    <rect key="frame" x="60" y="20" width="295" height="32"/>
+                    <rect key="frame" x="62" y="20" width="293" height="32"/>
                     <segments>
                         <segment title="День"/>
                         <segment title="Неделя"/>
@@ -69,10 +69,10 @@
                     </connections>
                 </button>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="74f-kn-hyl">
-                    <rect key="frame" x="10" y="22" width="30" height="27.5"/>
+                    <rect key="frame" x="10" y="22" width="32" height="27.5"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="30" id="gnL-oF-lRL"/>
-                        <constraint firstAttribute="width" constant="30" id="qYu-JK-eqa"/>
+                        <constraint firstAttribute="width" constant="32" id="qYu-JK-eqa"/>
                     </constraints>
                     <color key="tintColor" red="0.94879966969999996" green="0.95294338460000005" blue="0.95695537330000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     <state key="normal" backgroundImage="person.2" catalog="system">

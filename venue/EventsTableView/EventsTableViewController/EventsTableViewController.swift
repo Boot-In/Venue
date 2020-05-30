@@ -18,6 +18,7 @@ class EventsTableViewController: UIViewController {
     @IBOutlet weak var eventsTableView: UITableView!
     @IBOutlet weak var backToMapButton: UIButton!
     @IBOutlet weak var myEventsButton: UIButton!
+    var isMyEvents = false
     
     var eventsForTableView = DataService.shared.events
     var eventsFiltred: [Event]!
@@ -51,12 +52,27 @@ class EventsTableViewController: UIViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        
+        checkStatusMyEvensButton()
+        
         eventsForTableView = DataService.shared.events
         eventsFiltred = DataService.filtredDateEvents(events: eventsForTableView, range: rangeSC.selectedSegmentIndex)
         eventsTableView.reloadData()
         removeOldButton.setTitle("  🗑 Old(\(DataService.shared.oldEventsID?.count ?? 0))  ", for: .normal)
         print("отработал viewWillAppear EventsTableViewController")
     }
+    
+    func checkStatusMyEvensButton() {
+        if isMyEvents {
+            myEventsButton.setBackgroundImage(UIImage(systemName: "person.fill"), for: .normal)
+            rangeSC.isHidden = true
+            showAlertMsgWithDelay(title: "ВНИМАНИЕ !", message: "Показаны только Ваши события", delay: 2)
+        } else {
+            myEventsButton.setBackgroundImage(UIImage(systemName: "person.2"), for: .normal)
+            rangeSC.isHidden = false
+        }
+    }
+    
     
     @IBAction func rangeSCAction(_ sender: UISegmentedControl) {
         self.view.endEditing(true)
@@ -77,6 +93,10 @@ class EventsTableViewController: UIViewController {
     
     
     @IBAction func myEventButtonTap() {
+        isMyEvents.toggle()
+        checkStatusMyEvensButton()
+        eventsFiltred = DataService.filtreUserEvents(events: eventsForTableView, isMy: isMyEvents)
+        eventsTableView.reloadData()
     }
     
 }

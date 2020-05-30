@@ -56,6 +56,22 @@ class DataService {
         return eventsFiltred
     }
     
+    static func filtreUserEvents(events: [Event], isMy: Bool) -> [Event] {
+        print("В исходном массиве = \(events.count) элементов")
+        var eventsFiltred:[Event] = []
+        guard DataService.shared.localUser != nil else { return events }
+        guard isMy else { return events }
+        for event in events {
+            if event.userID == DataService.shared.localUser.userID {
+                eventsFiltred.append(event)
+            }
+        }
+        
+        eventsFiltred.sort { $0.dateEventTI < $1.dateEventTI }
+        print("В отфильтрованном массиве \(eventsFiltred.count) элементов")
+       
+        return eventsFiltred
+    }
     
     static func searchIndexEvent(event: Event) -> Int {
         var index = 0

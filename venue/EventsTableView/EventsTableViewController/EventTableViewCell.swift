@@ -17,9 +17,9 @@ class EventTableViewCell: UITableViewCell {
     
     override func awakeFromNib() {
         super.awakeFromNib()
-        nameEventLabel.textColor = .black
-        nickNameEventLabel.textColor = .black
-        discriptionEventLabel.textColor = .black
+        nameEventLabel.textColor = .label
+        nickNameEventLabel.textColor = .label
+        discriptionEventLabel.textColor = .label
         eventImage.backgroundColor = .clear
         // Initialization code
     }
