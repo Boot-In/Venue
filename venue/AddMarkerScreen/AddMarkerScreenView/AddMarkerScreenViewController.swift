@@ -31,7 +31,7 @@ class AddMarkerScreenViewController: UIViewController {
         super.viewDidLoad()
         saveButton.isHidden = false
         ConfigUI.buttonConfig(button: saveButton, titleColor: .white, alfa: 0.3)
-        ConfigUI.buttonConfig(button: backButton, titleColor: .systemBlue, alfa: 1)
+        ConfigUI.buttonConfig(button: backButton, titleColor: .white, alfa: 0)
         
         formatter.locale = .init(identifier: "Russian")
         formatter.dateStyle = .short

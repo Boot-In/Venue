@@ -11,7 +11,6 @@ import UIKit
 class EventScreenViewController: UIViewController {
 
     var presenter: EventScreenPresenterProtocol!
-    //var marker: GMSMarker!
     
     @IBOutlet weak var nickNameLabel: UILabel!
     @IBOutlet weak var eventDataLabel: UILabel!
@@ -34,13 +33,13 @@ class EventScreenViewController: UIViewController {
         cancelFollowButton.isHidden = true
         
         eventDiscriptionTV.backgroundColor? = UIColor(white: 1, alpha: 0.3)
-        eventDiscriptionTV.textColor = .black
+        eventDiscriptionTV.textColor = .label
         
         ConfigUI.buttonConfig(button: goButton, titleColor: ConfigUI.shared.greenVenue, alfa: 1)
         ConfigUI.buttonConfig(button: cancelFollowButton, titleColor: .red, alfa: 1)
         ConfigUI.buttonConfig(button: editButton, titleColor: .orange, alfa: 0.3)
         ConfigUI.buttonConfig(button: removeButton, titleColor: .systemRed, alfa: 0.3)
-        ConfigUI.buttonConfig(button: backButton, titleColor: .systemBlue, alfa: 1)
+        ConfigUI.buttonConfig(button: backButton, titleColor: .white, alfa: 0)
         
         infoLabel.alpha = 0
         eventDiscriptionTV.isEditable = false
@@ -148,7 +147,12 @@ extension EventScreenViewController: EventScreenProtocol {
         eventDataLabel.text = "Дата проведения: \(eventData)"
         eventNameLabel.text = "Название: \(eventName)"
         eventCategoryLabel.text = "Категория: \(eventCategory)"
-        eventDiscriptionTV.text = eventDiscription
+        
+        let count = DataService.shared.event.followEventUsers.count
+        if count > 0 {
+            eventDiscriptionTV.text = "Желающих посетить: \(count) чел. \n\n\(eventDiscription)"
+        } else { eventDiscriptionTV.text = eventDiscription }
+        
         self.index = index;   print("index = ", index)
         checkFollowUserStatus()
     }

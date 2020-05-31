@@ -35,7 +35,7 @@ class AccountScreenViewController: UIViewController {
         infoLabel.textColor = .yellow
         saveButton.isHidden = false
         
-        ConfigUI.buttonConfig(button: backButton, titleColor: .systemBlue, alfa: 1)
+        ConfigUI.buttonConfig(button: backButton, titleColor: .white, alfa: 0)
         ConfigUI.buttonConfig(button: saveButton, titleColor: ConfigUI.shared.greenVenue, alfa: 1)
         ConfigUI.buttonConfig(button: logOutButton, titleColor: .red, alfa: 0.3)
         

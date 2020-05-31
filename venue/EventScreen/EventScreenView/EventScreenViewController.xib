@@ -29,40 +29,34 @@
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
                 <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="20" translatesAutoresizingMaskIntoConstraints="NO" id="e6p-I8-Lcb">
-                    <rect key="frame" x="10" y="20" width="355" height="457"/>
+                    <rect key="frame" x="10" y="67" width="355" height="400"/>
                     <subviews>
-                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" horizontalCompressionResistancePriority="749" text="Информация о событии" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.60000002384185791" translatesAutoresizingMaskIntoConstraints="NO" id="QXK-uC-ckp">
-                            <rect key="frame" x="0.0" y="0.0" width="355" height="24"/>
-                            <fontDescription key="fontDescription" type="boldSystem" pointSize="20"/>
-                            <nil key="textColor"/>
-                            <nil key="highlightedColor"/>
-                        </label>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Организатор: " lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="gAm-ic-PTa">
-                            <rect key="frame" x="0.0" y="44" width="355" height="21.5"/>
+                            <rect key="frame" x="0.0" y="0.0" width="355" height="21.5"/>
                             <fontDescription key="fontDescription" type="system" pointSize="18"/>
                             <nil key="textColor"/>
                             <nil key="highlightedColor"/>
                         </label>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Дата начала:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ZqL-bu-9hB">
-                            <rect key="frame" x="0.0" y="85.5" width="355" height="21.5"/>
+                            <rect key="frame" x="0.0" y="41.5" width="355" height="21.5"/>
                             <fontDescription key="fontDescription" type="system" pointSize="18"/>
                             <nil key="textColor"/>
                             <nil key="highlightedColor"/>
                         </label>
-                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Название" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="bgu-qq-Sxp">
-                            <rect key="frame" x="0.0" y="127" width="355" height="21.5"/>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Название" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" minimumScaleFactor="0.80000000000000004" translatesAutoresizingMaskIntoConstraints="NO" id="bgu-qq-Sxp">
+                            <rect key="frame" x="0.0" y="83" width="355" height="21.5"/>
                             <fontDescription key="fontDescription" type="system" pointSize="18"/>
                             <nil key="textColor"/>
                             <nil key="highlightedColor"/>
                         </label>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Категория:" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="YWv-R5-e40">
-                            <rect key="frame" x="0.0" y="168.5" width="355" height="21.5"/>
+                            <rect key="frame" x="0.0" y="124.5" width="355" height="21.5"/>
                             <fontDescription key="fontDescription" type="system" pointSize="18"/>
                             <nil key="textColor"/>
                             <nil key="highlightedColor"/>
                         </label>
                         <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="7Iv-3H-uLM">
-                            <rect key="frame" x="0.0" y="210" width="355" height="203"/>
+                            <rect key="frame" x="0.0" y="166" width="355" height="190"/>
                             <subviews>
                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Описание мероприятия:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.80000000000000004" translatesAutoresizingMaskIntoConstraints="NO" id="2bv-Ej-vo6">
                                     <rect key="frame" x="0.0" y="0.0" width="355" height="21.5"/>
@@ -71,7 +65,7 @@
                                     <nil key="highlightedColor"/>
                                 </label>
                                 <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="70X-3T-J8V">
-                                    <rect key="frame" x="0.0" y="26.5" width="355" height="176.5"/>
+                                    <rect key="frame" x="0.0" y="26.5" width="355" height="163.5"/>
                                     <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                                     <color key="textColor" systemColor="labelColor" cocoaTouchSystemColor="darkTextColor"/>
                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
@@ -80,7 +74,7 @@
                             </subviews>
                         </stackView>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="info Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.80000000000000004" translatesAutoresizingMaskIntoConstraints="NO" id="L2C-cc-yhV">
-                            <rect key="frame" x="0.0" y="433" width="355" height="24"/>
+                            <rect key="frame" x="0.0" y="376" width="355" height="24"/>
                             <fontDescription key="fontDescription" type="system" weight="light" pointSize="20"/>
                             <nil key="textColor"/>
                             <nil key="highlightedColor"/>
@@ -88,55 +82,54 @@
                     </subviews>
                 </stackView>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="u7Y-UQ-z9H">
-                    <rect key="frame" x="20" y="617" width="100" height="30"/>
+                    <rect key="frame" x="10" y="22" width="30" height="26.5"/>
                     <constraints>
-                        <constraint firstAttribute="height" constant="30" id="CwD-Sr-gHE"/>
-                        <constraint firstAttribute="width" constant="100" id="VVz-Dy-mfe"/>
+                        <constraint firstAttribute="width" constant="30" id="4Za-JP-hxV"/>
+                        <constraint firstAttribute="height" constant="30" id="AKS-l3-M67"/>
                     </constraints>
                     <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
-                    <state key="normal" title="  Закрыть  ">
+                    <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    <state key="normal" backgroundImage="chevron.left" catalog="system">
                         <color key="titleColor" red="0.0" green="0.32479163122694288" blue="0.0058868771330174135" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     </state>
                     <connections>
                         <action selector="closeWindow" destination="-1" eventType="touchUpInside" id="nOw-bq-DdV"/>
                     </connections>
                 </button>
-                <stackView opaque="NO" contentMode="scaleToFill" spacing="20" translatesAutoresizingMaskIntoConstraints="NO" id="IrI-Lt-kI0">
-                    <rect key="frame" x="140" y="617" width="215" height="30"/>
-                    <subviews>
-                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="7xs-kS-GsI">
-                            <rect key="frame" x="0.0" y="0.0" width="97.5" height="30"/>
-                            <constraints>
-                                <constraint firstAttribute="height" constant="30" id="9l5-0z-7QW"/>
-                            </constraints>
-                            <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
-                            <state key="normal" title="  Изменить  ">
-                                <color key="titleColor" systemColor="systemOrangeColor" red="1" green="0.58431372550000005" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                            </state>
-                            <connections>
-                                <action selector="editButtonAction" destination="-1" eventType="touchUpInside" id="oi8-RV-vzI"/>
-                            </connections>
-                        </button>
-                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="w5u-QT-dvb">
-                            <rect key="frame" x="117.5" y="0.0" width="97.5" height="30"/>
-                            <constraints>
-                                <constraint firstAttribute="height" constant="30" id="LUL-iY-uzS"/>
-                            </constraints>
-                            <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
-                            <state key="normal" title="  Удалить  ">
-                                <color key="titleColor" red="0.86405652759999996" green="0.24311631919999999" blue="0.29670241479999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                            </state>
-                            <connections>
-                                <action selector="removeEventButtonTap" destination="-1" eventType="touchUpInside" id="1ZH-SM-YSX"/>
-                            </connections>
-                        </button>
-                    </subviews>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="7xs-kS-GsI">
+                    <rect key="frame" x="142" y="617" width="91" height="30"/>
                     <constraints>
-                        <constraint firstItem="w5u-QT-dvb" firstAttribute="width" secondItem="7xs-kS-GsI" secondAttribute="width" id="x9m-AH-6H9"/>
+                        <constraint firstAttribute="height" constant="30" id="9l5-0z-7QW"/>
                     </constraints>
-                </stackView>
+                    <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
+                    <state key="normal" title="  Изменить  ">
+                        <color key="titleColor" systemColor="systemOrangeColor" red="1" green="0.58431372550000005" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                    </state>
+                    <connections>
+                        <action selector="editButtonAction" destination="-1" eventType="touchUpInside" id="oi8-RV-vzI"/>
+                    </connections>
+                </button>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="w5u-QT-dvb">
+                    <rect key="frame" x="264" y="617" width="91" height="30"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="30" id="LUL-iY-uzS"/>
+                    </constraints>
+                    <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
+                    <state key="normal" title="  Удалить  ">
+                        <color key="titleColor" red="0.86405652759999996" green="0.24311631919999999" blue="0.29670241479999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                    </state>
+                    <connections>
+                        <action selector="removeEventButtonTap" destination="-1" eventType="touchUpInside" id="1ZH-SM-YSX"/>
+                    </connections>
+                </button>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" horizontalCompressionResistancePriority="749" text="Информация о событии" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.60000002384185791" translatesAutoresizingMaskIntoConstraints="NO" id="QXK-uC-ckp">
+                    <rect key="frame" x="69" y="23" width="237" height="24"/>
+                    <fontDescription key="fontDescription" type="boldSystem" pointSize="20"/>
+                    <nil key="textColor"/>
+                    <nil key="highlightedColor"/>
+                </label>
                 <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="20" translatesAutoresizingMaskIntoConstraints="NO" id="KrW-PU-Jth">
-                    <rect key="frame" x="112.5" y="507" width="150" height="80"/>
+                    <rect key="frame" x="112.5" y="487" width="150" height="80"/>
                     <subviews>
                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="pJB-xJ-Fam">
                             <rect key="frame" x="0.0" y="0.0" width="150" height="30"/>
@@ -170,21 +163,27 @@
             <color key="backgroundColor" red="0.0" green="0.59825009110000005" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
             <constraints>
                 <constraint firstItem="KrW-PU-Jth" firstAttribute="centerX" secondItem="i5M-Pr-FkT" secondAttribute="centerX" id="0kV-FN-0Qr"/>
-                <constraint firstItem="e6p-I8-Lcb" firstAttribute="top" secondItem="fnl-2z-Ty3" secondAttribute="top" constant="20" id="6bP-y1-ZD3"/>
-                <constraint firstItem="KrW-PU-Jth" firstAttribute="top" secondItem="e6p-I8-Lcb" secondAttribute="bottom" constant="30" id="919-mw-IC4"/>
-                <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="e6p-I8-Lcb" secondAttribute="trailing" constant="10" id="Fun-oA-QRb"/>
-                <constraint firstItem="e6p-I8-Lcb" firstAttribute="width" secondItem="i5M-Pr-FkT" secondAttribute="width" multiplier="0.946667" id="HgE-sf-NUd"/>
-                <constraint firstItem="IrI-Lt-kI0" firstAttribute="centerY" secondItem="u7Y-UQ-z9H" secondAttribute="centerY" id="KGC-tD-xjx"/>
-                <constraint firstItem="fnl-2z-Ty3" firstAttribute="bottom" secondItem="u7Y-UQ-z9H" secondAttribute="bottom" constant="20" id="MPy-H2-mlt"/>
+                <constraint firstItem="w5u-QT-dvb" firstAttribute="centerY" secondItem="7xs-kS-GsI" secondAttribute="centerY" id="1cM-aN-YWX"/>
+                <constraint firstItem="u7Y-UQ-z9H" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" constant="10" id="Gqw-I2-vAg"/>
+                <constraint firstItem="QXK-uC-ckp" firstAttribute="centerY" secondItem="u7Y-UQ-z9H" secondAttribute="centerY" id="LWD-bt-QvS"/>
+                <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="w5u-QT-dvb" secondAttribute="trailing" constant="20" id="Rkz-UV-3aU"/>
+                <constraint firstItem="QXK-uC-ckp" firstAttribute="centerX" secondItem="i5M-Pr-FkT" secondAttribute="centerX" id="Tew-IB-x5h"/>
+                <constraint firstItem="7xs-kS-GsI" firstAttribute="centerX" secondItem="i5M-Pr-FkT" secondAttribute="centerX" id="Wt6-VO-Vby"/>
+                <constraint firstItem="e6p-I8-Lcb" firstAttribute="top" secondItem="QXK-uC-ckp" secondAttribute="bottom" constant="20" id="XPa-xu-lsT"/>
+                <constraint firstItem="u7Y-UQ-z9H" firstAttribute="top" secondItem="fnl-2z-Ty3" secondAttribute="top" constant="20" id="Zhe-E7-X8t"/>
                 <constraint firstItem="KrW-PU-Jth" firstAttribute="width" secondItem="i5M-Pr-FkT" secondAttribute="width" multiplier="0.4" id="bJs-AO-27m"/>
-                <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="IrI-Lt-kI0" secondAttribute="trailing" constant="20" id="cJO-ku-vgi"/>
-                <constraint firstItem="e6p-I8-Lcb" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" constant="10" id="eX8-H6-GJM"/>
-                <constraint firstItem="u7Y-UQ-z9H" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" constant="20" id="vwf-M2-OKP"/>
-                <constraint firstItem="IrI-Lt-kI0" firstAttribute="leading" secondItem="u7Y-UQ-z9H" secondAttribute="trailing" constant="20" id="waS-zB-VXe"/>
-                <constraint firstItem="u7Y-UQ-z9H" firstAttribute="top" secondItem="KrW-PU-Jth" secondAttribute="bottom" constant="30" id="y3X-jn-JlN"/>
+                <constraint firstItem="fnl-2z-Ty3" firstAttribute="bottom" secondItem="7xs-kS-GsI" secondAttribute="bottom" constant="20" id="bvF-51-rF3"/>
+                <constraint firstItem="e6p-I8-Lcb" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" constant="10" id="cvb-OL-ieG"/>
+                <constraint firstItem="7xs-kS-GsI" firstAttribute="top" secondItem="KrW-PU-Jth" secondAttribute="bottom" constant="50" id="dga-w6-FX5"/>
+                <constraint firstItem="w5u-QT-dvb" firstAttribute="width" secondItem="7xs-kS-GsI" secondAttribute="width" id="lyS-hm-rbE"/>
+                <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="e6p-I8-Lcb" secondAttribute="trailing" constant="10" id="mFS-Xq-F7M"/>
+                <constraint firstItem="KrW-PU-Jth" firstAttribute="top" secondItem="e6p-I8-Lcb" secondAttribute="bottom" constant="20" id="uaR-Vu-NZ0"/>
             </constraints>
             <viewLayoutGuide key="safeArea" id="fnl-2z-Ty3"/>
             <point key="canvasLocation" x="138.40000000000001" y="131.78410794602701"/>
         </view>
     </objects>
+    <resources>
+        <image name="chevron.left" catalog="system" width="96" height="128"/>
+    </resources>
 </document>

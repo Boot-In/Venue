@@ -13,8 +13,10 @@
                 <outlet property="eventsTableView" destination="hDW-ue-LcM" id="C6D-Im-kTZ"/>
                 <outlet property="myEventsButton" destination="74f-kn-hyl" id="DdE-Ll-LoI"/>
                 <outlet property="rangeSC" destination="AvP-FN-y1b" id="ETp-fZ-qdu"/>
+                <outlet property="rangeStepper" destination="u8g-kI-wSl" id="bYd-8l-vMd"/>
                 <outlet property="removeOldButton" destination="iZ5-y2-iiW" id="n2H-9t-irI"/>
                 <outlet property="searchBar" destination="0Jm-xo-N2T" id="b9A-lU-xsW"/>
+                <outlet property="stepperLabel" destination="DpZ-Z5-41Q" id="Wpy-3c-Eka"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
             </connections>
         </placeholder>
@@ -23,30 +25,8 @@
             <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
-                <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="AvP-FN-y1b">
-                    <rect key="frame" x="62" y="20" width="293" height="32"/>
-                    <segments>
-                        <segment title="День"/>
-                        <segment title="Неделя"/>
-                        <segment title="Месяц"/>
-                        <segment title="Год"/>
-                    </segments>
-                    <connections>
-                        <action selector="rangeSCAction:" destination="-1" eventType="valueChanged" id="mgH-xJ-KbP"/>
-                    </connections>
-                </segmentedControl>
-                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="VT6-uz-K3l">
-                    <rect key="frame" x="20" y="617" width="150" height="30"/>
-                    <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
-                    <state key="normal" title="Назад к карте">
-                        <color key="titleColor" systemColor="systemBlueColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                    </state>
-                    <connections>
-                        <action selector="backButtonTap" destination="-1" eventType="touchUpInside" id="LfJ-bI-uMr"/>
-                    </connections>
-                </button>
                 <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="hDW-ue-LcM">
-                    <rect key="frame" x="5" y="71" width="365" height="526"/>
+                    <rect key="frame" x="5" y="66" width="365" height="533"/>
                     <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                     <searchBar key="tableHeaderView" contentMode="redraw" id="0Jm-xo-N2T">
                         <rect key="frame" x="0.0" y="0.0" width="365" height="57"/>
@@ -58,18 +38,35 @@
                         <outlet property="delegate" destination="-1" id="xrS-qs-1XZ"/>
                     </connections>
                 </tableView>
-                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="iZ5-y2-iiW">
-                    <rect key="frame" x="300" y="615" width="59" height="34"/>
-                    <fontDescription key="fontDescription" type="boldSystem" pointSize="18"/>
-                    <state key="normal" title="🗑 Old">
-                        <color key="titleColor" red="1" green="0.064624095630000003" blue="0.066512802849999997" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="VT6-uz-K3l">
+                    <rect key="frame" x="10" y="22" width="30" height="26.5"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="30" id="MXP-uH-byv"/>
+                        <constraint firstAttribute="width" constant="30" id="zob-cP-NHl"/>
+                    </constraints>
+                    <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
+                    <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    <state key="normal" backgroundImage="chevron.left" catalog="system">
+                        <color key="titleColor" systemColor="systemBlueColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     </state>
                     <connections>
-                        <action selector="removeOldEvents" destination="-1" eventType="touchUpInside" id="17m-fK-rNi"/>
+                        <action selector="backButtonTap" destination="-1" eventType="touchUpInside" id="LfJ-bI-uMr"/>
                     </connections>
                 </button>
-                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="74f-kn-hyl">
-                    <rect key="frame" x="10" y="22" width="32" height="27.5"/>
+                <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="AvP-FN-y1b">
+                    <rect key="frame" x="60" y="19.5" width="295" height="32"/>
+                    <segments>
+                        <segment title="День"/>
+                        <segment title="Неделя"/>
+                        <segment title="Месяц"/>
+                        <segment title="Год"/>
+                    </segments>
+                    <connections>
+                        <action selector="rangeSCAction:" destination="-1" eventType="valueChanged" id="mgH-xJ-KbP"/>
+                    </connections>
+                </segmentedControl>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="74f-kn-hyl">
+                    <rect key="frame" x="327" y="617.5" width="32" height="27.5"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="30" id="gnL-oF-lRL"/>
                         <constraint firstAttribute="width" constant="32" id="qYu-JK-eqa"/>
@@ -82,29 +79,60 @@
                         <action selector="myEventButtonTap" destination="-1" eventType="touchUpInside" id="YLQ-N4-rwB"/>
                     </connections>
                 </button>
+                <stackView opaque="NO" contentMode="scaleToFill" distribution="equalSpacing" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="cmz-fC-chc">
+                    <rect key="frame" x="16" y="615" width="295" height="32"/>
+                    <subviews>
+                        <stepper opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" maximumValue="100" translatesAutoresizingMaskIntoConstraints="NO" id="u8g-kI-wSl">
+                            <rect key="frame" x="0.0" y="0.0" width="94" height="32"/>
+                            <connections>
+                                <action selector="rangeStepperAction:" destination="-1" eventType="valueChanged" id="N3i-Y2-a7V"/>
+                            </connections>
+                        </stepper>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" minimumScaleFactor="0.59999999999999998" translatesAutoresizingMaskIntoConstraints="NO" id="DpZ-Z5-41Q">
+                            <rect key="frame" x="118.5" y="0.0" width="92" height="32"/>
+                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                            <nil key="textColor"/>
+                            <nil key="highlightedColor"/>
+                        </label>
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="iZ5-y2-iiW">
+                            <rect key="frame" x="235" y="0.0" width="60" height="32"/>
+                            <constraints>
+                                <constraint firstAttribute="width" constant="60" id="P70-oC-nvb"/>
+                            </constraints>
+                            <fontDescription key="fontDescription" type="boldSystem" pointSize="18"/>
+                            <state key="normal" title="🗑 Old">
+                                <color key="titleColor" red="1" green="0.064624095630000003" blue="0.066512802849999997" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                            </state>
+                            <connections>
+                                <action selector="removeOldEvents" destination="-1" eventType="touchUpInside" id="17m-fK-rNi"/>
+                            </connections>
+                        </button>
+                    </subviews>
+                </stackView>
             </subviews>
             <color key="backgroundColor" red="0.0" green="0.59808194640000001" blue="0.0042739505879999997" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
             <constraints>
-                <constraint firstItem="74f-kn-hyl" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" constant="10" id="6Fb-mh-zwj"/>
-                <constraint firstItem="iZ5-y2-iiW" firstAttribute="centerY" secondItem="VT6-uz-K3l" secondAttribute="centerY" id="9UF-F8-Tf9"/>
-                <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="AvP-FN-y1b" secondAttribute="trailing" constant="20" id="CLG-HG-xDr"/>
-                <constraint firstItem="AvP-FN-y1b" firstAttribute="centerY" secondItem="74f-kn-hyl" secondAttribute="centerY" id="Ef7-9y-19G"/>
-                <constraint firstItem="AvP-FN-y1b" firstAttribute="top" secondItem="fnl-2z-Ty3" secondAttribute="top" constant="20" id="Hno-md-JzS"/>
-                <constraint firstItem="VT6-uz-K3l" firstAttribute="top" secondItem="hDW-ue-LcM" secondAttribute="bottom" constant="20" id="IyX-Zu-bY2"/>
-                <constraint firstItem="VT6-uz-K3l" firstAttribute="width" secondItem="i5M-Pr-FkT" secondAttribute="width" multiplier="0.4" id="MbV-7v-Z8Z"/>
-                <constraint firstItem="hDW-ue-LcM" firstAttribute="top" secondItem="AvP-FN-y1b" secondAttribute="bottom" constant="20" id="NVD-fM-81m"/>
-                <constraint firstItem="fnl-2z-Ty3" firstAttribute="bottom" secondItem="VT6-uz-K3l" secondAttribute="bottom" constant="20" id="Neq-ij-wDQ"/>
+                <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="AvP-FN-y1b" secondAttribute="trailing" constant="20" id="6bP-le-xgr"/>
+                <constraint firstItem="cmz-fC-chc" firstAttribute="top" secondItem="hDW-ue-LcM" secondAttribute="bottom" constant="16" id="6d7-z9-mZ6"/>
+                <constraint firstItem="VT6-uz-K3l" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" constant="10" id="7HV-9D-USs"/>
+                <constraint firstItem="74f-kn-hyl" firstAttribute="centerY" secondItem="cmz-fC-chc" secondAttribute="centerY" id="AAC-WW-0Vo"/>
+                <constraint firstItem="74f-kn-hyl" firstAttribute="leading" secondItem="cmz-fC-chc" secondAttribute="trailing" constant="16" id="K5I-zQ-kH1"/>
+                <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="74f-kn-hyl" secondAttribute="trailing" constant="16" id="LMp-pE-TKO"/>
+                <constraint firstItem="AvP-FN-y1b" firstAttribute="leading" secondItem="VT6-uz-K3l" secondAttribute="trailing" constant="20" id="MmO-hv-VSX"/>
+                <constraint firstItem="cmz-fC-chc" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" constant="16" id="Wt8-DQ-pLZ"/>
+                <constraint firstItem="AvP-FN-y1b" firstAttribute="centerY" secondItem="VT6-uz-K3l" secondAttribute="centerY" id="aJX-y4-V0k"/>
                 <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="hDW-ue-LcM" secondAttribute="trailing" constant="5" id="bhk-gS-pbp"/>
-                <constraint firstItem="VT6-uz-K3l" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" constant="20" id="bpr-va-wzt"/>
-                <constraint firstItem="AvP-FN-y1b" firstAttribute="leading" secondItem="74f-kn-hyl" secondAttribute="trailing" constant="20" id="jLv-d0-f8G"/>
+                <constraint firstItem="fnl-2z-Ty3" firstAttribute="bottom" secondItem="cmz-fC-chc" secondAttribute="bottom" constant="20" id="fuW-zC-Q6K"/>
+                <constraint firstItem="hDW-ue-LcM" firstAttribute="top" secondItem="VT6-uz-K3l" secondAttribute="bottom" constant="16" id="mhN-5N-9Oe"/>
                 <constraint firstItem="hDW-ue-LcM" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" constant="5" id="tgM-lq-4Gm"/>
-                <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="iZ5-y2-iiW" secondAttribute="trailing" constant="16" id="za8-oa-ICE"/>
+                <constraint firstItem="VT6-uz-K3l" firstAttribute="top" secondItem="fnl-2z-Ty3" secondAttribute="top" constant="20" id="xMe-bV-XSV"/>
             </constraints>
             <viewLayoutGuide key="safeArea" id="fnl-2z-Ty3"/>
             <point key="canvasLocation" x="138.40000000000001" y="130.88455772113943"/>
         </view>
     </objects>
     <resources>
+        <image name="chevron.left" catalog="system" width="96" height="128"/>
         <image name="person.2" catalog="system" width="128" height="81"/>
     </resources>
 </document>

@@ -8,7 +8,7 @@
 import Foundation
 /// Вывод информации
 protocol EventsTableViewProtocol: class {
-    
+   
 }
 
 // это как мы принимаем информацию
@@ -33,6 +33,6 @@ class EventsTableViewPresenter: EventsTableViewPresenterProtocol {
     func goToEventScreen() {
         router.showEventScreen()
     }
-    
+        
     
 }

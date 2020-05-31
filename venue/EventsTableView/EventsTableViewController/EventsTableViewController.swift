@@ -18,7 +18,11 @@ class EventsTableViewController: UIViewController {
     @IBOutlet weak var eventsTableView: UITableView!
     @IBOutlet weak var backToMapButton: UIButton!
     @IBOutlet weak var myEventsButton: UIButton!
+    @IBOutlet weak var rangeStepper: UIStepper!
+    @IBOutlet weak var stepperLabel: UILabel!
+    
     var isMyEvents = false
+    var stepValue: Double = 0
     
     var eventsForTableView = DataService.shared.events
     var eventsFiltred: [Event]!
@@ -33,13 +37,21 @@ class EventsTableViewController: UIViewController {
         eventsTableView.backgroundColor = .clear
         eventsTableView.register(UINib(nibName: "EventTableViewCell", bundle: nil), forCellReuseIdentifier: "Cell")
         
+        rangeStepper.minimumValue = 1
+        rangeStepper.maximumValue = 10
+    
+        /// текущее значение через DefaultSetting
+        stepValue = UserDefaults.standard.double(forKey: "stepValue")
+        if stepValue < 1 { stepValue = 1 }
+        rangeStepper.value = stepValue
+        
         searchBar.delegate = self
         searchBar.barTintColor = view.backgroundColor
         print("Элементов для таблицы = ", eventsFiltred.count)
         
-        ConfigUI.buttonConfig(button: removeOldButton, titleColor: .red, alfa: 0.8)
+        ConfigUI.buttonConfig(button: removeOldButton, titleColor: .red, alfa: 0.3)
         ConfigUI.segmentControlConfig(sc: rangeSC)
-        ConfigUI.buttonConfig(button: backToMapButton, titleColor: .systemBlue, alfa: 1)
+        ConfigUI.buttonConfig(button: backToMapButton, titleColor: .white, alfa: 0.0)
     
         if DataService.shared.localUser != nil && DataService.shared.localUser.userID == DataService.shared.userAdmin {
             removeOldButton.isHidden = false
@@ -47,18 +59,22 @@ class EventsTableViewController: UIViewController {
         } else {
             removeOldButton.isHidden = true }
         print("admin = ", DataService.shared.userAdmin)
-        print("мои координаты = ", LocationService.shared.latitude, LocationService.shared.longitude)
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
+        eventsForTableView = DataService.shared.events
+
         checkStatusMyEvensButton()
         
-        eventsForTableView = DataService.shared.events
-        eventsFiltred = DataService.filtredDateEvents(events: eventsForTableView, range: rangeSC.selectedSegmentIndex)
+        if isMyEvents { eventsFiltred = DataService.filtreUserEvents(events: eventsForTableView)
+        } else {
+            //eventsFiltred = DataService.filtredDateEvents(events: eventsForTableView, range: rangeSC.selectedSegmentIndex)
+            filtredStepper(stepVal: Int(stepValue))
+        }
         eventsTableView.reloadData()
-        removeOldButton.setTitle("  🗑 Old(\(DataService.shared.oldEventsID?.count ?? 0))  ", for: .normal)
+        removeOldButton.setTitle(" 🗑 (\(DataService.shared.oldEventsID?.count ?? 0)) ", for: .normal)
         print("отработал viewWillAppear EventsTableViewController")
     }
     
@@ -66,24 +82,26 @@ class EventsTableViewController: UIViewController {
         if isMyEvents {
             myEventsButton.setBackgroundImage(UIImage(systemName: "person.fill"), for: .normal)
             rangeSC.isHidden = true
-            showAlertMsgWithDelay(title: "ВНИМАНИЕ !", message: "Показаны только Ваши события", delay: 2)
+            rangeStepper.isHidden = true
         } else {
             myEventsButton.setBackgroundImage(UIImage(systemName: "person.2"), for: .normal)
             rangeSC.isHidden = false
+            rangeStepper.isHidden = false
         }
     }
     
     
     @IBAction func rangeSCAction(_ sender: UISegmentedControl) {
         self.view.endEditing(true)
-        eventsFiltred = DataService.filtredDateEvents(events: eventsForTableView, range: sender.selectedSegmentIndex)
-        eventsTableView.reloadData()
+        filtredStepper(stepVal: Int(stepValue))
+//        eventsFiltred = DataService.filtredDateEvents(events: eventsForTableView, range: sender.selectedSegmentIndex)
+//        eventsTableView.reloadData()
     }
     
     @IBAction func removeOldEvents() {
         if let oldEvents = DataService.shared.oldEventsID, oldEvents.count > 0 { NetworkService.removeOldEvent(eventsID: oldEvents)
             DataService.shared.oldEventsID?.removeAll()
-            removeOldButton.setTitle("  🗑 Old(\(DataService.shared.oldEventsID?.count ?? 0))  ", for: .normal)
+            removeOldButton.setTitle(" 🗑 (\(DataService.shared.oldEventsID?.count ?? 0)) ", for: .normal)
         } else { print("Старых событий нет.") }
     }
     
@@ -91,18 +109,38 @@ class EventsTableViewController: UIViewController {
         navigationController?.popToRootViewController(animated: true)
     }
     
+    @IBAction func rangeStepperAction(_ sender: UIStepper) {
+        stepValue = sender.value
+        UserDefaults.standard.set(stepValue, forKey: "stepValue")
+        filtredStepper(stepVal: Int(stepValue))
+    }
+    
+    func filtredStepper(stepVal: Int) {
+        eventsFiltred = DataService.filtredDateEvents(events: eventsForTableView, range: rangeSC.selectedSegmentIndex)
+        
+        let rs = DataService.filtredRadiusEvents(events: eventsFiltred, radius: stepVal).1
+        if rs == 0 { stepperLabel.text = "Радиус событий: \nБез ограничений" } else { stepperLabel.text = "Радиус событий:\n\(rs) км." }
+        eventsFiltred = DataService.filtredRadiusEvents(events: eventsFiltred, radius: stepVal).0
+        eventsTableView.reloadData()
+    }
     
     @IBAction func myEventButtonTap() {
         isMyEvents.toggle()
         checkStatusMyEvensButton()
-        eventsFiltred = DataService.filtreUserEvents(events: eventsForTableView, isMy: isMyEvents)
-        eventsTableView.reloadData()
+        if isMyEvents {
+            //showAlertMsgWithDelay(title: "ВНИМАНИЕ !", message: "Показаны только Ваши события", delay: 2)
+            stepperLabel.text = "Показаны только Ваши события"
+            eventsFiltred = DataService.filtreUserEvents(events: eventsForTableView)
+            eventsTableView.reloadData()
+        } else {
+            filtredStepper(stepVal: Int(stepValue))
+        }
     }
     
 }
 
 extension EventsTableViewController: EventsTableViewProtocol {
-    //////
+    
 }
 
 extension EventsTableViewController: UITableViewDataSource, UITableViewDelegate {
@@ -116,7 +154,7 @@ extension EventsTableViewController: UITableViewDataSource, UITableViewDelegate 
         cell.backgroundColor = .clear
         let event = eventsFiltred[indexPath.row]
         cell.nameEventLabel.text = "\(event.dateEventString) \(event.nameEvent)"
-        cell.discriptionEventLabel.text = event.discriptionEvent
+        cell.discriptionEventLabel.text = "Желающих: \(event.followEventUsers.count)"
         cell.nickNameEventLabel.text = "Организатор: \(event.userNick)"
         cell.eventImage.image = UIImage(named: event.iconEvent)
         return cell

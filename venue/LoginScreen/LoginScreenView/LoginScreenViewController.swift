@@ -25,11 +25,11 @@ class LoginScreenViewController: UIViewController {
         super.viewDidLoad()
         navigationController?.navigationBar.isHidden = true
         warnLabel.textColor = .yellow
-        warnLabel.alpha = 0
+        warnLabel.text = "войдите или зарегистрируйтесь"
         
         ConfigUI.buttonConfig(button: loginButton, titleColor: ConfigUI.shared.greenVenue, alfa: 1)
         ConfigUI.buttonConfig(button: registrationButton, titleColor: .white, alfa: 0.3)
-        ConfigUI.buttonConfig(button: backButton, titleColor: .systemBlue, alfa: 1)
+        ConfigUI.buttonConfig(button: backButton, titleColor: .white, alfa: 0)
         
     }
     

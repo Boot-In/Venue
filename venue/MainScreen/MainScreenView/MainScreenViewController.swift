@@ -30,7 +30,7 @@ class MainScreenViewController: UIViewController {
         intervalSC.selectedSegmentIndex = 2
         presenter.startLocationService()
         presenter.checkUserLoginStatus()
-        infoLabel.textColor = .black
+        infoLabel.textColor = .label
         markerButton.isHidden = true
         ConfigUI.segmentControlConfig(sc: intervalSC)
         ConfigUI.changeSystemIconColor(button: tableButton, systemName: "table")
@@ -38,7 +38,6 @@ class MainScreenViewController: UIViewController {
         sliderSetup()
         mapViewSetup()
         print("старт маркеров на карту")
-        
         presenter.getOnlineMarkers(range: intervalSC.selectedSegmentIndex)
         
         print("DataService>defaultZoom>",DataService.shared.defaultZoom)
@@ -145,6 +144,8 @@ extension MainScreenViewController: GMSMapViewDelegate {
         presenter.getOfflineMarkers(range:  intervalSC.selectedSegmentIndex)
         DataService.shared.markerDidTapped = false
         updateMarkerButton()
+        UIPasteboard.general.string = "\(coordinate.latitude) \(coordinate.longitude)"
+        infoLabel.text = "Координаты: Lat / Lng\n\(String(format: "%.6f", coordinate.latitude)) / \(String(format: "%.6f", coordinate.longitude))"
         DataService.shared.coordinateEvent = coordinate
         DataService.shared.placeEvent = ""
         marker.map = mapView
@@ -155,6 +156,8 @@ extension MainScreenViewController: GMSMapViewDelegate {
         DataService.shared.markerDidTapped = true
         DataService.shared.marker = marker
         updateMarkerButton()
+        UIPasteboard.general.string = "\(marker.position.latitude) \(marker.position.longitude)"
+        infoLabel.text = "Координаты: Lat / Lng\n\(String(format: "%.6f", marker.position.latitude)) / \(String(format: "%.6f", marker.position.longitude))"
         return false
     }
     
@@ -167,6 +170,8 @@ extension MainScreenViewController: GMSMapViewDelegate {
         DataService.shared.placeEvent = name
         DataService.shared.markerDidTapped = false
         updateMarkerButton()
+        UIPasteboard.general.string = "\(location.latitude) \(location.longitude)"
+        infoLabel.text = "Координаты: Lat / Lng\n\(String(format: "%.6f", location.latitude)) / \(String(format: "%.6f",location.longitude))"
         //infoMarker.infoWindowAnchor.y = 1
         infoMarker.map = mapView
         mapView.selectedMarker = infoMarker
@@ -182,7 +187,6 @@ extension MainScreenViewController: MainScreenProtocol {
             marker.map = mapView
         }
     }
-    
 
     
 }
