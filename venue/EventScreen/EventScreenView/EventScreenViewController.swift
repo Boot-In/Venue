@@ -9,7 +9,7 @@
 import UIKit
 
 class EventScreenViewController: UIViewController {
-
+    
     var presenter: EventScreenPresenterProtocol!
     
     @IBOutlet weak var nickNameLabel: UILabel!
@@ -73,7 +73,7 @@ class EventScreenViewController: UIViewController {
         }
     }
     
-
+    
     @IBAction func cancelFollowAction() {
         NetworkService.removeFollow()
         goButton.isHidden = false
@@ -85,25 +85,33 @@ class EventScreenViewController: UIViewController {
         //checkFollowUserStatus()
     }
     
-
+    
     @IBAction func closeWindow() {
         DataService.shared.event = nil
         self.dismiss(animated: true)
     }
     
     @IBAction func editButtonAction() {
-        presenter.goToEdit()
+        self.alertAskConfirmation(title: "ВНИМАНИЕ !", message: "Вы действительно хотите редактировать событие ?") { (result) in
+            if result { print ("Редактирование")
+                self.presenter.goToEdit()
+            } else { print ("Отмена") }
+        }
     }
     
     @IBAction func removeEventButtonTap() {
-        guard let event = DataService.shared.event else { return }
-        print("нажали кнопку удалять:", event.eventID)
-        NetworkService.removeEvent(event: event)
-        DataService.shared.event = nil /// сделать после обработки удаления !
-        print("событие обнулено!")
-        DataService.shared.events.remove(at: self.index)
-        print("событие удалено из массива!")
-        self.dismiss(animated: true)
+        alertAskConfirmation(title: "ВНИМАНИЕ !", message: "Вы действительно хотите удалить событие ?") { (result) in
+            if result { print ("Удаление")
+                guard let event = DataService.shared.event else { return }
+                print("нажали кнопку удалять:", event.eventID)
+                NetworkService.removeEvent(event: event)
+                DataService.shared.event = nil /// сделать после обработки удаления !
+                print("событие обнулено!")
+                DataService.shared.events.remove(at: self.index)
+                print("событие удалено из массива!")
+                self.dismiss(animated: true)
+            } else { print ("Отмена") }
+        }
     }
     
     @IBAction func goButtonTap() {
@@ -126,13 +134,13 @@ class EventScreenViewController: UIViewController {
         self.infoLabel.alpha = 0
         infoLabel.text = text
         infoLabel.textColor = .yellow
-       
+        
         UIView.animate(withDuration: 3, delay: 0, usingSpringWithDamping: 1, initialSpringVelocity: 1, options: .curveEaseInOut, animations: { [weak self] in
             self?.infoLabel.alpha = 1
         })
-//        { [weak self] complete in
-//            self?.animeOffLabel()
-//        }
+        //        { [weak self] complete in
+        //            self?.animeOffLabel()
+        //        }
     }
     
     
