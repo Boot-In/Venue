@@ -15,7 +15,7 @@ protocol EventsTableViewProtocol: class {
 protocol EventsTableViewPresenterProtocol: class {
     init(view: EventsTableViewProtocol, router: EventsTableViewRouterProtocol)
     
-   // func markerFiltred(range: Int) -> [Event]
+    func goToEdit()
     func goToEventScreen()
 }
 
@@ -33,6 +33,9 @@ class EventsTableViewPresenter: EventsTableViewPresenterProtocol {
     func goToEventScreen() {
         router.showEventScreen()
     }
-        
+    
+    func goToEdit() {
+        router.showAddMarkerScreen()
+    }
     
 }

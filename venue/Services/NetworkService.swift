@@ -96,7 +96,6 @@ class NetworkService {
         let ref = Database.database().reference().child("events")
         print("... loadAllEvents > events")
         var eventsFromNet = [Event]()
-       // DataService.shared.events.removeAll()
         
        // ref.observe(.value, with: { (snapshot) in //реагирует на любое изменение в Базе Данных
         ref.observeSingleEvent(of: .value, with: { (snapshot) in

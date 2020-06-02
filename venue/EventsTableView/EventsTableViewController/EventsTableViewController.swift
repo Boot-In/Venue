@@ -23,6 +23,7 @@ class EventsTableViewController: UIViewController {
     
     var isMyEvents = false
     var stepValue: Double = 0
+    var segmentIndex: Int = 0
     
     var eventsForTableView = DataService.shared.events
     var eventsFiltred: [Event]!
@@ -30,19 +31,20 @@ class EventsTableViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        rangeSC.selectedSegmentIndex = 3
+        segmentIndex = UserDefaults.standard.integer(forKey: "segmentIndex")
+        rangeSC.selectedSegmentIndex = segmentIndex
+        
         eventsFiltred = DataService.filtredDateEvents(events: eventsForTableView, range: rangeSC.selectedSegmentIndex)
         eventsTableView.delegate = self
         eventsTableView.dataSource = self
         eventsTableView.backgroundColor = .clear
         eventsTableView.register(UINib(nibName: "EventTableViewCell", bundle: nil), forCellReuseIdentifier: "Cell")
         
-        rangeStepper.minimumValue = 1
-        rangeStepper.maximumValue = 10
+        rangeStepper.minimumValue = 0
+        rangeStepper.maximumValue = 9
     
         /// текущее значение через DefaultSetting
         stepValue = UserDefaults.standard.double(forKey: "stepValue")
-        if stepValue < 1 { stepValue = 1 }
         rangeStepper.value = stepValue
         
         searchBar.delegate = self
@@ -57,7 +59,13 @@ class EventsTableViewController: UIViewController {
             removeOldButton.isHidden = false
             print("user = ", DataService.shared.localUser.userID)
         } else {
-            removeOldButton.isHidden = true }
+            removeOldButton.isHidden = true
+        }
+        
+        if DataService.shared.localUser != nil {
+            myEventsButton.isHidden = false
+        } else { myEventsButton.isHidden = true }
+        
         print("admin = ", DataService.shared.userAdmin)
     }
     
@@ -70,7 +78,6 @@ class EventsTableViewController: UIViewController {
         
         if isMyEvents { eventsFiltred = DataService.filtreUserEvents(events: eventsForTableView)
         } else {
-            //eventsFiltred = DataService.filtredDateEvents(events: eventsForTableView, range: rangeSC.selectedSegmentIndex)
             filtredStepper(stepVal: Int(stepValue))
         }
         eventsTableView.reloadData()
@@ -92,10 +99,11 @@ class EventsTableViewController: UIViewController {
     
     
     @IBAction func rangeSCAction(_ sender: UISegmentedControl) {
+        segmentIndex = sender.selectedSegmentIndex
+        UserDefaults.standard.set(segmentIndex, forKey: "segmentIndex")
         self.view.endEditing(true)
         filtredStepper(stepVal: Int(stepValue))
-//        eventsFiltred = DataService.filtredDateEvents(events: eventsForTableView, range: sender.selectedSegmentIndex)
-//        eventsTableView.reloadData()
+
     }
     
     @IBAction func removeOldEvents() {
@@ -128,7 +136,6 @@ class EventsTableViewController: UIViewController {
         isMyEvents.toggle()
         checkStatusMyEvensButton()
         if isMyEvents {
-            //showAlertMsgWithDelay(title: "ВНИМАНИЕ !", message: "Показаны только Ваши события", delay: 2)
             stepperLabel.text = "Показаны только Ваши события"
             eventsFiltred = DataService.filtreUserEvents(events: eventsForTableView)
             eventsTableView.reloadData()
@@ -157,6 +164,9 @@ extension EventsTableViewController: UITableViewDataSource, UITableViewDelegate 
         cell.discriptionEventLabel.text = "Желающих: \(event.followEventUsers.count)"
         cell.nickNameEventLabel.text = "Организатор: \(event.userNick)"
         cell.eventImage.image = UIImage(named: event.iconEvent)
+        if DataService.checkMyFollow(event: eventsFiltred[indexPath.row]) {
+            cell.discriptionEventLabel.font = UIFont.boldSystemFont(ofSize: 17)
+        } else { cell.discriptionEventLabel.font = UIFont.systemFont(ofSize: 17) }
         return cell
     }
     
@@ -164,6 +174,71 @@ extension EventsTableViewController: UITableViewDataSource, UITableViewDelegate 
         DataService.shared.event = eventsFiltred[indexPath.row]
         DataService.shared.eventID = eventsFiltred[indexPath.row].eventID
         presenter.goToEventScreen()
+    }
+    
+    //    func tableView(_ tableView: UITableView, editingStyleForRowAt indexPath: IndexPath) -> UITableViewCell.EditingStyle {
+    //        tableView.isEditing = false
+    //        return .none
+    //    }
+    
+    // свайп влево  (удаление)
+    func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
+        let event = eventsFiltred[indexPath.row]
+        let delete = deleteProperty(at: indexPath)
+        guard DataService.shared.localUser != nil, DataService.shared.localUser.userID == event.userID else { return nil }
+        return UISwipeActionsConfiguration(actions: [delete])
+    }
+    
+    //Declare this method in Viewcontroller Main and modify according to your need
+    
+    func deleteProperty(at indexPath: IndexPath) -> UIContextualAction {
+        let event = eventsFiltred[indexPath.row]
+        
+        let action = UIContextualAction(style: .destructive, title: "Удалить") { (action, view, completion) in
+            
+            self.alertAskConfirmation(title: "ВНИМАНИЕ !", message: "Вы действительно хотите удалить событие ?") { (result) in
+                if result { print ("Удаление")
+                    //Removing from array at selected index
+                    NetworkService.removeEvent(event: event)  //Вернуть !!!
+                    let index = DataService.searchIndexEvent(event: event)
+                    DataService.shared.events.remove(at: index) // из основного
+                    self.eventsFiltred.remove(at: indexPath.row) //из отфильтрованного
+                    print("событие удалено из массива!")
+                    self.eventsTableView.deleteRows(at: [indexPath], with: .automatic)
+                    completion(true)
+                    
+                } else { print ("Отмена")
+                    self.eventsTableView.reloadRows(at: [indexPath], with: .fade)
+                }
+            }
+        }
+        action.backgroundColor = .red //cell background color
+        return action
+    }
+    
+    /// свайп вправо (Редактирование)
+    func tableView(_ tableView: UITableView, leadingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
+        let event = eventsFiltred[indexPath.row]
+        let edit = editProperty(at: indexPath)
+        guard DataService.shared.localUser != nil, DataService.shared.localUser.userID == event.userID else { return nil }
+        return UISwipeActionsConfiguration(actions: [edit])
+    }
+    
+    func editProperty(at indexPath: IndexPath) -> UIContextualAction {
+        let action = UIContextualAction(style: .normal, title: "Изменить") { (action, view, completion) in
+            
+            self.alertAskConfirmation(title: "ВНИМАНИЕ !", message: "Вы действительно хотите редактировать событие ?") { (result) in
+                if result { print ("Редактирование")
+                    DataService.shared.event = self.eventsFiltred[indexPath.row]
+                    self.presenter.goToEdit()
+                    completion(true)
+                } else { print ("Отмена")
+                    self.eventsTableView.reloadRows(at: [indexPath], with: .fade)
+                }
+            }
+        }
+        action.backgroundColor = .orange
+        return action
     }
     
 }

@@ -138,4 +138,13 @@ class DataService {
         return iD
     }
     
+   static func checkMyFollow(event: Event) -> Bool {
+        for nick in event.followEventUsers {
+            if DataService.shared.localUser != nil && nick.key == DataService.shared.localUser.userID {
+                return true
+            }
+        }
+        return false
+    }
+    
 }

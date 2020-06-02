@@ -20,7 +20,9 @@ static var shared = ConfigUI()
         button.backgroundColor = UIColor(white: 1, alpha: alfa)
         button.layer.shadowOpacity = 1
         button.setTitleColor(titleColor, for: .normal)
-       // button.layer.masksToBounds = true
+//        button.layer.borderWidth = 3
+//        button.layer.borderColor = CGColor(srgbRed: 1, green: 0, blue: 0, alpha: 1)
+//        button.layer.masksToBounds = true
     }
 
     static func segmentControlConfig(sc: UISegmentedControl){

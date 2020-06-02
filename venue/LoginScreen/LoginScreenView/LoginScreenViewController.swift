@@ -47,7 +47,7 @@ class LoginScreenViewController: UIViewController {
 
     @IBAction func loginButtonTap(_ sender: UIButton) {
         guard let email = emailTextField.text, let password = passwordTextField.text, email != "", password != "" else {
-            displayWarningLabel(withText: "Введите login/password")
+            displayWarningLabel(withText: "Введите E-mail / password")
             return }
         Auth.auth().signIn(withEmail: email, password: password) { [weak self] (user, error) in
             if error != nil {

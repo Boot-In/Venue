@@ -12,21 +12,20 @@ import FirebaseAuth
 class AccountScreenViewController: UIViewController {
     
     var presenter: AccountScreenPresenterProtocol!
-    
-    // let picker = UIDatePicker()
-    // let calendar = Calendar.current
-    
+        
     @IBOutlet weak var nameUserTF: UITextField!
     @IBOutlet weak var secondNameUserTF: UITextField!
     @IBOutlet weak var infoLabel: UILabel!
     @IBOutlet weak var nickNameUserTF: UITextField!
-    
     @IBOutlet weak var emailTextField: UITextField!
     @IBOutlet weak var passwordTextField: UITextField!
     @IBOutlet weak var rePasswordTextField: UITextField!
     @IBOutlet weak var logOutButton: UIButton!
     @IBOutlet weak var saveButton: UIButton!
     @IBOutlet weak var backButton: UIButton!
+    @IBOutlet weak var userIdLabel: UILabel!
+    @IBOutlet weak var copyUserIdButton: UIButton!
+    @IBOutlet weak var idLabel: UILabel!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -34,6 +33,9 @@ class AccountScreenViewController: UIViewController {
         logOutButton.isHidden = true
         infoLabel.textColor = .yellow
         saveButton.isHidden = false
+        copyUserIdButton.isHidden = true
+        userIdLabel.isHidden = true
+        idLabel.isHidden = true
         
         ConfigUI.buttonConfig(button: backButton, titleColor: .white, alfa: 0)
         ConfigUI.buttonConfig(button: saveButton, titleColor: ConfigUI.shared.greenVenue, alfa: 1)
@@ -43,6 +45,10 @@ class AccountScreenViewController: UIViewController {
             print("...profile", profile.firstUserName)
             updateProfileInfo(profile: profile)
             disableTF()
+            copyUserIdButton.isHidden = false
+            userIdLabel.isHidden = false
+            idLabel.isHidden = false
+            userIdLabel.text = DataService.shared.localUser.userID
         }
     }
     
@@ -77,22 +83,32 @@ class AccountScreenViewController: UIViewController {
          nickNameUserTF.isEnabled = true
      }
     
+    @IBAction func copyUserIdButtonTap() {
+        UIPasteboard.general.string = userIdLabel.text
+        showAlertMsgWithDelay(title: "UserId", message: "Скопировано в буфер обмена", delay: 1)
+    }
+    
+    
     @IBAction func closeWindow() {
         dismiss(animated: false)
     }
     
     @IBAction func logOut() {
-        do {
-            try Auth.auth().signOut()
-            UserDefaults.standard.set(false, forKey: "logined")
-            DataService.shared.localUser = nil
-            print("Log Out")
-        } catch {
-            print(error.localizedDescription)
-            infoLabel.text = error.localizedDescription
+        alertAskConfirmation(title: "ВНИМАНИЕ !", message: "Вы действительно хотите выйти ?") { (result) in
+            if result {
+                do {
+                    try Auth.auth().signOut()
+                    UserDefaults.standard.set(false, forKey: "logined")
+                    DataService.shared.localUser = nil
+                    print("Log Out")
+                } catch {
+                    print(error.localizedDescription)
+                    self.infoLabel.text = error.localizedDescription
+                }
+                self.presenter.clearLocalUserData()
+                self.dismiss(animated: true)
+            }
         }
-        presenter.clearLocalUserData()
-        self.dismiss(animated: true)
     }
     
     @IBAction func saveButtonTap() {

@@ -9,6 +9,7 @@
 protocol EventsTableViewRouterProtocol: class {
     
     func showEventScreen()
+    func showAddMarkerScreen()
 }
 
 final class EventsTableViewRouter: EventsTableViewRouterProtocol {
@@ -26,5 +27,11 @@ final class EventsTableViewRouter: EventsTableViewRouterProtocol {
         view?.navigationController?.present(addEventScreenVC, animated: true)
     }
     
+    func showAddMarkerScreen() {
+        let addMarkerScreenVC = ModuleBulder.addMarkerScreen()
+        addMarkerScreenVC.modalPresentationStyle = .fullScreen
+        addMarkerScreenVC.isEdit = true
+        view?.present(addMarkerScreenVC, animated: true)
+    }
     
 }

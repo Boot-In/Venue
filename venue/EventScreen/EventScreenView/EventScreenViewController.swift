@@ -81,7 +81,7 @@ class EventScreenViewController: UIViewController {
         print("до удаления:", DataService.shared.events[index].followEventUsers)
         DataService.shared.events[index].followEventUsers.removeValue(forKey: DataService.shared.localUser.userID)
         print("После удаления:", DataService.shared.events[index].followEventUsers)
-        displayWarningLabel(withText: "Жаль, что передумали ...")
+        displayWarningLabel(withText: "Ваш голос убран")
         //checkFollowUserStatus()
     }
     

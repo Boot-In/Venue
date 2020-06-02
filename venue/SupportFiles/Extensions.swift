@@ -27,5 +27,19 @@ extension UIViewController {
         })
     }
     
+    func alertAskConfirmation (title:String, message:String, completion:@escaping (_ result: Bool) -> Void) {
+        let alert = UIAlertController(title: title, message: message, preferredStyle: .alert)
+
+      alert.addAction(UIAlertAction(title: "Да", style: .destructive, handler: { action in
+          completion(true)
+      }))
+
+      alert.addAction(UIAlertAction(title: "Нет", style: .cancel, handler: { action in
+          completion(false)
+      }))
+        
+        self.present(alert, animated: true, completion: nil)
+    }
+    
     
 }
