@@ -77,7 +77,10 @@ class EventsTableViewController: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
-        eventsForTableView = DataService.shared.events
+        if DataService.shared.isPrivateUser {
+            eventsForTableView = DataService.shared.privateEvents
+            myEventsButton.isHidden = true
+        }
 
         checkStatusMyEvensButton()
         
@@ -170,7 +173,7 @@ extension EventsTableViewController: UITableViewDataSource, UITableViewDelegate 
         cell.nickNameEventLabel.text = "Организатор: \(event.userNick)"
         cell.eventImage.image = UIImage(named: event.iconEvent)
         if DataService.checkMyFollow(event: eventsFiltred[indexPath.row]) {
-            cell.discriptionEventLabel.font = UIFont.boldSystemFont(ofSize: 17)
+            cell.discriptionEventLabel.font = UIFont.boldSystemFont(ofSize: 18)
         } else { cell.discriptionEventLabel.font = UIFont.systemFont(ofSize: 17) }
         return cell
     }

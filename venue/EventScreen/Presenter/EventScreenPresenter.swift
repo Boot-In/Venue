@@ -38,7 +38,7 @@ class EventScreenPresenter: EventScreenPresenterProtocol {
    
     func loadEventInfo(event: Event) {
         print("eventID: ", event.eventID)
-        let events = DataService.shared.isPrivateEvent ? DataService.shared.privateEvents : DataService.shared.events
+        let events = DataService.shared.isPrivateUser ? DataService.shared.privateEvents : DataService.shared.events
         let index = DataService.searchIndexEvent(event: event, fromEvents: events)
         view.setTextToView(nickName: "Организатор: \(event.userNick)", eventData: event.dateEventString, eventName: event.nameEvent, eventCategory: event.snipetEvent, eventDiscription: event.discriptionEvent, index: index)
         

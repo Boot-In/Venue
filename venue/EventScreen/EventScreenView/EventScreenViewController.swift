@@ -119,9 +119,13 @@ class EventScreenViewController: UIViewController {
         displayWarningLabel(withText: "Ваш голос принят !")
         goButton.isHidden = true
         cancelFollowButton.isHidden = false
-        print("До добавления:", DataService.shared.events[index].followEventUsers)
+        //print("До добавления:", DataService.shared.events[index].followEventUsers)
+        if DataService.shared.isPrivateUser {
+            DataService.shared.privateEvents[index].followEventUsers[DataService.shared.localUser.userID] = DataService.shared.localUser.niсkNameUser
+        } else {
         DataService.shared.events[index].followEventUsers[DataService.shared.localUser.userID] = DataService.shared.localUser.niсkNameUser
-        print("После добавления:", DataService.shared.events[index].followEventUsers)
+        }
+       // print("После добавления:", DataService.shared.events[index].followEventUsers)
         checkFollowUserStatus()
     }
     

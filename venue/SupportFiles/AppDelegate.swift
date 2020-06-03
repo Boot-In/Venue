@@ -35,16 +35,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     
     func setRemoteConfigure(){
         remoteConfig = RemoteConfig.remoteConfig()
-//        let setting = RemoteConfigSettings()
-//        setting.minimumFetchInterval = 0
-//        remoteConfig.configSettings = setting
-        
+        remoteConfig.configSettings.minimumFetchInterval = 0
         /// Значение ключей по умолчанию (офлайн)
         let remoteConfigDefault = [ "defultZoom" : 11 as NSObject,
             "admin_User" : "XBXa5zCsAMggdwcODbelcqMLXRi2" as NSObject] ///
         remoteConfig.setDefaults(remoteConfigDefault)
-        
-        remoteConfig.configSettings.minimumFetchInterval = 60
         
         remoteConfig.fetchAndActivate { (status, error) in
             
@@ -62,16 +57,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             }
         }
         
-        //        remoteConfig.fetch(withExpirationDuration: TimeInterval(0)) { (status, error) -> Void in
-        //            print("remoteConfig.fetch")
-        //            if status == .success {  // remoteConfig fetched!"
-        //                DataService.shared.defaultZoom = self.remoteConfig.configValue(forKey: "defultZoom").numberValue as! Int
-        //                print("NetworkService.shared>defaultZoom>", DataService.shared.defaultZoom)
-        //            } else {  //remoteConfig not fetched
-        //                print("Error: \(error?.localizedDescription ?? "No error available.")")
-        //            }
-        //        }
-        //
         
     }
     

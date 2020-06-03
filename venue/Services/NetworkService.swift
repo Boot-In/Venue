@@ -170,7 +170,13 @@ class NetworkService {
         guard let localUser = DataService.shared.localUser else { return }
         print("eventID = ", eventID, "\nUserID = ", localUser.userID, "\nniсkNameUser = ", localUser.niсkNameUser)
         let ref = Database.database().reference()
-        let eventRefKey = ref.child("events").child(eventID).child("followEventUsers")
+        var eventRefKey = ref.child("events").child(eventID).child("followEventUsers")
+        
+        if DataService.shared.isPrivateUser { //приватное событие
+            eventRefKey = ref.child("users").child(localUser.userID)
+                .child("events").child(eventID).child("followEventUsers")
+        }
+        
         let update = ["\(localUser.userID)": localUser.niсkNameUser]
         eventRefKey.updateChildValues(update)
         print("--- save Follow Event Complete ! ---\n")
@@ -182,7 +188,13 @@ class NetworkService {
         guard let localUser = DataService.shared.localUser else { return }
         print("eventID = ", eventID, "\nUserID = ", localUser.userID, "\nniсkNameUser = ", localUser.niсkNameUser)
         let ref = Database.database().reference()
-        let eventRefKey = ref.child("events").child(eventID).child("followEventUsers").child(localUser.userID)
+        var eventRefKey = ref.child("events").child(eventID).child("followEventUsers").child(localUser.userID)
+        
+        if DataService.shared.isPrivateUser { //приватное событие
+            eventRefKey = ref.child("users").child(localUser.userID)
+                .child("events").child(eventID).child("followEventUsers")
+        }
+        
         eventRefKey.removeValue()
         print("--- Follow removed! ---\n")
     }
