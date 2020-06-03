@@ -85,7 +85,7 @@ class AccountScreenViewController: UIViewController {
     
     @IBAction func copyUserIdButtonTap() {
         UIPasteboard.general.string = userIdLabel.text
-        showAlertMsgWithDelay(title: "UserId", message: "Скопировано в буфер обмена", delay: 1)
+        showAlertMsgWithDelay(title: nil, message: "Добавлено в буфер обмена", delay: 1)
     }
     
     

@@ -19,7 +19,7 @@ extension UIViewController {
         present(alertController, animated: true, completion: nil)
     }
     
-    func showAlertMsgWithDelay(title: String, message: String, delay: Int){
+    func showAlertMsgWithDelay(title: String?, message: String, delay: Int){
         let alertController = UIAlertController(title: title, message: message, preferredStyle: .alert)
         self.present(alertController, animated: true, completion: nil)
         DispatchQueue.main.asyncAfter(deadline: .now() + .seconds(delay), execute: {
@@ -27,7 +27,7 @@ extension UIViewController {
         })
     }
     
-    func alertAskConfirmation (title:String, message:String, completion:@escaping (_ result: Bool) -> Void) {
+    func alertAskConfirmation (title: String, message: String, completion:@escaping (_ result: Bool) -> Void) {
         let alert = UIAlertController(title: title, message: message, preferredStyle: .alert)
 
       alert.addAction(UIAlertAction(title: "Да", style: .destructive, handler: { action in

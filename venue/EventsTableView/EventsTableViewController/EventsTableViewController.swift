@@ -31,6 +31,15 @@ class EventsTableViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        if DataService.shared.localUser != nil {
+            myEventsButton.isHidden = false
+        } else { myEventsButton.isHidden = true }
+        
+        if DataService.shared.isPrivateUser {
+            eventsForTableView = DataService.shared.privateEvents
+            myEventsButton.isHidden = true
+        }
+        
         segmentIndex = UserDefaults.standard.integer(forKey: "segmentIndex")
         rangeSC.selectedSegmentIndex = segmentIndex
         
@@ -61,10 +70,6 @@ class EventsTableViewController: UIViewController {
         } else {
             removeOldButton.isHidden = true
         }
-        
-        if DataService.shared.localUser != nil {
-            myEventsButton.isHidden = false
-        } else { myEventsButton.isHidden = true }
         
         print("admin = ", DataService.shared.userAdmin)
     }
@@ -193,14 +198,14 @@ extension EventsTableViewController: UITableViewDataSource, UITableViewDelegate 
     
     func deleteProperty(at indexPath: IndexPath) -> UIContextualAction {
         let event = eventsFiltred[indexPath.row]
-        
+        let events = DataService.shared.isPrivateEvent ? DataService.shared.privateEvents : DataService.shared.events
         let action = UIContextualAction(style: .destructive, title: "Удалить") { (action, view, completion) in
             
             self.alertAskConfirmation(title: "ВНИМАНИЕ !", message: "Вы действительно хотите удалить событие ?") { (result) in
                 if result { print ("Удаление")
                     //Removing from array at selected index
                     NetworkService.removeEvent(event: event)  //Вернуть !!!
-                    let index = DataService.searchIndexEvent(event: event)
+                    let index = DataService.searchIndexEvent(event: event, fromEvents: events)
                     DataService.shared.events.remove(at: index) // из основного
                     self.eventsFiltred.remove(at: indexPath.row) //из отфильтрованного
                     print("событие удалено из массива!")

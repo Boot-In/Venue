@@ -13,6 +13,7 @@ import Firebase
 /// Вывод информации
 protocol MainScreenProtocol: class {
     func setMarkers(markers: [GMSMarker])
+    func startMap()
 }
 
 // это как мы принимаем информацию
@@ -48,7 +49,7 @@ class MainScreenPresenter: MainScreenPresenterProtocol {
         print("LocationService запущен")
     }
     
-    func checkUserLoginStatus () {
+    func checkUserLoginStatus() {
         print("...checkUserLoginStatus")
         Auth.auth().addStateDidChangeListener({[weak self] (auth, user) in
             if user != nil {
@@ -102,7 +103,7 @@ class MainScreenPresenter: MainScreenPresenterProtocol {
     }
     
     func getOfflineMarkers(range: Int){
-        let events = DataService.shared.events
+        let events = DataService.shared.isPrivateUser ? DataService.shared.privateEvents : DataService.shared.events
         let filtredEvents = DataService.filtredDateEvents(events: events, range: range)
         self.createMarkers(eventsForMarker: filtredEvents)
     }

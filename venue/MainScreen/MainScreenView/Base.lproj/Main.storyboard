@@ -56,13 +56,13 @@
                                 </subviews>
                             </stackView>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ToA-zb-sao" customClass="GMSMapView">
-                                <rect key="frame" x="5" y="94" width="365" height="443"/>
+                                <rect key="frame" x="5" y="94" width="365" height="493"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                             </view>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="20" translatesAutoresizingMaskIntoConstraints="NO" id="vpO-nh-Hqz">
-                                <rect key="frame" x="10" y="557" width="355" height="90"/>
+                                <rect key="frame" x="10" y="607" width="355" height="40"/>
                                 <subviews>
-                                    <stackView opaque="NO" contentMode="scaleToFill" distribution="equalSpacing" spacing="20" translatesAutoresizingMaskIntoConstraints="NO" id="t58-Yr-jvd">
+                                    <stackView opaque="NO" contentMode="scaleToFill" distribution="equalSpacing" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="t58-Yr-jvd">
                                         <rect key="frame" x="0.0" y="0.0" width="355" height="40"/>
                                         <subviews>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="wordWrap" translatesAutoresizingMaskIntoConstraints="NO" id="83x-64-wV0">
@@ -95,19 +95,26 @@
                                                 </connections>
                                             </button>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" minimumScaleFactor="0.59999999999999998" translatesAutoresizingMaskIntoConstraints="NO" id="IW7-oO-VeB">
-                                                <rect key="frame" x="187.5" y="0.0" width="167.5" height="40"/>
+                                                <rect key="frame" x="175" y="0.0" width="20" height="40"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="15"/>
                                                 <nil key="textColor"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
+                                            <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="K2D-b5-K0Y">
+                                                <rect key="frame" x="205" y="0.0" width="150" height="41"/>
+                                                <segments>
+                                                    <segment title="Все"/>
+                                                    <segment title="Личные"/>
+                                                </segments>
+                                                <connections>
+                                                    <action selector="publicEventCSAction" destination="BYZ-38-t0r" eventType="valueChanged" id="M6b-wG-vbu"/>
+                                                </connections>
+                                            </segmentedControl>
                                         </subviews>
+                                        <constraints>
+                                            <constraint firstItem="K2D-b5-K0Y" firstAttribute="centerY" secondItem="83x-64-wV0" secondAttribute="centerY" id="s8s-bu-mvR"/>
+                                        </constraints>
                                     </stackView>
-                                    <slider opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="0.5" minValue="0.0" maxValue="1" minimumValueImage="minus" catalog="system" maximumValueImage="plus" translatesAutoresizingMaskIntoConstraints="NO" id="SIK-rf-0zn">
-                                        <rect key="frame" x="-2" y="60" width="359" height="31"/>
-                                        <connections>
-                                            <action selector="zoomSliderAction:" destination="BYZ-38-t0r" eventType="valueChanged" id="KoG-tJ-nd0"/>
-                                        </connections>
-                                    </slider>
                                 </subviews>
                             </stackView>
                         </subviews>
@@ -118,6 +125,7 @@
                             <constraint firstItem="vpO-nh-Hqz" firstAttribute="top" secondItem="ToA-zb-sao" secondAttribute="bottom" constant="20" id="8ph-jY-zRg"/>
                             <constraint firstItem="0QN-g6-Zqc" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="5" id="BoK-xH-wPb"/>
                             <constraint firstItem="83x-64-wV0" firstAttribute="width" secondItem="8bC-Xf-vdC" secondAttribute="width" multiplier="0.44" id="IP1-dR-kGm"/>
+                            <constraint firstItem="K2D-b5-K0Y" firstAttribute="width" secondItem="8bC-Xf-vdC" secondAttribute="width" multiplier="0.4" id="NRv-7A-pDh"/>
                             <constraint firstItem="ToA-zb-sao" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="5" id="Qe6-1R-0a5"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="0QN-g6-Zqc" secondAttribute="trailing" constant="15" id="UPP-5U-RKX"/>
                             <constraint firstItem="ToA-zb-sao" firstAttribute="top" secondItem="0QN-g6-Zqc" secondAttribute="bottom" constant="15" id="eAP-E8-5DV"/>
@@ -134,8 +142,8 @@
                         <outlet property="intervalSC" destination="fDf-HW-xTV" id="Vuo-1X-up6"/>
                         <outlet property="mapView" destination="ToA-zb-sao" id="8K5-qG-sdM"/>
                         <outlet property="markerButton" destination="83x-64-wV0" id="p5t-7j-kMQ"/>
+                        <outlet property="publicEventSC" destination="K2D-b5-K0Y" id="CNZ-I0-B1g"/>
                         <outlet property="tableButton" destination="QM2-h4-bBs" id="uoE-2t-M4Y"/>
-                        <outlet property="zoomSlider" destination="SIK-rf-0zn" id="a6H-N7-WbM"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
@@ -162,9 +170,7 @@
         </scene>
     </scenes>
     <resources>
-        <image name="minus" catalog="system" width="128" height="24"/>
         <image name="person" catalog="system" width="128" height="117"/>
-        <image name="plus" catalog="system" width="128" height="113"/>
         <image name="table" catalog="system" width="128" height="93"/>
     </resources>
 </document>

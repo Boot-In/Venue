@@ -56,11 +56,14 @@ class AddMarkerScreenPresenter: AddMarkerScreenPresenterProtocol {
         /// Сохранение в сеть и добавление локально
         NetworkService.saveNewEvent(event: event)
         ///
-        print("В массив из \(DataService.shared.events.count) элементов добавлен")
-        DataService.shared.events.append(event)
         DataService.shared.event = event
-        print(DataService.shared.event.eventID)
-        print("стало элементов: ", DataService.shared.events.count, " элементов")
+        
+        if DataService.shared.isPrivateEvent {
+            DataService.shared.privateEvents.append(event)
+        } else {
+            DataService.shared.events.append(event)
+        }
+        print("Добавлено событие EventID: ", DataService.shared.event.eventID)
     }
     
 //    func getEventID(event: Event) -> String {
@@ -75,6 +78,7 @@ class AddMarkerScreenPresenter: AddMarkerScreenPresenterProtocol {
     
     func updateEvent(event: Event, nameEvent: String, iconEvent: String, discrEvent: String) {
         let date = DataService.shared.dateEvent
+        var events = DataService.shared.events
         var eventUpd = event
         eventUpd.dateEventString = DataService.shared.dataEventString
         eventUpd.nameEvent = nameEvent
@@ -86,10 +90,15 @@ class AddMarkerScreenPresenter: AddMarkerScreenPresenterProtocol {
         NetworkService.updateEvent(event: eventUpd)
         DataService.shared.event = eventUpd
         /// Замена в локальном массиве.
-        let i = DataService.searchIndexEvent(event: event)
-        print("\nстарое имя = ", DataService.shared.events[i].nameEvent)
-        DataService.shared.events[i] = eventUpd
-        print("новое имя = ", DataService.shared.events[i].nameEvent)
+        if DataService.shared.isPrivateEvent {
+            events = DataService.shared.privateEvents
+        }
+        let i = DataService.searchIndexEvent(event: event, fromEvents: events)
+        if DataService.shared.isPrivateEvent {
+            DataService.shared.privateEvents[i] = eventUpd
+        } else {
+            DataService.shared.events[i] = eventUpd
+        }
     }
 
 

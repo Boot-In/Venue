@@ -20,27 +20,33 @@ class NetworkService {
     }
     
     static func removeEvent(event: Event) {
-        print("начинаем удалять событие 1:", event.eventID)
         let ref = Database.database().reference()
-        print("начинаем удалять событие 2:", event.eventID)
-        let eventRef = ref.child("events").child(event.eventID)
-        print("начинаем удалять событие 3:", event.eventID)
+        var eventRef = ref.child("events").child(event.eventID)
+        if DataService.shared.isPrivateUser {
+            eventRef = ref.child("users").child(event.userID)
+                .child("events").child(event.eventID)
+        }
+        print("начинаем удалять событие:", event.eventID)
         eventRef.removeValue()
         print("Event removed!")
     }
     
-//    static func removeEvent(event: Event, completion: @escaping (_ success: Bool) -> Void) {
-//        let ref = Database.database().reference()
-//        let eventRef = ref.child("events").child(event.eventID)
-//        eventRef.removeValue()
-//        print("Event removed!")
-//        completion(true)
-//    }
+    //    static func removeEvent(event: Event, completion: @escaping (_ success: Bool) -> Void) {
+    //        let ref = Database.database().reference()
+    //        let eventRef = ref.child("events").child(event.eventID)
+    //        eventRef.removeValue()
+    //        print("Event removed!")
+    //        completion(true)
+    //    }
     
     static func saveNewEvent(event: Event) {
-        
         let ref = Database.database().reference()
-        let eventRef = ref.child("events").child(event.eventID)
+        var eventRef = ref.child("events").child(event.eventID)
+        
+        if DataService.shared.isPrivateEvent { //приватное событие
+            eventRef = ref.child("users").child(event.userID)
+                .child("events").child(event.eventID)
+        }
         eventRef.setValue([
             "userID" : event.userID,
             "eventID" : event.eventID,
@@ -62,7 +68,13 @@ class NetworkService {
     
     static func updateEvent(event: Event) {
         let ref = Database.database().reference()
-        let eventRef = ref.child("events").child(event.eventID)
+        var eventRef = ref.child("events").child(event.eventID)
+        
+        if DataService.shared.isPrivateEvent { //приватное событие
+            eventRef = ref.child("users").child(event.userID)
+                .child("events").child(event.eventID)
+        }
+        
         eventRef.updateChildValues([
             "userID" : event.userID,
             "eventID" : event.eventID,
@@ -80,7 +92,7 @@ class NetworkService {
         print("saveUpdateEvent Complete !")
         print("EventID = \(event.eventID)")
     }
-
+    
     
     static func removeOldEvent(eventsID: [String]) {
         print("Запущен процесс удаления старых событий")
@@ -90,14 +102,14 @@ class NetworkService {
             eventRef.removeValue()
         }
     }
-
+    
     
     static func loadAllEvents( completion: @escaping (_ list: [Event], _ success: Bool) -> Void) {
         let ref = Database.database().reference().child("events")
         print("... loadAllEvents > events")
         var eventsFromNet = [Event]()
         
-       // ref.observe(.value, with: { (snapshot) in //реагирует на любое изменение в Базе Данных
+        // ref.observe(.value, with: { (snapshot) in //реагирует на любое изменение в Базе Данных
         ref.observeSingleEvent(of: .value, with: { (snapshot) in
             for item in snapshot.children {
                 let event = Event(snapshot: item as! DataSnapshot)
@@ -111,6 +123,22 @@ class NetworkService {
         }) { (error) in
             print(error.localizedDescription)
             completion(eventsFromNet, false)
+        }
+    }
+    
+    static func loadPrivareEvents(ref: DatabaseReference) {
+        var eventsFromNet = [Event]()
+        ref.observeSingleEvent(of: .value, with: { (snapshot) in
+            for item in snapshot.children {
+                let event = Event(snapshot: item as! DataSnapshot)
+                eventsFromNet.append(event)
+            }
+            eventsFromNet.sort {$0.dateEventTI < $1.dateEventTI }
+            DataService.shared.privateEvents = eventsFromNet
+            print("загружено \(eventsFromNet.count) Приватных событий")
+            print("Элементы помещены в приватный массив \(DataService.shared.privateEvents.count)")
+        }) { (error) in
+            print(error.localizedDescription)
         }
     }
     
@@ -129,6 +157,8 @@ class NetworkService {
             DataService.shared.localUser = profile
             print("Сохранён профиль для ", profile.firstUserName)
             UserDefaults.standard.set(nickNameUser, forKey: "nickNameUser")
+            /// загрузка приватных событий
+            NetworkService.loadPrivareEvents(ref: ref.child("events"))
         }) { (error) in
             print(error.localizedDescription)
         }

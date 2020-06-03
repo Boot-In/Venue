@@ -19,6 +19,9 @@ class DataService {
     var dataEventString = String()
     var categoryEvent = String()
     var events = [Event]()
+    var privateEvents = [Event]()
+    var isPrivateEvent = false
+    var isPrivateUser = false
     var oldEventsID: [String]? = []
     var event: Event!
     var eventID = String()
@@ -117,9 +120,9 @@ class DataService {
         return eventsFiltred
     }
     
-    static func searchIndexEvent(event: Event) -> Int {
+    static func searchIndexEvent(event: Event, fromEvents: [Event]) -> Int {
         var index = 0
-        let events = DataService.shared.events
+        let events = fromEvents
         for i in 0..<events.count {
             if events[i].eventID == event.eventID {
                 index = i

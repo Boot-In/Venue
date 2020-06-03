@@ -18,6 +18,8 @@ class AddMarkerScreenViewController: UIViewController {
     @IBOutlet weak var infoLabel: UILabel!
     @IBOutlet weak var saveButton: UIButton!
     @IBOutlet weak var backButton: UIButton!
+    @IBOutlet weak var privateSwitch: UISwitch!
+    @IBOutlet weak var privateLabel: UILabel!
     
     var presenter: AddMarkerScreenPresenterProtocol!
     let picker = UIDatePicker()
@@ -33,6 +35,18 @@ class AddMarkerScreenViewController: UIViewController {
         ConfigUI.buttonConfig(button: saveButton, titleColor: .white, alfa: 0.3)
         ConfigUI.buttonConfig(button: backButton, titleColor: .white, alfa: 0)
         
+        privateSwitch.isOn = false
+        privateLabel.adjustsFontSizeToFitWidth = true
+        if DataService.shared.isPrivateUser {
+            DataService.shared.isPrivateEvent = true
+            privateSwitch.isOn = true
+            privateLabel.textColor = .red
+            privateLabel.font = .boldSystemFont(ofSize: 18)
+        } else {
+            DataService.shared.isPrivateEvent = false
+            privateLabel.textColor = .label
+            privateLabel.font = .systemFont(ofSize: 17)
+        }
         formatter.locale = .init(identifier: "Russian")
         formatter.dateStyle = .short
         formatter.timeStyle = .none
@@ -140,6 +154,19 @@ class AddMarkerScreenViewController: UIViewController {
         //changeIconColor(imageName: iconArray[i])
     }
     
+    @IBAction func privateSwitchAction() {
+        if privateSwitch.isOn {
+            privateLabel.textColor = .red
+            privateLabel.font = .boldSystemFont(ofSize: 18)
+            privateLabel.adjustsFontSizeToFitWidth = true
+            DataService.shared.isPrivateEvent = true
+        } else {
+            privateLabel.textColor = .label
+            privateLabel.font = .systemFont(ofSize: 17)
+            privateLabel.adjustsFontSizeToFitWidth = true
+            DataService.shared.isPrivateEvent = false
+        }
+    }
     
     @IBAction func saveButtonTap() {
         guard let _ = dateEventTF.text, dateEventTF.text != "" else {

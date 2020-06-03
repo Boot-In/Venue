@@ -17,9 +17,10 @@ class MainScreenViewController: UIViewController {
     @IBOutlet weak var accountButton: UIButton!
     @IBOutlet weak var intervalSC: UISegmentedControl!
     @IBOutlet weak var infoLabel: UILabel!
-    @IBOutlet weak var zoomSlider: UISlider!
     @IBOutlet weak var mapView: GMSMapView!
     @IBOutlet weak var tableButton: UIButton!
+    @IBOutlet weak var publicEventSC: UISegmentedControl!
+    
     
     let infoMarker = GMSMarker()
     
@@ -32,10 +33,11 @@ class MainScreenViewController: UIViewController {
         presenter.checkUserLoginStatus()
         infoLabel.textColor = .label
         markerButton.isHidden = true
+        publicEventSC.isHidden = true
         ConfigUI.segmentControlConfig(sc: intervalSC)
+        ConfigUI.segmentControlConfig(sc: publicEventSC)
         ConfigUI.changeSystemIconColor(button: tableButton, systemName: "table")
         navigationController?.navigationBar.isHidden = true
-        sliderSetup()
         mapViewSetup()
         print("старт маркеров на карту")
         presenter.getOnlineMarkers(range: intervalSC.selectedSegmentIndex)
@@ -62,10 +64,12 @@ class MainScreenViewController: UIViewController {
         if UserDefaults.standard.bool(forKey: "logined"){
             infoLabel.text = ""
             ConfigUI.changeSystemIconColor(button: accountButton, systemName: "person.fill")
-            //accountButton.setBackgroundImage(UIImage(systemName: "person.fill"), for: .normal)
+            publicEventSC.isHidden = false
+            infoLabel.isHidden = true
         } else {
             ConfigUI.changeSystemIconColor(button: accountButton, systemName: "person")
-            //accountButton.setBackgroundImage(UIImage(systemName: "person"), for: .normal)
+            publicEventSC.isHidden = true
+            infoLabel.isHidden = false
             infoLabel.text = "создайте или войдите в свой аккаунт"
         }
     }
@@ -80,22 +84,20 @@ class MainScreenViewController: UIViewController {
         //mapView.animate(toZoom: DataService.shared.defaultZoom)
     }
     
-    func sliderSetup() {
-        zoomSlider.isHidden = true /// скрыт слайдер !!!
-        zoomSlider.minimumValue = 0
-        zoomSlider.maximumValue = 20
-        zoomSlider.value = Float(DataService.shared.defaultZoom)
-    }
     
     @IBAction func rangeSCaction(_ sender: UISegmentedControl) {
         mapView.clear()
         presenter.getOfflineMarkers(range:  intervalSC.selectedSegmentIndex)
     }
     
-    @IBAction func zoomSliderAction(_ sender: UISlider) {
-        mapView.animate(toZoom: zoomSlider.value)
-        infoLabel.text = String(format: "Zoom: %.1f ",
-                                zoomSlider.value * 5) + "%"
+    @IBAction func publicEventCSAction() {
+        mapView.clear()
+        if publicEventSC.selectedSegmentIndex == 0 {
+            DataService.shared.isPrivateUser = false
+        } else {
+            DataService.shared.isPrivateUser = true
+        }
+        presenter.getOfflineMarkers(range:  intervalSC.selectedSegmentIndex)
     }
     
     @IBAction func addNewMarkerButtonTap() {
@@ -145,7 +147,7 @@ extension MainScreenViewController: GMSMapViewDelegate {
         DataService.shared.markerDidTapped = false
         updateMarkerButton()
         UIPasteboard.general.string = "\(coordinate.latitude) \(coordinate.longitude)"
-        infoLabel.text = "Координаты: Lat / Lng\n\(String(format: "%.6f", coordinate.latitude)) / \(String(format: "%.6f", coordinate.longitude))"
+        //infoLabel.text = "Координаты: Lat / Lng\n\(String(format: "%.6f", coordinate.latitude)) / \(String(format: "%.6f", coordinate.longitude))"
         DataService.shared.coordinateEvent = coordinate
         DataService.shared.placeEvent = ""
         marker.map = mapView
@@ -157,7 +159,7 @@ extension MainScreenViewController: GMSMapViewDelegate {
         DataService.shared.marker = marker
         updateMarkerButton()
         UIPasteboard.general.string = "\(marker.position.latitude) \(marker.position.longitude)"
-        infoLabel.text = "Координаты: Lat / Lng\n\(String(format: "%.6f", marker.position.latitude)) / \(String(format: "%.6f", marker.position.longitude))"
+        //infoLabel.text = "Координаты: Lat / Lng\n\(String(format: "%.6f", marker.position.latitude)) / \(String(format: "%.6f", marker.position.longitude))"
         return false
     }
     
@@ -171,7 +173,7 @@ extension MainScreenViewController: GMSMapViewDelegate {
         DataService.shared.markerDidTapped = false
         updateMarkerButton()
         UIPasteboard.general.string = "\(location.latitude) \(location.longitude)"
-        infoLabel.text = "Координаты: Lat / Lng\n\(String(format: "%.6f", location.latitude)) / \(String(format: "%.6f",location.longitude))"
+        //infoLabel.text = "Координаты: Lat / Lng\n\(String(format: "%.6f", location.latitude)) / \(String(format: "%.6f",location.longitude))"
         //infoMarker.infoWindowAnchor.y = 1
         infoMarker.map = mapView
         mapView.selectedMarker = infoMarker
@@ -182,11 +184,20 @@ extension MainScreenViewController: GMSMapViewDelegate {
 
 extension MainScreenViewController: MainScreenProtocol {
     
+    func startMap() {  /// настроить запуск после обновления координат
+        print("\nSTART MAP")
+        if let myLocation = mapView.myLocation {
+            print("myLocation", myLocation)
+            mapView.animate(toLocation: myLocation.coordinate)
+            mapView.animate(toZoom: DataService.shared.defaultZoom)
+        }
+    }
+    
     func setMarkers(markers: [GMSMarker]) {
         for marker in markers {
             marker.map = mapView
         }
     }
-
+    
     
 }
