@@ -23,7 +23,7 @@
                             <constraint firstAttribute="height" constant="50" id="82D-eT-TKu"/>
                         </constraints>
                     </imageView>
-                    <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="YZl-1y-Kdm">
+                    <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="1" translatesAutoresizingMaskIntoConstraints="NO" id="YZl-1y-Kdm">
                         <rect key="frame" x="54" y="2" width="318" height="128"/>
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Date Name" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" minimumScaleFactor="0.59999999999999998" translatesAutoresizingMaskIntoConstraints="NO" id="dlO-Av-ezk">
@@ -36,25 +36,25 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Организатор: nick" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="OPA-jZ-McH">
-                                <rect key="frame" x="0.0" y="30" width="318" height="20"/>
+                                <rect key="frame" x="0.0" y="31" width="318" height="20"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="20" id="Pcy-mc-A0Y"/>
                                 </constraints>
-                                <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="18"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <stackView opaque="NO" contentMode="scaleToFill" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="wxi-sO-5hg">
-                                <rect key="frame" x="0.0" y="50" width="318" height="78"/>
+                                <rect key="frame" x="0.0" y="52" width="318" height="76"/>
                                 <subviews>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" verticalHuggingPriority="251" text="Начало" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="J1O-WF-xJn">
-                                        <rect key="frame" x="0.0" y="0.0" width="275.5" height="78"/>
-                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" verticalHuggingPriority="251" text="Организатор" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="J1O-WF-xJn">
+                                        <rect key="frame" x="0.0" y="0.0" width="275.5" height="76"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="15"/>
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Флаг" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="y4G-8W-hXc">
-                                        <rect key="frame" x="280.5" y="0.0" width="37.5" height="78"/>
+                                        <rect key="frame" x="280.5" y="0.0" width="37.5" height="76"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="16"/>
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
@@ -75,11 +75,11 @@
             </tableViewCellContentView>
             <viewLayoutGuide key="safeArea" id="njF-e1-oar"/>
             <connections>
-                <outlet property="discriptionEventLabel" destination="J1O-WF-xJn" id="5xy-Nx-zmI"/>
                 <outlet property="eventImage" destination="654-MH-hgs" id="5eu-tK-Lgv"/>
                 <outlet property="flagLabel" destination="y4G-8W-hXc" id="UKA-6f-AcM"/>
                 <outlet property="nameEventLabel" destination="dlO-Av-ezk" id="eJh-BY-Vfk"/>
-                <outlet property="nickNameEventLabel" destination="OPA-jZ-McH" id="2Me-Zq-aVg"/>
+                <outlet property="nickNameEventLabel" destination="J1O-WF-xJn" id="5xy-Nx-zmI"/>
+                <outlet property="startEventLabel" destination="OPA-jZ-McH" id="2Me-Zq-aVg"/>
             </connections>
             <point key="canvasLocation" x="89.855072463768124" y="101.78571428571428"/>
         </tableViewCell>

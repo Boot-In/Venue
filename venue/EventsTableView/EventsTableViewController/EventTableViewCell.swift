@@ -11,16 +11,16 @@ import UIKit
 class EventTableViewCell: UITableViewCell {
 
     @IBOutlet weak var nameEventLabel: UILabel!
+    @IBOutlet weak var startEventLabel: UILabel!
     @IBOutlet weak var nickNameEventLabel: UILabel!
-    @IBOutlet weak var discriptionEventLabel: UILabel!
     @IBOutlet weak var eventImage: UIImageView!
     @IBOutlet weak var flagLabel: UILabel!
     
     override func awakeFromNib() {
         super.awakeFromNib()
         nameEventLabel.textColor = .label
+        startEventLabel.textColor = .label
         nickNameEventLabel.textColor = .label
-        discriptionEventLabel.textColor = .label
         eventImage.backgroundColor = .clear
         // Initialization code
     }

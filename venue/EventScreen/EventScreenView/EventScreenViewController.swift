@@ -166,7 +166,7 @@ extension EventScreenViewController: EventScreenProtocol {
         nickNameLabel.text = nickName
         eventDataLabel.text = "Дата проведения: \(eventData)"
         eventNameLabel.text = "Название: \(eventName)"
-        eventCategoryLabel.text = "Категория: \(eventCategory)"
+        eventCategoryLabel.text = "Начало: \(eventCategory)"
         
         let count = DataService.shared.event.followEventUsers.count
         if count > 0 {

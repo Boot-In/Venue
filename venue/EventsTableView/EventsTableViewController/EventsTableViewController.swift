@@ -175,8 +175,8 @@ extension EventsTableViewController: UITableViewDataSource, UITableViewDelegate 
         cell.backgroundColor = .clear
         let event = eventsFiltred[indexPath.row]
         cell.nameEventLabel.text = "\(event.dateEventString) \(event.nameEvent)"
-        cell.discriptionEventLabel.text = "Желающих: \(event.followEventUsers.count)"
         cell.nickNameEventLabel.text = "Организатор: \(event.userNick)"
+        cell.startEventLabel.text = "Начало: \(event.snipetEvent)"
         cell.eventImage.image = UIImage(named: event.iconEvent)
         if DataService.checkMyFollow(event: eventsFiltred[indexPath.row]) {
             cell.flagLabel.text = "\(event.followEventUsers.count) ⚑ "

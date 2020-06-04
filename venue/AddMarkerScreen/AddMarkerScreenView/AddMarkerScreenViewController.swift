@@ -12,7 +12,7 @@ class AddMarkerScreenViewController: UIViewController {
     @IBOutlet weak var userNickLabel: UILabel!
     @IBOutlet weak var dateEventTF: UITextField!
     @IBOutlet weak var nameEventTF: UITextField!
-    @IBOutlet weak var categoryEventTF: UITextField! // задействовать с таблицей категорий
+    @IBOutlet weak var startEventTF: UITextField! // задействовать с таблицей категорий
     @IBOutlet weak var discriptionEventTV: UITextView!
     @IBOutlet weak var iconEventIV: UIImageView!
     @IBOutlet weak var infoLabel: UILabel!
@@ -28,6 +28,8 @@ class AddMarkerScreenViewController: UIViewController {
     var isEdit: Bool = false // true - для режима редактирования
     
     let formatter = DateFormatter()
+    var dateComponents = DateComponents()
+    let calendar = Calendar.current
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -47,16 +49,23 @@ class AddMarkerScreenViewController: UIViewController {
             privateLabel.textColor = .label
             privateLabel.font = .systemFont(ofSize: 17)
         }
-        formatter.locale = .init(identifier: "Russian")
-        formatter.dateStyle = .short
-        formatter.timeStyle = .none
+        dateSetting()
+        
         enableTextField()
         infoLabel.text = "Заполните поля"
         infoLabel.textColor = .yellow
-        createDatePicker()
-        addDoneButtonTo(nameEventTF, categoryEventTF)
+        //createDatePicker()
+        //categoryEventTF.
+        addDoneButtonTo(nameEventTF) //, categoryEventTF
         addDoneButtonToTV(discriptionEventTV)
         loadTextFieldFromEvent()
+    }
+    
+    func dateSetting() {
+        formatter.locale = .init(identifier: "Russian")
+        dateComponents = calendar.dateComponents([.year, .month, .day, .hour, .minute], from: Date())
+        dateComponents.hour = 10
+        dateComponents.minute = 0
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -83,14 +92,14 @@ class AddMarkerScreenViewController: UIViewController {
     func disableTextField() {
         dateEventTF.isEnabled = false
         nameEventTF.isEnabled = false
-        categoryEventTF.isEnabled = false
+        startEventTF.isEnabled = false
         discriptionEventTV.isSelectable = false
     }
     
     func enableTextField() {
           dateEventTF.isEnabled = true
           nameEventTF.isEnabled = true
-          categoryEventTF.isEnabled = true
+          startEventTF.isEnabled = true
           discriptionEventTV.isSelectable = true
       }
     
@@ -122,7 +131,7 @@ class AddMarkerScreenViewController: UIViewController {
         let toolbar = UIToolbar()
         toolbar.sizeToFit()
         
-        let done = UIBarButtonItem(title: "Готово", style: .done, target: self, action: #selector(donePressed))
+        let done = UIBarButtonItem(title: "Готово", style: .done, target: self, action: #selector(donePressedForDP))
         let flexBarButton = UIBarButtonItem(barButtonSystemItem: .flexibleSpace,
         target: nil, action: nil)
         toolbar.setItems([flexBarButton, done], animated: true)
@@ -133,12 +142,41 @@ class AddMarkerScreenViewController: UIViewController {
         picker.locale = .init(identifier: "Russian")
     }
     
-    @objc func donePressed() {       
+    @objc func donePressedForDP() {
+        formatter.dateStyle = .short
+        formatter.timeStyle = .none
         let dateString = formatter.string(from: picker.date)
         DataService.shared.dateEvent = picker.date
         DataService.shared.dataEventString = dateString
         dateEventTF.text = "\(dateString)"
         
+        self.view.endEditing(true)
+    }
+    
+    func createTimePicker() {
+        let toolbar = UIToolbar()
+        toolbar.sizeToFit()
+        
+        let done = UIBarButtonItem(title: "Готово", style: .done, target: self, action: #selector(donePressedForTP))
+        let flexBarButton = UIBarButtonItem(barButtonSystemItem: .flexibleSpace,
+                                            target: nil, action: nil)
+        toolbar.setItems([flexBarButton, done], animated: true)
+        
+        startEventTF.inputAccessoryView = toolbar // вызов тулбара
+        startEventTF.inputView = picker
+        picker.datePickerMode = .time
+       
+        let date = calendar.date(from: dateComponents)
+        picker.setDate(date ?? Date(), animated: true)
+        picker.locale = .init(identifier: "Russian")
+    }
+       
+    @objc func donePressedForTP() {
+        formatter.dateStyle = .none
+        formatter.timeStyle = .short
+        let timeString = formatter.string(from: picker.date)
+        
+        startEventTF.text = "\(timeString)"
         self.view.endEditing(true)
     }
     
@@ -174,8 +212,10 @@ class AddMarkerScreenViewController: UIViewController {
         guard let name = nameEventTF.text, nameEventTF.text != "" else {
             infoLabel.text = "Не заполнено поле Название" ; return }
         guard let discr = discriptionEventTV.text else { return }
+        var startEvent = startEventTF.text
+        if startEventTF.text == "" { startEvent = "10:00" }
         //guard let category = categoryEventTF.text else { return }
-        DataService.shared.categoryEvent = categoryEventTF.text ?? ""
+        DataService.shared.categoryEvent = startEvent ?? "10:00"
         infoLabel.textColor = .white
         infoLabel.text = "Сохраняем ...."
         if isEdit {
@@ -210,7 +250,7 @@ extension AddMarkerScreenViewController: AddMarkerScreenProtocol {
         nameEventTF.text = name
         dateEventTF.text = ""
         //dateEventTF.text = formatter.string(from: Date())
-        categoryEventTF.text = caregiry
+        startEventTF.text = caregiry
         iconEventIV.image = UIImage(named: iconArray[i])
         discriptionEventTV.text = discription
         infoLabel.text = "Внесите изменения, проверьте дату"
@@ -224,6 +264,14 @@ extension AddMarkerScreenViewController: UITextFieldDelegate {
     
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
       self.view.endEditing(true) // Скрывает клавиатуру по Enter
+    }
+    
+    func textFieldDidBeginEditing(_ textField: UITextField) {
+        if textField == startEventTF {
+            createTimePicker()
+        } else if textField == dateEventTF {
+            createDatePicker()
+        }
     }
     
 }
