@@ -7,7 +7,7 @@
 //
 
 protocol AddMarkerScreenRouterProtocol: class {
-   // func showSecondModule(result: Int)
+   func showCategoryModule()
   
 }
 
@@ -20,11 +20,11 @@ final class AddMarkerScreenRouter: AddMarkerScreenRouterProtocol {
         self.view = vc
     }
     
-//    func showSecondModule(result: Int) {
-//        let secondModuleVC = ModuleBulder.secondModule()
-//        secondModuleVC.resultCalc = result
-//        view?.navigationController?.pushViewController(secondModuleVC, animated: true)
-//    }
+    func showCategoryModule() {
+        let categoryModuleVC = ModuleBulder.addCategoryTableViewScreen()
+        //addEventScreenVC.modalPresentationStyle = .fullScreen
+        view?.present(categoryModuleVC, animated: true)
+    }
     
    
 }

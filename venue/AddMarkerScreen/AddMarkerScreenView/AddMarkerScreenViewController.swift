@@ -21,10 +21,13 @@ class AddMarkerScreenViewController: UIViewController {
     @IBOutlet weak var privateSwitch: UISwitch!
     @IBOutlet weak var privateLabel: UILabel!
     
+    @IBOutlet weak var categoryButton: UIButton!
+    @IBOutlet weak var categoryLabel: UILabel!
+    
     var presenter: AddMarkerScreenPresenterProtocol!
     let picker = UIDatePicker()
-    let iconArray = ["marker-icon", "red-marker", "green-marker", "blue-marker"]
-    var i = 0
+   // let iconArray = ["marker-icon", "red-marker", "green-marker", "blue-marker"]
+   // var i = 0
     var isEdit: Bool = false // true - для режима редактирования
     
     let formatter = DateFormatter()
@@ -36,7 +39,7 @@ class AddMarkerScreenViewController: UIViewController {
         saveButton.isHidden = false
         ConfigUI.buttonConfig(button: saveButton, titleColor: .white, alfa: 0.3)
         ConfigUI.buttonConfig(button: backButton, titleColor: .white, alfa: 0)
-        
+        ConfigUI.buttonConfig(button: categoryButton, titleColor: .white, alfa: 0.3)
         privateSwitch.isOn = false
         privateLabel.adjustsFontSizeToFitWidth = true
         if DataService.shared.isPrivateUser {
@@ -50,13 +53,10 @@ class AddMarkerScreenViewController: UIViewController {
             privateLabel.font = .systemFont(ofSize: 17)
         }
         dateSetting()
-        
         enableTextField()
         infoLabel.text = "Заполните поля"
         infoLabel.textColor = .yellow
-        //createDatePicker()
-        //categoryEventTF.
-        addDoneButtonTo(nameEventTF) //, categoryEventTF
+        addDoneButtonTo(nameEventTF)
         addDoneButtonToTV(discriptionEventTV)
         loadTextFieldFromEvent()
     }
@@ -70,7 +70,9 @@ class AddMarkerScreenViewController: UIViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        // при включённом наблюдателе не работает
+        print("viewWillAppear AddMarkerScreenViewController")
+        categoryLabel.text = DataService.shared.categoryEvent.0
+        iconEventIV.image = UIImage(named: DataService.shared.categoryEvent.1)
     }
     
     func observeToKeyboard() {
@@ -121,7 +123,7 @@ class AddMarkerScreenViewController: UIViewController {
         userNickLabel.text = "Организатор: \(userDefault.string(forKey: "nickNameUser") ?? "без названия")"
         //let stringDate = formatter.string(from: Date())
         nameEventTF.text = DataService.shared.placeEvent
-        iconEventIV.image = UIImage(named: iconArray[i])
+        iconEventIV.image = UIImage(named: DataService.shared.categoryEvent.1)
         dateEventTF.text = ""
         //DataService.shared.dateEvent = Date()
         //DataService.shared.dataEventString = stringDate
@@ -186,10 +188,12 @@ class AddMarkerScreenViewController: UIViewController {
     }
     
     @IBAction func changeIconButtonTap() {
-        i += 1
-        if i == iconArray.count {i = 0}
-        iconEventIV.image = UIImage(named: iconArray[i])
+        presenter.showCategory()
+//        i += 1
+//        if i == iconArray.count {i = 0}
+//        iconEventIV.image = UIImage(named: iconArray[i])
         //changeIconColor(imageName: iconArray[i])
+        
     }
     
     @IBAction func privateSwitchAction() {
@@ -215,15 +219,15 @@ class AddMarkerScreenViewController: UIViewController {
         var startEvent = startEventTF.text
         if startEventTF.text == "" { startEvent = "10:00" }
         //guard let category = categoryEventTF.text else { return }
-        DataService.shared.categoryEvent = startEvent ?? "10:00"
+        DataService.shared.startEvent = startEvent ?? "10:00"
         infoLabel.textColor = .white
         infoLabel.text = "Сохраняем ...."
         if isEdit {
             guard let event = DataService.shared.event else { return }
-            presenter.updateEvent(event: event, nameEvent: name, iconEvent: iconArray[i], discrEvent: discr)
+            presenter.updateEvent(event: event, nameEvent: name, iconEvent: DataService.shared.categoryEvent.1, discrEvent: discr)
             infoLabel.text = "Данные успешно обновлены"
         } else {
-            presenter.saveEvent(nameEvent: name, iconEvent: iconArray[i], discrEvent: discr)
+            presenter.saveEvent(nameEvent: name, iconEvent: DataService.shared.categoryEvent.1, discrEvent: discr)
             infoLabel.text = "Данные успешно сохранены"
         }
         saveButton.isHidden = true
@@ -243,15 +247,15 @@ class AddMarkerScreenViewController: UIViewController {
 extension AddMarkerScreenViewController: AddMarkerScreenProtocol {
     
     func fieldInfo(nik: String, name: String, caregiry: String, icon: String, discription: String) {
-        for ico in 0..<iconArray.count {
-            if iconArray[ico] == icon { i = ico }
-        }
+//        for ico in 0..<iconArray.count {
+//            if iconArray[ico] == icon { i = ico }
+//        }
         userNickLabel.text = "Организатор: \(nik)"
         nameEventTF.text = name
         dateEventTF.text = ""
         //dateEventTF.text = formatter.string(from: Date())
         startEventTF.text = caregiry
-        iconEventIV.image = UIImage(named: iconArray[i])
+        iconEventIV.image = UIImage(named: DataService.shared.categoryEvent.1)
         discriptionEventTV.text = discription
         infoLabel.text = "Внесите изменения, проверьте дату"
         //DataService.shared.dateEvent = Date()

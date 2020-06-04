@@ -17,7 +17,8 @@ class DataService {
     var placeEvent = String()
     var dateEvent = Date()
     var dataEventString = String()
-    var categoryEvent = String()
+    var startEvent = String()
+    var categoryEvent = ("Без категории", "marker-icon")
     var events = [Event]()
     var privateEvents = [Event]()
     var isPrivateEvent = false
@@ -26,9 +27,10 @@ class DataService {
     var event: Event!
     var eventID = String()
     var localUser: Profile!
-    //var fallowUsers: [String : String] = [:]
     var markerDidTapped = false
     var marker: GMSMarker!
+    
+    let categoryArray = [("Спорт", "marker-icon"), ("Игры", "red-marker"), ("Концерты", "green-marker"), ("Детское", "blue-marker")]
     
     static func filtredRadiusEvents(events: [Event], radius: Int) -> ([Event], Int) {
         print("В исходном массиве = \(events.count) элементов")

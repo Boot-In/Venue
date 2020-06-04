@@ -386,6 +386,7 @@
 		1BECD6F02467990C0000A0C6 /* venue */ = {
 			isa = PBXGroup;
 			children = (
+				1B8E09F324694238001C5E01 /* AddMarkerScreen */,
 				1B57BC85247CE425000BD8B7 /* CategoryTableView */,
 				1B95A08624777B4D00CCBE9F /* EventsTableView */,
 				1BC3C00124752FFB00A2F775 /* EventScreen */,
@@ -394,7 +395,6 @@
 				1B01EC7E2468D3B900FA52F1 /* AccountScreen */,
 				1BECD70824679D1F0000A0C6 /* Services */,
 				1BECD7052467994B0000A0C6 /* SupportFiles */,
-				1B8E09F324694238001C5E01 /* AddMarkerScreen */,
 				1BECD6FA246799100000A0C6 /* Assets.xcassets */,
 				1BECD6FF246799100000A0C6 /* Info.plist */,
 				1B5FA126248106170021022D /* GoogleService-Info.plist */,

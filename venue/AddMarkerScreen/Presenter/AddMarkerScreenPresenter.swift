@@ -23,6 +23,7 @@ protocol AddMarkerScreenPresenterProtocol: class {
     func saveEvent(nameEvent: String, iconEvent: String, discrEvent: String)
     func updateEvent(event: Event, nameEvent: String, iconEvent: String, discrEvent: String)
     func loadTFFromEvent(event: Event)
+    func showCategory()
 }
 
 class AddMarkerScreenPresenter: AddMarkerScreenPresenterProtocol {
@@ -51,7 +52,7 @@ class AddMarkerScreenPresenter: AddMarkerScreenPresenterProtocol {
         event.dateEventString = DataService.shared.dataEventString
         event.iconEvent = iconEvent
         event.discriptionEvent = discrEvent
-        event.snipetEvent = DataService.shared.categoryEvent
+        event.snipetEvent = DataService.shared.startEvent
         event.eventID = DataService.getEventID(event: event)
         /// Сохранение в сеть и добавление локально
         NetworkService.saveNewEvent(event: event)
@@ -84,7 +85,7 @@ class AddMarkerScreenPresenter: AddMarkerScreenPresenterProtocol {
         eventUpd.nameEvent = nameEvent
         eventUpd.iconEvent = iconEvent
         eventUpd.discriptionEvent = discrEvent
-        eventUpd.snipetEvent = DataService.shared.categoryEvent
+        eventUpd.snipetEvent = DataService.shared.startEvent
         eventUpd.dateEventTI = date.timeIntervalSince1970
         /// Сохранение
         NetworkService.updateEvent(event: eventUpd)
@@ -101,5 +102,9 @@ class AddMarkerScreenPresenter: AddMarkerScreenPresenterProtocol {
         }
     }
 
+    
+    func showCategory() {
+        router.showCategoryModule()
+    }
 
 }
