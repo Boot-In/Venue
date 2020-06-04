@@ -194,6 +194,10 @@ extension MainScreenViewController: MainScreenProtocol {
         }
     }
     
+    func mapGoMyLocation(location: CLLocationCoordinate2D){
+        mapView.animate(toLocation: location)
+    }
+    
     func setMarkers(markers: [GMSMarker]) {
         for marker in markers {
             marker.map = mapView

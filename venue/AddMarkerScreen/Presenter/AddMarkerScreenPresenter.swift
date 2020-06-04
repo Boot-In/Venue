@@ -14,6 +14,7 @@ import CoreLocation
 /// Вывод информации
 protocol AddMarkerScreenProtocol: class {
     func fieldInfo(nik: String, name: String, caregiry: String, icon: String, discription: String)
+    func setCategory(name: String, imageName: String)
 }
 
 // это как мы принимаем информацию
@@ -102,9 +103,8 @@ class AddMarkerScreenPresenter: AddMarkerScreenPresenterProtocol {
         }
     }
 
-    
     func showCategory() {
-        router.showCategoryModule()
+        router.showCategoryModule(addMarkerView: self.view)
     }
 
 }

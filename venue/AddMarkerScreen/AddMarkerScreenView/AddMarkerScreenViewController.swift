@@ -20,15 +20,13 @@ class AddMarkerScreenViewController: UIViewController {
     @IBOutlet weak var backButton: UIButton!
     @IBOutlet weak var privateSwitch: UISwitch!
     @IBOutlet weak var privateLabel: UILabel!
-    
     @IBOutlet weak var categoryButton: UIButton!
     @IBOutlet weak var categoryLabel: UILabel!
     
     var presenter: AddMarkerScreenPresenterProtocol!
     let picker = UIDatePicker()
-   // let iconArray = ["marker-icon", "red-marker", "green-marker", "blue-marker"]
-   // var i = 0
     var isEdit: Bool = false // true - для режима редактирования
+    var categoryEvent = ("", "")
     
     let formatter = DateFormatter()
     var dateComponents = DateComponents()
@@ -246,6 +244,11 @@ class AddMarkerScreenViewController: UIViewController {
 
 extension AddMarkerScreenViewController: AddMarkerScreenProtocol {
     
+    func setCategory(name: String, imageName: String) {
+        categoryLabel.text = name
+        iconEventIV.image = UIImage(named: imageName)
+    }
+    
     func fieldInfo(nik: String, name: String, caregiry: String, icon: String, discription: String) {
 //        for ico in 0..<iconArray.count {
 //            if iconArray[ico] == icon { i = ico }
@@ -253,13 +256,10 @@ extension AddMarkerScreenViewController: AddMarkerScreenProtocol {
         userNickLabel.text = "Организатор: \(nik)"
         nameEventTF.text = name
         dateEventTF.text = ""
-        //dateEventTF.text = formatter.string(from: Date())
         startEventTF.text = caregiry
         iconEventIV.image = UIImage(named: DataService.shared.categoryEvent.1)
         discriptionEventTV.text = discription
         infoLabel.text = "Внесите изменения, проверьте дату"
-        //DataService.shared.dateEvent = Date()
-        //DataService.shared.dataEventString = formatter.string(from: Date())
     }
     
 }

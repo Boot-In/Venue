@@ -14,6 +14,7 @@ import Firebase
 protocol MainScreenProtocol: class {
     func setMarkers(markers: [GMSMarker])
     func startMap()
+    func mapGoMyLocation(location: CLLocationCoordinate2D)
 }
 
 // это как мы принимаем информацию
@@ -45,8 +46,17 @@ class MainScreenPresenter: MainScreenPresenterProtocol {
     }///////////////////////////////////////////////////
    
     func startLocationService() {
+        NotificationCenter.default.addObserver(self, selector: #selector(self.updateLocation(_:)), name: NSNotification.Name(rawValue: "nfLocation"), object: nil)
+        
         LocationService.shared.start()
         print("LocationService запущен")
+    }
+    
+    @objc func updateLocation(_ notification: NSNotification) {
+        if let userInfo = notification.userInfo , let locValue = userInfo["locValue"] as? CLLocationCoordinate2D {
+            self.view.mapGoMyLocation(location: locValue)
+            NotificationCenter.default.removeObserver(self, name: NSNotification.Name(rawValue: "nfLocation"), object: nil)
+        }
     }
     
     func checkUserLoginStatus() {

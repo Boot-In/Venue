@@ -11,7 +11,7 @@ import UIKit
 class CategoryTableViewController: UITableViewController {
     
     var presenter: CategoryTableViewPresenterProtocol!
-    
+    var addMarkerView: AddMarkerScreenProtocol?
     let categoryArray = DataService.shared.categoryArray
     
     override func viewDidLoad() {
@@ -55,6 +55,7 @@ class CategoryTableViewController: UITableViewController {
         let category = categoryArray[indexPath.row].0
         let imageName = categoryArray[indexPath.row].1
         DataService.shared.categoryEvent = (category, imageName)
+        addMarkerView?.setCategory(name: category, imageName: imageName)
         self.dismiss(animated: true)
     }
     /*

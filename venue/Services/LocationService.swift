@@ -28,6 +28,11 @@ extension LocationService: CLLocationManagerDelegate {
         //print("locValue>",locValue)
         latitude = locValue.latitude
         longitude = locValue.longitude
+        
+        if latitude != 0 && longitude != 0 {
+            NotificationCenter.default.post(name: Notification.Name("nfLocation"), object: nil, userInfo: ["locValue": locValue])
+        }
+        
     }
     
     func locationManager(_ manager: CLLocationManager, didChangeAuthorization status: CLAuthorizationStatus) {
