@@ -103,7 +103,7 @@ class DataService {
         return eventsFiltred
     }
     
-    static func filtreUserEvents(events: [Event]) -> [Event] {
+    static func filtredUserEvents(events: [Event]) -> [Event] {
         print("В исходном массиве = \(events.count) элементов")
         var eventsFiltred:[Event] = []
         guard DataService.shared.localUser != nil else { return events }

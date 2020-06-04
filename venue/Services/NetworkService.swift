@@ -22,6 +22,7 @@ class NetworkService {
     static func removeEvent(event: Event) {
         let ref = Database.database().reference()
         var eventRef = ref.child("events").child(event.eventID)
+        
         if DataService.shared.isPrivateUser {
             eventRef = ref.child("users").child(event.userID)
                 .child("events").child(event.eventID)

@@ -78,9 +78,13 @@ class EventScreenViewController: UIViewController {
         NetworkService.removeFollow()
         goButton.isHidden = false
         cancelFollowButton.isHidden = true
-        print("до удаления:", DataService.shared.events[index].followEventUsers)
-        DataService.shared.events[index].followEventUsers.removeValue(forKey: DataService.shared.localUser.userID)
-        print("После удаления:", DataService.shared.events[index].followEventUsers)
+        //print("до удаления:", DataService.shared.events[index].followEventUsers)
+        if DataService.shared.isPrivateUser {
+            DataService.shared.privateEvents[index].followEventUsers.removeValue(forKey: DataService.shared.localUser.userID)
+        } else {
+            DataService.shared.events[index].followEventUsers.removeValue(forKey: DataService.shared.localUser.userID)
+        }
+       // print("После удаления:", DataService.shared.events[index].followEventUsers)
         displayWarningLabel(withText: "Ваш голос убран")
         //checkFollowUserStatus()
     }
@@ -107,7 +111,11 @@ class EventScreenViewController: UIViewController {
                 NetworkService.removeEvent(event: event)
                 DataService.shared.event = nil /// сделать после обработки удаления !
                 print("событие обнулено!")
-                DataService.shared.events.remove(at: self.index)
+                if DataService.shared.isPrivateUser {
+                   DataService.shared.privateEvents.remove(at: self.index)
+                } else {
+                    DataService.shared.events.remove(at: self.index)
+                }
                 print("событие удалено из массива!")
                 self.dismiss(animated: true)
             } else { print ("Отмена") }

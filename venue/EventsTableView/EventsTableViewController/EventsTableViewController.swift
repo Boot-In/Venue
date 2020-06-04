@@ -79,12 +79,18 @@ class EventsTableViewController: UIViewController {
         
         if DataService.shared.isPrivateUser {
             eventsForTableView = DataService.shared.privateEvents
+            isMyEvents = true
+            rangeSC.isHidden = true
+            rangeStepper.isHidden = true
             myEventsButton.isHidden = true
+            stepperLabel.text = "личные (приватные) события"
+        } else {
+            eventsForTableView = DataService.shared.events
         }
 
         checkStatusMyEvensButton()
         
-        if isMyEvents { eventsFiltred = DataService.filtreUserEvents(events: eventsForTableView)
+        if isMyEvents { eventsFiltred = DataService.filtredUserEvents(events: eventsForTableView)
         } else {
             filtredStepper(stepVal: Int(stepValue))
         }
@@ -144,8 +150,8 @@ class EventsTableViewController: UIViewController {
         isMyEvents.toggle()
         checkStatusMyEvensButton()
         if isMyEvents {
-            stepperLabel.text = "Показаны только Ваши события"
-            eventsFiltred = DataService.filtreUserEvents(events: eventsForTableView)
+            stepperLabel.text = "отфильтрованы все Ваши события"
+            eventsFiltred = DataService.filtredUserEvents(events: eventsForTableView)
             eventsTableView.reloadData()
         } else {
             filtredStepper(stepVal: Int(stepValue))
@@ -173,8 +179,8 @@ extension EventsTableViewController: UITableViewDataSource, UITableViewDelegate 
         cell.nickNameEventLabel.text = "Организатор: \(event.userNick)"
         cell.eventImage.image = UIImage(named: event.iconEvent)
         if DataService.checkMyFollow(event: eventsFiltred[indexPath.row]) {
-            cell.discriptionEventLabel.font = UIFont.boldSystemFont(ofSize: 18)
-        } else { cell.discriptionEventLabel.font = UIFont.systemFont(ofSize: 17) }
+            cell.flagLabel.text = "\(event.followEventUsers.count) ⚑ "
+        } else { cell.flagLabel.text = "\(event.followEventUsers.count) ⚐ " }
         return cell
     }
     
@@ -201,7 +207,7 @@ extension EventsTableViewController: UITableViewDataSource, UITableViewDelegate 
     
     func deleteProperty(at indexPath: IndexPath) -> UIContextualAction {
         let event = eventsFiltred[indexPath.row]
-        let events = DataService.shared.isPrivateEvent ? DataService.shared.privateEvents : DataService.shared.events
+        let events = DataService.shared.isPrivateUser ? DataService.shared.privateEvents : DataService.shared.events
         let action = UIContextualAction(style: .destructive, title: "Удалить") { (action, view, completion) in
             
             self.alertAskConfirmation(title: "ВНИМАНИЕ !", message: "Вы действительно хотите удалить событие ?") { (result) in
@@ -209,7 +215,13 @@ extension EventsTableViewController: UITableViewDataSource, UITableViewDelegate 
                     //Removing from array at selected index
                     NetworkService.removeEvent(event: event)  //Вернуть !!!
                     let index = DataService.searchIndexEvent(event: event, fromEvents: events)
-                    DataService.shared.events.remove(at: index) // из основного
+                    
+                    if DataService.shared.isPrivateUser { // проверка на приватность
+                        DataService.shared.privateEvents.remove(at: index)
+                    } else {
+                        DataService.shared.events.remove(at: index) // из основного
+                    }
+                    
                     self.eventsFiltred.remove(at: indexPath.row) //из отфильтрованного
                     print("событие удалено из массива!")
                     self.eventsTableView.deleteRows(at: [indexPath], with: .automatic)
@@ -252,14 +264,14 @@ extension EventsTableViewController: UITableViewDataSource, UITableViewDelegate 
 }
 
 extension EventsTableViewController: UISearchBarDelegate {
+   
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
         eventsFiltred = eventsForTableView
         
         if searchText.isEmpty == false {
-            eventsFiltred = eventsForTableView.filter({ $0.nameEvent.lowercased().contains(searchText.lowercased()) })
+            eventsFiltred = eventsForTableView.filter({ $0.nameEvent.lowercased().contains(searchText.lowercased()) || $0.snipetEvent.lowercased().contains(searchText.lowercased()) || $0.userNick.lowercased().contains(searchText.lowercased()) })
         }
         eventsTableView.reloadData()
     }
-    
     
 }

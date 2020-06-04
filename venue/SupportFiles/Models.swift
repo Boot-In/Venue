@@ -23,7 +23,6 @@ struct Event {
     var iconEvent: String = "marker-icon"
     var lifeTimeEvent: Double = 86400
     var followEventUsers = [String : String]()
-   // let ref: DatabaseReference?
     
     init(userID: String, userNick: String, nameEvent: String, coordinate: CLLocationCoordinate2D, date: Date ) {
         self.userID = userID
@@ -32,7 +31,6 @@ struct Event {
         self.latEvent = coordinate.latitude
         self.lngEvent = coordinate.longitude
         self.dateEventTI = date.timeIntervalSince1970
-      //  self.ref = nil
     }
         init(snapshot: DataSnapshot) {
             let snapshotValue = snapshot.value as! [String: AnyObject]
@@ -52,8 +50,6 @@ struct Event {
             if snapshotValue["followEventUsers"] != nil {
                 followEventUsers = snapshotValue["followEventUsers"] as! [String: String]
             }
-            
-          //  ref = snapshot.ref
         }
 }
 

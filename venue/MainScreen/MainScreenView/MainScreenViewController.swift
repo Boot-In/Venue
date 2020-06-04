@@ -150,6 +150,7 @@ extension MainScreenViewController: GMSMapViewDelegate {
         //infoLabel.text = "Координаты: Lat / Lng\n\(String(format: "%.6f", coordinate.latitude)) / \(String(format: "%.6f", coordinate.longitude))"
         DataService.shared.coordinateEvent = coordinate
         DataService.shared.placeEvent = ""
+        DataService.shared.event = nil // обнуление события после сохранения
         marker.map = mapView
     }
     
