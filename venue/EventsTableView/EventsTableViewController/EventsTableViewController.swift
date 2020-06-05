@@ -160,6 +160,17 @@ class EventsTableViewController: UIViewController {
     
 }
 
+func dateTItoString(dateTI: Double) -> (String, String){
+    let date = Date(timeIntervalSince1970: dateTI)
+    let dateFormatter = DateFormatter()
+    dateFormatter.dateFormat = "dd-MM-YYYY"
+    let dateDMY = dateFormatter.string(from: date)
+    dateFormatter.dateFormat = "HH:MM"
+    let dateHM = dateFormatter.string(from: date)
+    print("dateDMY" ,dateDMY, "dateHM", dateHM)
+    return(dateDMY, dateHM)
+}
+
 extension EventsTableViewController: EventsTableViewProtocol {
     
 }
@@ -174,6 +185,9 @@ extension EventsTableViewController: UITableViewDataSource, UITableViewDelegate 
         let cell = tableView.dequeueReusableCell(withIdentifier: "Cell", for: indexPath) as! EventTableViewCell
         cell.backgroundColor = .clear
         let event = eventsFiltred[indexPath.row]
+        
+        dateTItoString(dateTI: event.dateEventTI)
+        
         cell.nameEventLabel.text = "\(event.dateEventString) \(event.nameEvent)"
         cell.nickNameEventLabel.text = "Организатор: \(event.userNick)"
         cell.startEventLabel.text = "Начало: \(event.snipetEvent)"

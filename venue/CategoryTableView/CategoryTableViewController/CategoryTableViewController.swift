@@ -54,7 +54,7 @@ class CategoryTableViewController: UITableViewController {
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let category = categoryArray[indexPath.row].0
         let imageName = categoryArray[indexPath.row].1
-        DataService.shared.categoryEvent = (category, imageName)
+      //  DataService.shared.categoryEvent = (category, imageName)
         addMarkerView?.setCategory(name: category, imageName: imageName)
         self.dismiss(animated: true)
     }

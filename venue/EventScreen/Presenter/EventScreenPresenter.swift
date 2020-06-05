@@ -13,7 +13,7 @@ protocol EventScreenProtocol: class {
     
     func hideFollowButton()
     func removeButtonSetting(hide: Bool)
-    func setTextToView(nickName: String, eventData: String, eventName: String, eventCategory: String, eventDiscription: String, index: Int)
+    func setTextToView(nickName: String, eventData: String, eventName: String, eventCategory: String, icon: String, eventDiscription: String, index: Int)
 }
 
 // это как мы принимаем информацию
@@ -40,7 +40,7 @@ class EventScreenPresenter: EventScreenPresenterProtocol {
         print("eventID: ", event.eventID)
         let events = DataService.shared.isPrivateUser ? DataService.shared.privateEvents : DataService.shared.events
         let index = DataService.searchIndexEvent(event: event, fromEvents: events)
-        view.setTextToView(nickName: "Организатор: \(event.userNick)", eventData: event.dateEventString, eventName: event.nameEvent, eventCategory: event.snipetEvent, eventDiscription: event.discriptionEvent, index: index)
+        view.setTextToView(nickName: "Организатор: \(event.userNick)", eventData: event.dateEventString, eventName: event.nameEvent, eventCategory: event.snipetEvent, icon: event.iconEvent, eventDiscription: event.discriptionEvent, index: index)
         
         guard DataService.shared.localUser != nil else {
             view.removeButtonSetting(hide: true)

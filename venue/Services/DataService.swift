@@ -17,8 +17,8 @@ class DataService {
     var placeEvent = String()
     var dateEvent = Date()
     var dataEventString = String()
-    var startEvent = String()
-    var categoryEvent = ("Без категории", "marker-icon")
+    var categoryEvent = String()
+   // var categoryEvent = ("Без категории", "marker-icon")
     var events = [Event]()
     var privateEvents = [Event]()
     var isPrivateEvent = false

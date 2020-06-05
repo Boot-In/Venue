@@ -13,7 +13,7 @@ import CoreLocation
 
 /// Вывод информации
 protocol AddMarkerScreenProtocol: class {
-    func fieldInfo(nik: String, name: String, caregiry: String, icon: String, discription: String)
+    func fieldInfo(nik: String, name: String, category: String, icon: String, discription: String)
     func setCategory(name: String, imageName: String)
 }
 
@@ -41,7 +41,7 @@ class AddMarkerScreenPresenter: AddMarkerScreenPresenterProtocol {
     func loadTFFromEvent(event: Event) {
         let coordinate = CLLocationCoordinate2D(latitude: event.latEvent, longitude: event.lngEvent)
         DataService.shared.coordinateEvent = coordinate
-        view.fieldInfo(nik: event.userNick, name: event.nameEvent, caregiry: event.snipetEvent, icon: event.iconEvent, discription: event.discriptionEvent)
+        view.fieldInfo(nik: event.userNick, name: event.nameEvent, category: event.snipetEvent, icon: event.iconEvent, discription: event.discriptionEvent)
     }
     
     func saveEvent(nameEvent: String, iconEvent: String, discrEvent: String) {
@@ -53,7 +53,7 @@ class AddMarkerScreenPresenter: AddMarkerScreenPresenterProtocol {
         event.dateEventString = DataService.shared.dataEventString
         event.iconEvent = iconEvent
         event.discriptionEvent = discrEvent
-        event.snipetEvent = DataService.shared.startEvent
+        event.snipetEvent = DataService.shared.categoryEvent
         event.eventID = DataService.getEventID(event: event)
         /// Сохранение в сеть и добавление локально
         NetworkService.saveNewEvent(event: event)
@@ -86,7 +86,7 @@ class AddMarkerScreenPresenter: AddMarkerScreenPresenterProtocol {
         eventUpd.nameEvent = nameEvent
         eventUpd.iconEvent = iconEvent
         eventUpd.discriptionEvent = discrEvent
-        eventUpd.snipetEvent = DataService.shared.startEvent
+        eventUpd.snipetEvent = DataService.shared.categoryEvent
         eventUpd.dateEventTI = date.timeIntervalSince1970
         /// Сохранение
         NetworkService.updateEvent(event: eventUpd)

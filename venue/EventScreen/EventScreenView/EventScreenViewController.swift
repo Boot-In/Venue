@@ -23,6 +23,7 @@ class EventScreenViewController: UIViewController {
     @IBOutlet weak var cancelFollowButton: UIButton!
     @IBOutlet weak var editButton: UIButton!
     @IBOutlet weak var backButton: UIButton!
+    @IBOutlet weak var iconEventIV: UIImageView!
     
     var index: Int = 0
     
@@ -161,18 +162,19 @@ class EventScreenViewController: UIViewController {
 
 extension EventScreenViewController: EventScreenProtocol {
     
-    func setTextToView(nickName: String, eventData: String, eventName: String, eventCategory: String, eventDiscription: String, index: Int) {
+    func setTextToView(nickName: String, eventData: String, eventName: String, eventCategory: String, icon: String, eventDiscription: String, index: Int) {
         
         nickNameLabel.text = nickName
         eventDataLabel.text = "Дата проведения: \(eventData)"
         eventNameLabel.text = "Название: \(eventName)"
-        eventCategoryLabel.text = "Начало: \(eventCategory)"
+        eventCategoryLabel.text = "Категория: \(eventCategory)"
+        iconEventIV.image = UIImage(named: icon)
+        eventDiscriptionTV.text = eventDiscription
         
         let count = DataService.shared.event.followEventUsers.count
         if count > 0 {
-            eventDiscriptionTV.text = "Желающих посетить: \(count) чел. \n\n\(eventDiscription)"
-        } else { eventDiscriptionTV.text = eventDiscription }
-        
+            eventCategoryLabel.text! += "\nЖелающих посетить: \(count) чел."
+        }
         self.index = index;   print("index = ", index)
         checkFollowUserStatus()
     }
