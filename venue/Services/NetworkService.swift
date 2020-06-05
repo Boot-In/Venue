@@ -32,13 +32,6 @@ class NetworkService {
         print("Event removed!")
     }
     
-    //    static func removeEvent(event: Event, completion: @escaping (_ success: Bool) -> Void) {
-    //        let ref = Database.database().reference()
-    //        let eventRef = ref.child("events").child(event.eventID)
-    //        eventRef.removeValue()
-    //        print("Event removed!")
-    //        completion(true)
-    //    }
     
     static func saveNewEvent(event: Event) {
         let ref = Database.database().reference()

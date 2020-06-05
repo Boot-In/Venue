@@ -134,7 +134,12 @@ class EventScreenViewController: UIViewController {
         } else {
         DataService.shared.events[index].followEventUsers[DataService.shared.localUser.userID] = DataService.shared.localUser.niсkNameUser
         }
-       // print("После добавления:", DataService.shared.events[index].followEventUsers)
+        /// добавляем событие в календарь
+        alertAskConfirmation(title: "Внимание!", message: "Хотите добавить событие в календарь ?") { (result) in
+            if result {
+                self.presenter.addEventToCalendar()
+            }
+        }
         checkFollowUserStatus()
     }
     
@@ -191,6 +196,10 @@ extension EventScreenViewController: EventScreenProtocol {
     
     func hideFollowButton() {
         goButton.isHidden = true
+    }
+    
+    func showAlert() {
+        showAlertMsgWithDelay(title: nil, message: "Событие успешно добавлено!", delay: 1)
     }
     
 }

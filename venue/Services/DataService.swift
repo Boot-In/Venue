@@ -6,7 +6,7 @@
 //
 
 import GoogleMaps
-//import CoreLocation
+import EventKit
 
 class DataService {
     static var shared = DataService()
@@ -174,5 +174,37 @@ class DataService {
         default: return .black
         }
     }
+    
+    
+    static func addEventToCalendar(title: String, description: String?, startDate: Date, endDate: Date, completion: ((_ success: Bool, _ error: NSError?) -> Void)? = nil) {
+        DispatchQueue.global(qos: .background).async { () -> Void in
+            let eventStore = EKEventStore()
+
+            eventStore.requestAccess(to: .event, completion: { (granted, error) in
+                if (granted) && (error == nil) {
+                    let event = EKEvent(eventStore: eventStore)
+                    event.title = title
+                    event.startDate = startDate
+                    event.endDate = endDate
+                    event.notes = description
+                    event.calendar = eventStore.defaultCalendarForNewEvents
+                    let alarm:EKAlarm = EKAlarm(relativeOffset: -60*60*2)
+                    event.alarms = [alarm]
+                    do {
+                        try eventStore.save(event, span: .thisEvent)
+                        let eventID = event.eventIdentifier
+                        print("Calendar eventID = ", eventID ?? "No Id")
+                    } catch let error as NSError {
+                        completion?(false, error)
+                        return
+                    }
+                    completion?(true, nil)
+                } else {
+                    completion?(false, error as NSError?)
+                }
+            })
+        }
+    }
+    
     
 }

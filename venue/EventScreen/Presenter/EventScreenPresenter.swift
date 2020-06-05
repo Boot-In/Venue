@@ -11,6 +11,7 @@ import Firebase
 /// Вывод информации
 protocol EventScreenProtocol: class {
     
+    func showAlert()
     func hideFollowButton()
     func removeButtonSetting(hide: Bool)
     func setTextToView(nickName: String, eventData: String, eventName: String, eventCategory: String, icon: String, eventDiscription: String, index: Int)
@@ -23,6 +24,7 @@ protocol EventScreenPresenterProtocol: class {
     func loadEventInfo(event: Event)
     func markerToEvent()
     func goToEdit()
+    func addEventToCalendar()
 
 }
 
@@ -79,6 +81,19 @@ class EventScreenPresenter: EventScreenPresenterProtocol {
         return events_.last
     }
     
+    func addEventToCalendar() {
+        guard let event = DataService.shared.event else { return }
+        let date = Date(timeIntervalSince1970: event.dateEventTI)
+        let title = event.nameEvent
+        let description = event.discriptionEvent
+        DataService.addEventToCalendar(title: title, description: description, startDate: date, endDate: date + (60*60*2)) { (result, error) in
+            if result {
+                print("Всё ок!")
+            } else {
+                print(error?.localizedDescription ?? "Не понятная беда" )
+            }
+        }
+    }
     
     func goToEdit() {
         router.showAddMarkerScreen()
