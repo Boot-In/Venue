@@ -160,16 +160,6 @@ class EventsTableViewController: UIViewController {
     
 }
 
-func dateTItoString(dateTI: Double) -> (String, String){
-    let date = Date(timeIntervalSince1970: dateTI)
-    let dateFormatter = DateFormatter()
-    dateFormatter.dateFormat = "dd-MM-YYYY"
-    let dateDMY = dateFormatter.string(from: date)
-    dateFormatter.dateFormat = "HH:MM"
-    let dateHM = dateFormatter.string(from: date)
-    print("dateDMY" ,dateDMY, "dateHM", dateHM)
-    return(dateDMY, dateHM)
-}
 
 extension EventsTableViewController: EventsTableViewProtocol {
     
@@ -186,12 +176,10 @@ extension EventsTableViewController: UITableViewDataSource, UITableViewDelegate 
         cell.backgroundColor = .clear
         let event = eventsFiltred[indexPath.row]
         
-        dateTItoString(dateTI: event.dateEventTI)
-        
-        cell.nameEventLabel.text = "\(event.dateEventString) \(event.nameEvent)"
+        cell.nameEventLabel.text = "\(DataService.dateTItoString(dateTI: event.dateEventTI).0) \(event.nameEvent)"
         cell.nickNameEventLabel.text = "Организатор: \(event.userNick)"
-        cell.startEventLabel.text = "Начало: \(event.snipetEvent)"
-        cell.eventImage.image = UIImage(named: event.iconEvent)
+        cell.startEventLabel.text = "Начало: \(DataService.dateTItoString(dateTI: event.dateEventTI).1)"
+        cell.eventImage.image = UIImage(named: event.iconEvent)?.overlayImage(color: .white)
         if DataService.checkMyFollow(event: eventsFiltred[indexPath.row]) {
             cell.flagLabel.text = "\(event.followEventUsers.count) ⚑ "
         } else { cell.flagLabel.text = "\(event.followEventUsers.count) ⚐ " }

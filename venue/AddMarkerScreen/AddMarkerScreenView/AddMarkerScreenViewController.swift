@@ -12,7 +12,7 @@ class AddMarkerScreenViewController: UIViewController {
     @IBOutlet weak var userNickLabel: UILabel!
     @IBOutlet weak var dateEventTF: UITextField!
     @IBOutlet weak var nameEventTF: UITextField!
-    @IBOutlet weak var durationEventTF: UITextField! // задействовать с таблицей категорий
+    @IBOutlet weak var durationEventTF: UITextField! // задействовать длительность !!!
     @IBOutlet weak var discriptionEventTV: UITextView!
     @IBOutlet weak var iconEventIV: UIImageView!
     @IBOutlet weak var infoLabel: UILabel!
@@ -36,7 +36,7 @@ class AddMarkerScreenViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         saveButton.isHidden = false
-        daurationStack.isHidden = true /// отобразить по готовности
+        daurationStack.isHidden = true /// отобразить по готовности !!!
         ConfigUI.buttonConfig(button: saveButton, titleColor: .white, alfa: 0.3)
         ConfigUI.buttonConfig(button: backButton, titleColor: .white, alfa: 0)
         ConfigUI.buttonConfig(button: categoryButton, titleColor: .white, alfa: 0.3)
@@ -104,13 +104,6 @@ class AddMarkerScreenViewController: UIViewController {
           discriptionEventTV.isSelectable = true
       }
     
-    func changeIconColor(imageName: String) { ///// !!!!!!!!!!!
-        let origImage = UIImage(named: imageName)
-        let tintedImage = origImage?.withRenderingMode(.alwaysTemplate)
-        iconEventIV.image = tintedImage
-        iconEventIV.tintColor = .red
-    }
-    
     func loadTextFieldFromEvent() {
         if let event = DataService.shared.event {
             presenter.loadTFFromEvent(event: event)
@@ -120,19 +113,16 @@ class AddMarkerScreenViewController: UIViewController {
     func loadDataForTextField() {
         let userDefault = UserDefaults.standard
         userNickLabel.text = "Организатор: \(userDefault.string(forKey: "nickNameUser") ?? "без названия")"
-        //let stringDate = formatter.string(from: Date())
         nameEventTF.text = DataService.shared.placeEvent
         iconEventIV.image = UIImage(named: categoryEvent.1)
         dateEventTF.text = ""
-        //DataService.shared.dateEvent = Date()
-        //DataService.shared.dataEventString = stringDate
     }
     
-    func createDatePicker() {
+    func createStartDatePicker() {
         let toolbar = UIToolbar()
         toolbar.sizeToFit()
         
-        let done = UIBarButtonItem(title: "Готово", style: .done, target: self, action: #selector(donePressedForDP))
+        let done = UIBarButtonItem(title: "Готово", style: .done, target: self, action: #selector(donePressedForStartDP))
         let flexBarButton = UIBarButtonItem(barButtonSystemItem: .flexibleSpace,
         target: nil, action: nil)
         toolbar.setItems([flexBarButton, done], animated: true)
@@ -145,7 +135,7 @@ class AddMarkerScreenViewController: UIViewController {
         picker.setDate(date ?? Date(), animated: true)
     }
     
-    @objc func donePressedForDP() {
+    @objc func donePressedForStartDP() {
         formatter.dateStyle = .short
         formatter.timeStyle = .short
         let dateString = formatter.string(from: picker.date)
@@ -156,32 +146,33 @@ class AddMarkerScreenViewController: UIViewController {
         self.view.endEditing(true)
     }
     
-//    func createTimePicker() {
-//        let toolbar = UIToolbar()
-//        toolbar.sizeToFit()
-//
-//        let done = UIBarButtonItem(title: "Готово", style: .done, target: self, action: #selector(donePressedForTP))
-//        let flexBarButton = UIBarButtonItem(barButtonSystemItem: .flexibleSpace,
-//                                            target: nil, action: nil)
-//        toolbar.setItems([flexBarButton, done], animated: true)
-//
-//        startEventTF.inputAccessoryView = toolbar // вызов тулбара
-//        startEventTF.inputView = picker
-//        picker.datePickerMode = .time
-//
-//        let date = calendar.date(from: dateComponents)
-//        picker.setDate(date ?? Date(), animated: true)
-//        picker.locale = .init(identifier: "Russian")
-//    }
-//
-//    @objc func donePressedForTP() {
-//        formatter.dateStyle = .none
-//        formatter.timeStyle = .short
-//        let timeString = formatter.string(from: picker.date)
-//
-//        startEventTF.text = "\(timeString)"
-//        self.view.endEditing(true)
-//    }
+func createEndDatePicker() {
+    let toolbar = UIToolbar()
+    toolbar.sizeToFit()
+    
+    let done = UIBarButtonItem(title: "Готово", style: .done, target: self, action: #selector(donePressedForEndDP))
+    let flexBarButton = UIBarButtonItem(barButtonSystemItem: .flexibleSpace,
+    target: nil, action: nil)
+    toolbar.setItems([flexBarButton, done], animated: true)
+    
+    durationEventTF.inputAccessoryView = toolbar // вызов тулбара
+    durationEventTF.inputView = picker
+    picker.datePickerMode = .dateAndTime
+    picker.locale = .init(identifier: "Russian")
+    let date = calendar.date(from: dateComponents) ?? Date()
+    picker.setDate(date, animated: true)
+}
+
+@objc func donePressedForEndDP() {
+    formatter.dateStyle = .short
+    formatter.timeStyle = .short
+    let dateString = formatter.string(from: picker.date)
+    DataService.shared.dateEvent = picker.date
+    DataService.shared.dataEventString = dateString
+    durationEventTF.text = "\(dateString)"
+    
+    self.view.endEditing(true)
+}
     
     @IBAction func closeButtonTap() {
         isEdit = false
@@ -190,11 +181,6 @@ class AddMarkerScreenViewController: UIViewController {
     
     @IBAction func changeIconButtonTap() {
         presenter.showCategory()
-//        i += 1
-//        if i == iconArray.count {i = 0}
-//        iconEventIV.image = UIImage(named: iconArray[i])
-        //changeIconColor(imageName: iconArray[i])
-        
     }
     
     @IBAction func privateSwitchAction() {
@@ -254,16 +240,12 @@ extension AddMarkerScreenViewController: AddMarkerScreenProtocol {
     }
     
     func fieldInfo(nik: String, name: String, category: String, icon: String, discription: String) {
-//        var i=0
-//        for ico in 0..<DataService.shared.categoryArray.count {
-//            if DataService.shared.categoryArray[ico].0 == category { i = ico }
-//        }
-//        let iconName = DataService.shared.categoryArray[i].1
+
         userNickLabel.text = "Организатор: \(nik)"
         nameEventTF.text = name
         dateEventTF.text = ""
         categoryLabel.text = category
-        iconEventIV.image = UIImage(named: icon)
+        iconEventIV.image = UIImage(named: icon)?.overlayImage(color: .white)
         discriptionEventTV.text = discription
         infoLabel.text = "Внесите изменения, проверьте дату"
     }
@@ -278,10 +260,9 @@ extension AddMarkerScreenViewController: UITextFieldDelegate {
     
     func textFieldDidBeginEditing(_ textField: UITextField) {
         if textField == durationEventTF {
-            // presenter.showDuration()
-            // сделать пикер на день окончания
+            createEndDatePicker()
         } else if textField == dateEventTF {
-            createDatePicker()
+            createStartDatePicker()
         }
     }
     

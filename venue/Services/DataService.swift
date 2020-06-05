@@ -30,7 +30,7 @@ class DataService {
     var markerDidTapped = false
     var marker: GMSMarker!
     
-    let categoryArray = [("Спорт", "marker-icon"), ("Игры", "red-marker"), ("Концерты", "green-marker"), ("Детское", "blue-marker")]
+    let categoryArray = [("Спорт", "sport-marker"), ("Игры", "table_games"), ("Концерты", "music-marker"), ("Детское мероприятие", "baby-marker"), ("Вечеринка","party-marker"), ("Природа","forest-marker"), ("Обучение","learning-marker"), ("Красота","beuty-marker"), ("Бизнес","busines-marker"), ("Еда","food-marker"), ("Городское мероприятие","city-marker")]
     
     static func filtredRadiusEvents(events: [Event], radius: Int) -> ([Event], Int) {
         print("В исходном массиве = \(events.count) элементов")
@@ -150,6 +150,29 @@ class DataService {
             }
         }
         return false
+    }
+    
+    static func dateTItoString(dateTI: Double) -> (String, String){
+        let date = Date(timeIntervalSince1970: dateTI)
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "dd.MM.yyyy"
+        let dateDMY = dateFormatter.string(from: date)
+        dateFormatter.dateFormat = "HH:mm"
+        let dateHM = dateFormatter.string(from: date)
+        return(dateDMY, dateHM)
+    }
+    
+    static func iconColor(count: Int) -> UIColor {
+        switch count {
+        case 0: return .systemGreen
+        case 1...5: return .systemBlue
+        case 6...10: return .blue
+        case 11...25: return .darkGray
+        case 26...50: return .purple
+        case 51...100: return .orange
+        case 101...500: return .red
+        default: return .black
+        }
     }
     
 }

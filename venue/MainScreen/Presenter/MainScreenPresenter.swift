@@ -104,9 +104,14 @@ class MainScreenPresenter: MainScreenPresenterProtocol {
         print("Для создания маркеров доступно \(events.count) элементов")
         for event in events {
             let marker = GMSMarker(position: CLLocationCoordinate2D(latitude: event.latEvent, longitude: event.lngEvent) )
-            marker.icon = UIImage(named: event.iconEvent)
-            marker.title = "\(event.dateEventString) \(event.nameEvent)"
-            marker.snippet = "Желающих: \(event.followEventUsers.count)\nКатегория: \(event.snipetEvent)"
+        
+            let iconImage = UIImage(named: event.iconEvent)
+            let countFollow = event.followEventUsers.count
+            let color = DataService.iconColor(count: countFollow)
+            marker.icon = iconImage?.overlayImage(color: color)
+            
+            marker.title = "\(event.nameEvent)"
+            marker.snippet = "\(event.dateEventString)\nЖелающих: \(event.followEventUsers.count)"
             markers.append(marker)
         }
         view.setMarkers(markers: markers)

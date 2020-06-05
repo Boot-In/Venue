@@ -168,7 +168,7 @@ extension EventScreenViewController: EventScreenProtocol {
         eventDataLabel.text = "Дата проведения: \(eventData)"
         eventNameLabel.text = "Название: \(eventName)"
         eventCategoryLabel.text = "Категория: \(eventCategory)"
-        iconEventIV.image = UIImage(named: icon)
+        iconEventIV.image = UIImage(named: icon)?.overlayImage(color: .white)
         eventDiscriptionTV.text = eventDiscription
         
         let count = DataService.shared.event.followEventUsers.count

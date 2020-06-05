@@ -12,7 +12,7 @@ class CategoryTableViewController: UITableViewController {
     
     var presenter: CategoryTableViewPresenterProtocol!
     var addMarkerView: AddMarkerScreenProtocol?
-    let categoryArray = DataService.shared.categoryArray
+    let categoryArray = DataService.shared.categoryArray.sorted { $0.0 < $1.0 }
     
     override func viewDidLoad() {
         super.viewDidLoad()
