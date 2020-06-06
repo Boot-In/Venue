@@ -199,7 +199,9 @@ extension EventScreenViewController: EventScreenProtocol {
     }
     
     func showAlert() {
-        showAlertMsgWithDelay(title: nil, message: "Событие успешно добавлено!", delay: 1)
+        DispatchQueue.main.sync {
+            displayWarningLabel(withText: "Календарь Вам напомнит за 2 часа")
+        }
     }
     
 }

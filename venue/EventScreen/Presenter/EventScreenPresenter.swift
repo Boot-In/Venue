@@ -88,7 +88,8 @@ class EventScreenPresenter: EventScreenPresenterProtocol {
         let description = event.discriptionEvent
         DataService.addEventToCalendar(title: title, description: description, startDate: date, endDate: date + (60*60*2)) { (result, error) in
             if result {
-                print("Всё ок!")
+                self.view.showAlert()
+                print("Событие добавлено !")
             } else {
                 print(error?.localizedDescription ?? "Не понятная беда" )
             }
