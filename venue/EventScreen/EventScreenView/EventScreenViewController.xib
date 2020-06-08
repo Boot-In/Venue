@@ -17,7 +17,7 @@
                 <outlet property="eventDiscriptionTV" destination="70X-3T-J8V" id="N57-bx-mMI"/>
                 <outlet property="eventNameLabel" destination="bgu-qq-Sxp" id="wm0-ye-1po"/>
                 <outlet property="goButton" destination="pJB-xJ-Fam" id="n9J-oK-HBj"/>
-                <outlet property="iconEventIV" destination="eo3-jL-5JY" id="nkl-bz-rj8"/>
+                <outlet property="goToMapButton" destination="71J-0k-zkg" id="rQa-wF-BrI"/>
                 <outlet property="infoLabel" destination="L2C-cc-yhV" id="WIl-Rf-ffF"/>
                 <outlet property="nickNameLabel" destination="gAm-ic-PTa" id="2uC-YR-LDg"/>
                 <outlet property="removeButton" destination="w5u-QT-dvb" id="voM-zC-gut"/>
@@ -53,13 +53,16 @@
                         <stackView opaque="NO" contentMode="scaleToFill" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="Eqd-7B-3rq">
                             <rect key="frame" x="0.0" y="124.5" width="355" height="40"/>
                             <subviews>
-                                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="eo3-jL-5JY">
+                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="71J-0k-zkg">
                                     <rect key="frame" x="0.0" y="0.0" width="40" height="40"/>
                                     <constraints>
-                                        <constraint firstAttribute="height" constant="40" id="BJ4-qD-zh9"/>
-                                        <constraint firstAttribute="width" constant="40" id="riP-ev-Ewn"/>
+                                        <constraint firstAttribute="height" constant="40" id="IDm-tP-jU1"/>
+                                        <constraint firstAttribute="width" constant="40" id="xgJ-3H-ho4"/>
                                     </constraints>
-                                </imageView>
+                                    <connections>
+                                        <action selector="goToMapButtonTap" destination="-1" eventType="touchUpInside" id="Fmw-Ny-dWk"/>
+                                    </connections>
+                                </button>
                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Категория:" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" minimumScaleFactor="0.59999999999999998" translatesAutoresizingMaskIntoConstraints="NO" id="YWv-R5-e40">
                                     <rect key="frame" x="50" y="0.0" width="305" height="40"/>
                                     <fontDescription key="fontDescription" type="system" pointSize="18"/>
@@ -86,7 +89,7 @@
                                 </textView>
                             </subviews>
                         </stackView>
-                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="info Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.80000000000000004" translatesAutoresizingMaskIntoConstraints="NO" id="L2C-cc-yhV">
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="info Label" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" minimumScaleFactor="0.80000000000000004" translatesAutoresizingMaskIntoConstraints="NO" id="L2C-cc-yhV">
                             <rect key="frame" x="0.0" y="376" width="355" height="24"/>
                             <fontDescription key="fontDescription" type="system" weight="light" pointSize="20"/>
                             <nil key="textColor"/>

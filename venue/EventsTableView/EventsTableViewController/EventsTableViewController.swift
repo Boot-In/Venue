@@ -78,16 +78,26 @@ class EventsTableViewController: UIViewController {
         super.viewWillAppear(animated)
         
         if DataService.shared.isPrivateUser {
-            eventsForTableView = DataService.shared.privateEvents
+            let userID = DataService.shared.localUser.userID
+            NetworkService.loadPrivareEvents(userID: userID, completion: {(events, result) in
+                if result {
+                    self.eventsForTableView = DataService.shared.privateEvents
+                }
+            })
             isMyEvents = true
             rangeSC.isHidden = true
             rangeStepper.isHidden = true
             myEventsButton.isHidden = true
             stepperLabel.text = "личные (приватные) события"
         } else {
-            eventsForTableView = DataService.shared.events
+            NetworkService.loadPublicEvents { (events, result) in
+                if result {
+                    self.eventsForTableView = DataService.shared.events
+                    self.eventsTableView.reloadData()
+                }
+            }
         }
-
+        
         checkStatusMyEvensButton()
         
         if isMyEvents { eventsFiltred = DataService.filtredUserEvents(events: eventsForTableView)

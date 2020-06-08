@@ -52,7 +52,13 @@ class MainScreenViewController: UIViewController {
         checkAccount()
         mapView.clear()
         print("Карта очищена")
-        presenter.getOfflineMarkers(range:  intervalSC.selectedSegmentIndex)
+        presenter.getOnlineMarkers(range:  intervalSC.selectedSegmentIndex)
+        let coordinate = DataService.shared.coordinateEvent
+        if coordinate.latitude != 0, coordinate.longitude != 0 {
+            mapView.animate(toLocation: coordinate)
+            let zoom = DataService.shared.defaultZoom
+            mapView.animate(toZoom: zoom)
+        }
     }
     
     override func viewWillDisappear(_ animated: Bool) {
@@ -147,7 +153,6 @@ extension MainScreenViewController: GMSMapViewDelegate {
         DataService.shared.markerDidTapped = false
         updateMarkerButton()
         UIPasteboard.general.string = "\(coordinate.latitude) \(coordinate.longitude)"
-        //infoLabel.text = "Координаты: Lat / Lng\n\(String(format: "%.6f", coordinate.latitude)) / \(String(format: "%.6f", coordinate.longitude))"
         DataService.shared.coordinateEvent = coordinate
         DataService.shared.placeEvent = ""
         DataService.shared.event = nil // обнуление события после сохранения
@@ -158,9 +163,9 @@ extension MainScreenViewController: GMSMapViewDelegate {
         print("\(marker.title ?? "No marker")")
         DataService.shared.markerDidTapped = true
         DataService.shared.marker = marker
+        DataService.shared.coordinateEvent = marker.position
         updateMarkerButton()
         UIPasteboard.general.string = "\(marker.position.latitude) \(marker.position.longitude)"
-        //infoLabel.text = "Координаты: Lat / Lng\n\(String(format: "%.6f", marker.position.latitude)) / \(String(format: "%.6f", marker.position.longitude))"
         return false
     }
     
@@ -174,11 +179,11 @@ extension MainScreenViewController: GMSMapViewDelegate {
         DataService.shared.markerDidTapped = false
         updateMarkerButton()
         UIPasteboard.general.string = "\(location.latitude) \(location.longitude)"
-        //infoLabel.text = "Координаты: Lat / Lng\n\(String(format: "%.6f", location.latitude)) / \(String(format: "%.6f",location.longitude))"
-        //infoMarker.infoWindowAnchor.y = 1
         infoMarker.map = mapView
         mapView.selectedMarker = infoMarker
     }
+    
+   
     
 }
 

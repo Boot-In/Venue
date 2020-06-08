@@ -90,7 +90,7 @@ class AccountScreenViewController: UIViewController {
     
     
     @IBAction func closeWindow() {
-        dismiss(animated: false)
+        dismiss(animated: true)
     }
     
     @IBAction func logOut() {

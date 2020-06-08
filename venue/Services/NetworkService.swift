@@ -98,7 +98,7 @@ class NetworkService {
     }
     
     
-    static func loadAllEvents( completion: @escaping (_ list: [Event], _ success: Bool) -> Void) {
+    static func loadPublicEvents( completion: @escaping (_ list: [Event], _ success: Bool) -> Void) {
         let ref = Database.database().reference().child("events")
         print("... loadAllEvents > events")
         var eventsFromNet = [Event]()
@@ -120,7 +120,8 @@ class NetworkService {
         }
     }
     
-    static func loadPrivareEvents(ref: DatabaseReference) {
+    static func loadPrivareEvents(userID: String, completion: @escaping (_ list: [Event], _ success: Bool) -> Void) {
+        let ref = Database.database().reference().child("users").child(userID).child("events")
         var eventsFromNet = [Event]()
         ref.observeSingleEvent(of: .value, with: { (snapshot) in
             for item in snapshot.children {
@@ -129,15 +130,17 @@ class NetworkService {
             }
             eventsFromNet.sort {$0.dateEventTI < $1.dateEventTI }
             DataService.shared.privateEvents = eventsFromNet
+            completion(eventsFromNet, true)
             print("загружено \(eventsFromNet.count) Приватных событий")
             print("Элементы помещены в приватный массив \(DataService.shared.privateEvents.count)")
         }) { (error) in
             print(error.localizedDescription)
+            completion(eventsFromNet, false)
         }
     }
     
     
-    static func loadMyProfile (userId: String) {
+    static func loadMyProfile (userId: String, completion: @escaping (_ success: Bool) -> Void) {
         print("loadMyProfile>userId>",userId)
         let ref = Database.database().reference().child("users").child(userId)
         ref.observeSingleEvent(of: .value, with: { (snapshot) in
@@ -151,10 +154,10 @@ class NetworkService {
             DataService.shared.localUser = profile
             print("Сохранён профиль для ", profile.firstUserName)
             UserDefaults.standard.set(nickNameUser, forKey: "nickNameUser")
-            /// загрузка приватных событий
-            NetworkService.loadPrivareEvents(ref: ref.child("events"))
+            completion(true)
         }) { (error) in
             print(error.localizedDescription)
+            completion(false)
         }
     }
     

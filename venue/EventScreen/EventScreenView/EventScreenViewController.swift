@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import GoogleMaps
 
 class EventScreenViewController: UIViewController {
     
@@ -23,7 +24,7 @@ class EventScreenViewController: UIViewController {
     @IBOutlet weak var cancelFollowButton: UIButton!
     @IBOutlet weak var editButton: UIButton!
     @IBOutlet weak var backButton: UIButton!
-    @IBOutlet weak var iconEventIV: UIImageView!
+    @IBOutlet weak var goToMapButton: UIButton!
     
     var index: Int = 0
     
@@ -123,6 +124,16 @@ class EventScreenViewController: UIViewController {
         }
     }
     
+    
+    @IBAction func goToMapButtonTap() {
+        guard let event = DataService.shared.event else { return }
+        let lat = event.latEvent
+        let lng = event.lngEvent
+        DataService.shared.coordinateEvent = CLLocationCoordinate2D(latitude: lat, longitude: lng)
+        DataService.shared.defaultZoom = 17
+        displayWarningLabel(withText: "Вернувшись на карту, данное событие будет в фокусе")
+    }
+    
     @IBAction func goButtonTap() {
         NetworkService.followMe()
         displayWarningLabel(withText: "Ваш голос принят !")
@@ -173,8 +184,10 @@ extension EventScreenViewController: EventScreenProtocol {
         eventDataLabel.text = "Дата проведения: \(eventData)"
         eventNameLabel.text = "Название: \(eventName)"
         eventCategoryLabel.text = "Категория: \(eventCategory)"
-        iconEventIV.image = UIImage(named: icon)?.overlayImage(color: .white)
         eventDiscriptionTV.text = eventDiscription
+        let imageForButton = UIImage(named: icon)?.withRenderingMode(.alwaysTemplate)
+        goToMapButton.setImage(imageForButton, for: .normal)
+        goToMapButton.tintColor = .white
         
         let count = DataService.shared.event.followEventUsers.count
         if count > 0 {

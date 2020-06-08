@@ -64,7 +64,16 @@ class MainScreenPresenter: MainScreenPresenterProtocol {
         Auth.auth().addStateDidChangeListener({[weak self] (auth, user) in
             if user != nil {
                 self?.user = user
-                NetworkService.loadMyProfile(userId: user!.uid)
+                NetworkService.loadMyProfile(userId: user!.uid, completion: { result in
+                    if result {
+                        NetworkService.loadPrivareEvents(userID: user!.uid, completion: {(events, result) in
+                            if result {
+                                print("Приватные события успешно загружены")
+                            }
+                        })
+                        
+                    }
+                })
                 UserDefaults.standard.set(true, forKey: "logined")
                 print("данные пользователя загружены")
             } else {
@@ -124,7 +133,7 @@ class MainScreenPresenter: MainScreenPresenterProtocol {
     }
     
     func getOnlineMarkers(range: Int) {
-        NetworkService.loadAllEvents(completion: { list, success in
+        NetworkService.loadPublicEvents(completion: { list, success in
             if success {
                 let filtredEvents = DataService.filtredDateEvents(events: list, range: range)
                 self.createMarkers(eventsForMarker: filtredEvents)
