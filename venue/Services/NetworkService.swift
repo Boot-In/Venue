@@ -112,7 +112,7 @@ class NetworkService {
             eventsFromNet.sort {$0.dateEventTI < $1.dateEventTI }
             DataService.shared.events = eventsFromNet
             print("загружено \(eventsFromNet.count) элементов")
-            print("Элементы помещены в массив \(DataService.shared.events.count)")
+            print("Элементов помещено в массив = \(DataService.shared.events.count)")
             completion(eventsFromNet, true)
         }) { (error) in
             print(error.localizedDescription)
@@ -160,7 +160,7 @@ class NetworkService {
     
     static func followMe() {
         print("\n--- Выполнение Follow Me ----")
-        let eventID = DataService.shared.eventID
+        let eventID = DataService.shared.event.eventID
         guard let localUser = DataService.shared.localUser else { return }
         print("eventID = ", eventID, "\nUserID = ", localUser.userID, "\nniсkNameUser = ", localUser.niсkNameUser)
         let ref = Database.database().reference()
@@ -178,7 +178,7 @@ class NetworkService {
     
     static func removeFollow() {
         print("\n--- Удаление Follow ----")
-        let eventID = DataService.shared.eventID
+        let eventID = DataService.shared.event.eventID
         guard let localUser = DataService.shared.localUser else { return }
         print("eventID = ", eventID, "\nUserID = ", localUser.userID, "\nniсkNameUser = ", localUser.niсkNameUser)
         let ref = Database.database().reference()

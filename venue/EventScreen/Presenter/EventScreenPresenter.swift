@@ -56,7 +56,6 @@ class EventScreenPresenter: EventScreenPresenterProtocol {
     func markerToEvent() {
         guard let marker = DataService.shared.marker else { return }
         guard let event = searchEvent(marker: marker) else { return }
-        DataService.shared.eventID = event.eventID
         DataService.shared.event = event
         print("локально сохранено событие ", DataService.shared.event.eventID )
         loadEventInfo(event: event)

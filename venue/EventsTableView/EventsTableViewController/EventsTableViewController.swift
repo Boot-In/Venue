@@ -188,7 +188,6 @@ extension EventsTableViewController: UITableViewDataSource, UITableViewDelegate 
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         DataService.shared.event = eventsFiltred[indexPath.row]
-        DataService.shared.eventID = eventsFiltred[indexPath.row].eventID
         presenter.goToEventScreen()
     }
     

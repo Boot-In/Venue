@@ -15,7 +15,8 @@ import IQKeyboardManagerSwift
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
     
-    let apiKEY = "AIzaSyCMGq_hOzYVcKMJ-RKyy3QuIB1Hn_7o_Aw" /// Google
+    let apiKEY = "AIzaSyCMGq_hOzYVcKMJ-RKyy3QuIB1Hn_7o_Aw" /// Google map
+    //let apiKEY = "AIzaSyAKb9KuuhOsv_rSSpO3KNmtK0k0iXxz6zc"
     var remoteConfig: RemoteConfig!
     
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
@@ -27,8 +28,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         setRemoteConfigure()
         
         // включение режима офлайн
-       // Database.database().isPersistenceEnabled = true
-        
+        Database.database().isPersistenceEnabled = true
         
         return true
     }

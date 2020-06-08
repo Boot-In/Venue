@@ -11,6 +11,7 @@
 		1B01EC832468D40800FA52F1 /* AccountScreenViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1B01EC812468D40800FA52F1 /* AccountScreenViewController.xib */; };
 		1B01EC872468D45E00FA52F1 /* AccountScreenPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B01EC862468D45E00FA52F1 /* AccountScreenPresenter.swift */; };
 		1B01EC892468D47200FA52F1 /* AccountScreenRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B01EC882468D47200FA52F1 /* AccountScreenRouter.swift */; };
+		1B165A58248DDF940022E427 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 1B165A57248DDF940022E427 /* GoogleService-Info.plist */; };
 		1B4242722481455100A216AB /* ConfigUI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B4242712481455100A216AB /* ConfigUI.swift */; };
 		1B48450224713C8700836FB5 /* LoginScreenViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B48450024713C8700836FB5 /* LoginScreenViewController.swift */; };
 		1B48450324713C8700836FB5 /* LoginScreenViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1B48450124713C8700836FB5 /* LoginScreenViewController.xib */; };
@@ -28,7 +29,6 @@
 		1B57BC93247CE802000BD8B7 /* CategoryCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B57BC91247CE802000BD8B7 /* CategoryCell.swift */; };
 		1B57BC94247CE802000BD8B7 /* CategoryCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1B57BC92247CE802000BD8B7 /* CategoryCell.xib */; };
 		1B5B7022246826A7004CA039 /* Models.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B5B7021246826A7004CA039 /* Models.swift */; };
-		1B5FA127248106170021022D /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 1B5FA126248106170021022D /* GoogleService-Info.plist */; };
 		1B8E09F92469428F001C5E01 /* AddMarkerScreenViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B8E09F72469428F001C5E01 /* AddMarkerScreenViewController.swift */; };
 		1B8E09FA2469428F001C5E01 /* AddMarkerScreenViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1B8E09F82469428F001C5E01 /* AddMarkerScreenViewController.xib */; };
 		1B8E09FC246942BA001C5E01 /* AddMarkerScreenRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B8E09FB246942BA001C5E01 /* AddMarkerScreenRouter.swift */; };
@@ -59,6 +59,7 @@
 		1B01EC812468D40800FA52F1 /* AccountScreenViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = AccountScreenViewController.xib; sourceTree = "<group>"; };
 		1B01EC862468D45E00FA52F1 /* AccountScreenPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountScreenPresenter.swift; sourceTree = "<group>"; };
 		1B01EC882468D47200FA52F1 /* AccountScreenRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountScreenRouter.swift; sourceTree = "<group>"; };
+		1B165A57248DDF940022E427 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		1B4242712481455100A216AB /* ConfigUI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConfigUI.swift; sourceTree = "<group>"; };
 		1B48450024713C8700836FB5 /* LoginScreenViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginScreenViewController.swift; sourceTree = "<group>"; };
 		1B48450124713C8700836FB5 /* LoginScreenViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = LoginScreenViewController.xib; sourceTree = "<group>"; };
@@ -76,7 +77,6 @@
 		1B57BC91247CE802000BD8B7 /* CategoryCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryCell.swift; sourceTree = "<group>"; };
 		1B57BC92247CE802000BD8B7 /* CategoryCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CategoryCell.xib; sourceTree = "<group>"; };
 		1B5B7021246826A7004CA039 /* Models.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Models.swift; sourceTree = "<group>"; };
-		1B5FA126248106170021022D /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		1B6D6677248B344E00A341EB /* VenueRelease.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = VenueRelease.entitlements; sourceTree = "<group>"; };
 		1B8E09F72469428F001C5E01 /* AddMarkerScreenViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddMarkerScreenViewController.swift; sourceTree = "<group>"; };
 		1B8E09F82469428F001C5E01 /* AddMarkerScreenViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = AddMarkerScreenViewController.xib; sourceTree = "<group>"; };
@@ -387,7 +387,6 @@
 		1BECD6F02467990C0000A0C6 /* venue */ = {
 			isa = PBXGroup;
 			children = (
-				1B6D6677248B344E00A341EB /* VenueRelease.entitlements */,
 				1B8E09F324694238001C5E01 /* AddMarkerScreen */,
 				1B57BC85247CE425000BD8B7 /* CategoryTableView */,
 				1B95A08624777B4D00CCBE9F /* EventsTableView */,
@@ -399,7 +398,8 @@
 				1BECD7052467994B0000A0C6 /* SupportFiles */,
 				1BECD6FA246799100000A0C6 /* Assets.xcassets */,
 				1BECD6FF246799100000A0C6 /* Info.plist */,
-				1B5FA126248106170021022D /* GoogleService-Info.plist */,
+				1B165A57248DDF940022E427 /* GoogleService-Info.plist */,
+				1B6D6677248B344E00A341EB /* VenueRelease.entitlements */,
 			);
 			path = venue;
 			sourceTree = "<group>";
@@ -513,7 +513,7 @@
 				1B48450324713C8700836FB5 /* LoginScreenViewController.xib in Resources */,
 				1B95A09124777BF800CCBE9F /* EventsTableViewController.xib in Resources */,
 				1BECD6FE246799100000A0C6 /* LaunchScreen.storyboard in Resources */,
-				1B5FA127248106170021022D /* GoogleService-Info.plist in Resources */,
+				1B165A58248DDF940022E427 /* GoogleService-Info.plist in Resources */,
 				1BECD6FB246799100000A0C6 /* Assets.xcassets in Resources */,
 				1BECD6F92467990C0000A0C6 /* Main.storyboard in Resources */,
 				1B57BC94247CE802000BD8B7 /* CategoryCell.xib in Resources */,

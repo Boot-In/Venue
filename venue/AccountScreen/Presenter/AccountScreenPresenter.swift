@@ -89,7 +89,7 @@ class AccountScreenPresenter: AccountScreenPresenterProtocol {
         let user = Profile(userID: getUID(), userMail: email, firstUserName: fName, secondNameUser: sName, niсkNameUser: nik)
         print("Пользователь \(user.userID) успешно создан !")
         DataService.shared.localUser = user
-        self.view.sendMessage(text: "Данные сохранены !")
+        self.view.sendMessage(text: "Данные сохранены !\nМожно пользоваться приложением")
     }
 
 }

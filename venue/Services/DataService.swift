@@ -25,7 +25,6 @@ class DataService {
     var isPrivateUser = false
     var oldEventsID: [String]? = []
     var event: Event!
-    var eventID = String()
     var localUser: Profile!
     var markerDidTapped = false
     var marker: GMSMarker!
