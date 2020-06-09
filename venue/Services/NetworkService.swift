@@ -121,7 +121,8 @@ class NetworkService {
     }
     
     static func loadPrivareEvents(userID: String, completion: @escaping (_ list: [Event], _ success: Bool) -> Void) {
-        let ref = Database.database().reference().child("users").child(userID).child("events")
+        let ref = Database.database().reference().child("users")
+            .child(userID).child("events")
         var eventsFromNet = [Event]()
         ref.observeSingleEvent(of: .value, with: { (snapshot) in
             for item in snapshot.children {

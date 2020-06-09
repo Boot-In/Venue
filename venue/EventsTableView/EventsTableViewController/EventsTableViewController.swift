@@ -76,12 +76,14 @@ class EventsTableViewController: UIViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        checkStatusMyEvensButton()
         
         if DataService.shared.isPrivateUser {
             let userID = DataService.shared.localUser.userID
             NetworkService.loadPrivareEvents(userID: userID, completion: {(events, result) in
                 if result {
-                    self.eventsForTableView = DataService.shared.privateEvents
+                    self.eventsForTableView = events//DataService.shared.privateEvents
+                    self.forViewWillAppear()
                 }
             })
             isMyEvents = true
@@ -92,14 +94,23 @@ class EventsTableViewController: UIViewController {
         } else {
             NetworkService.loadPublicEvents { (events, result) in
                 if result {
-                    self.eventsForTableView = DataService.shared.events
-                    self.eventsTableView.reloadData()
+                    print("События из сети загружены, таблица обновлена.")
+                    self.eventsForTableView = events//DataService.shared.events
+                    self.forViewWillAppear()
                 }
             }
         }
         
-        checkStatusMyEvensButton()
-        
+//        if isMyEvents { eventsFiltred = DataService.filtredUserEvents(events: eventsForTableView)
+//        } else {
+//            filtredStepper(stepVal: Int(stepValue))
+//        }
+//        eventsTableView.reloadData()
+//        removeOldButton.setTitle(" 🗑 (\(DataService.shared.oldEventsID?.count ?? 0)) ", for: .normal)
+       
+    }// viewWillAppear
+    
+    func forViewWillAppear(){
         if isMyEvents { eventsFiltred = DataService.filtredUserEvents(events: eventsForTableView)
         } else {
             filtredStepper(stepVal: Int(stepValue))
@@ -108,6 +119,7 @@ class EventsTableViewController: UIViewController {
         removeOldButton.setTitle(" 🗑 (\(DataService.shared.oldEventsID?.count ?? 0)) ", for: .normal)
         print("отработал viewWillAppear EventsTableViewController")
     }
+    
     
     func checkStatusMyEvensButton() {
         if isMyEvents {

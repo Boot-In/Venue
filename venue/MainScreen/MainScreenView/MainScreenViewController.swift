@@ -97,13 +97,17 @@ class MainScreenViewController: UIViewController {
     }
     
     @IBAction func publicEventCSAction() {
+       checkPublicStatus() 
+    }
+    
+    func checkPublicStatus() {
         mapView.clear()
         if publicEventSC.selectedSegmentIndex == 0 {
             DataService.shared.isPrivateUser = false
         } else {
             DataService.shared.isPrivateUser = true
         }
-        presenter.getOfflineMarkers(range:  intervalSC.selectedSegmentIndex)
+       presenter.getOfflineMarkers(range:  intervalSC.selectedSegmentIndex)
     }
     
     @IBAction func addNewMarkerButtonTap() {

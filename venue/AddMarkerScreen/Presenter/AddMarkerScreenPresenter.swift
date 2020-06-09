@@ -41,7 +41,16 @@ class AddMarkerScreenPresenter: AddMarkerScreenPresenterProtocol {
     func loadTFFromEvent(event: Event) {
         let coordinate = CLLocationCoordinate2D(latitude: event.latEvent, longitude: event.lngEvent)
         DataService.shared.coordinateEvent = coordinate
+        DataService.shared.categoryEvent = event.snipetEvent
         view.fieldInfo(nik: event.userNick, name: event.nameEvent, category: event.snipetEvent, icon: event.iconEvent, discription: event.discriptionEvent)
+    }
+    
+    func searchIconFromCategory(category: String) -> String {
+        let array = DataService.shared.categoryArray
+        for cat in array {
+            if cat.0 == category { return cat.1 }
+        }
+        return "marker-icon"
     }
     
     func saveEvent(nameEvent: String, iconEvent: String, discrEvent: String) {
@@ -84,9 +93,9 @@ class AddMarkerScreenPresenter: AddMarkerScreenPresenterProtocol {
         var eventUpd = event
         eventUpd.dateEventString = DataService.shared.dataEventString
         eventUpd.nameEvent = nameEvent
-        eventUpd.iconEvent = iconEvent
-        eventUpd.discriptionEvent = discrEvent
         eventUpd.snipetEvent = DataService.shared.categoryEvent
+        eventUpd.iconEvent = searchIconFromCategory(category: DataService.shared.categoryEvent)
+        eventUpd.discriptionEvent = discrEvent
         eventUpd.dateEventTI = date.timeIntervalSince1970
         /// Сохранение
         NetworkService.updateEvent(event: eventUpd)

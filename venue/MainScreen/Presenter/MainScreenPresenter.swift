@@ -133,12 +133,22 @@ class MainScreenPresenter: MainScreenPresenterProtocol {
     }
     
     func getOnlineMarkers(range: Int) {
-        NetworkService.loadPublicEvents(completion: { list, success in
-            if success {
-                let filtredEvents = DataService.filtredDateEvents(events: list, range: range)
-                self.createMarkers(eventsForMarker: filtredEvents)
+        if DataService.shared.isPrivateUser {
+            let uID = DataService.shared.localUser.userID
+            NetworkService.loadPrivareEvents(userID: uID) { (events, result) in
+                if result {
+                    let filtredEvents = DataService.filtredDateEvents(events: events, range: range)
+                    self.createMarkers(eventsForMarker: filtredEvents)
+                }
             }
-        })
+        } else {
+            NetworkService.loadPublicEvents(completion: { list, success in
+                if success {
+                    let filtredEvents = DataService.filtredDateEvents(events: list, range: range)
+                    self.createMarkers(eventsForMarker: filtredEvents)
+                }
+            })
+        }
     }
     
 

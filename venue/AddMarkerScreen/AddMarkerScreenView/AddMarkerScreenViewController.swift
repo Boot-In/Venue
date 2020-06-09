@@ -56,6 +56,7 @@ class AddMarkerScreenViewController: UIViewController {
         enableTextField()
         infoLabel.text = "Заполните поля"
         categoryLabel.text = categoryEvent.0
+        iconEventIV.image = UIImage(named: categoryEvent.1)
         infoLabel.textColor = .yellow
         addDoneButtonTo(nameEventTF)
         addDoneButtonToTV(discriptionEventTV)
@@ -206,7 +207,7 @@ func createEndDatePicker() {
         //var startEvent = durationEventTF.text
         //if durationEventTF.text == "" { startEvent = "10:00" }
         //guard let category = categoryEventTF.text else { return }
-        DataService.shared.categoryEvent = categoryEvent.0
+        //DataService.shared.categoryEvent = categoryEvent.0
         infoLabel.textColor = .white
         infoLabel.text = "Сохраняем ...."
         if isEdit {
@@ -236,6 +237,7 @@ extension AddMarkerScreenViewController: AddMarkerScreenProtocol {
     func setCategory(name: String, imageName: String) {
         categoryLabel.text = name
         iconEventIV.image = UIImage(named: imageName)
+        DataService.shared.categoryEvent = name
         categoryEvent = (name, imageName)
     }
     
