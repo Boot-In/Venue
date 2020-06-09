@@ -21,6 +21,7 @@
                 <outlet property="infoLabel" destination="L2C-cc-yhV" id="WIl-Rf-ffF"/>
                 <outlet property="nickNameLabel" destination="gAm-ic-PTa" id="2uC-YR-LDg"/>
                 <outlet property="removeButton" destination="w5u-QT-dvb" id="voM-zC-gut"/>
+                <outlet property="subscribeButton" destination="sBm-6w-QaF" id="gay-Rz-puY"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
             </connections>
         </placeholder>
@@ -32,12 +33,29 @@
                 <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="20" translatesAutoresizingMaskIntoConstraints="NO" id="e6p-I8-Lcb">
                     <rect key="frame" x="10" y="67" width="355" height="400"/>
                     <subviews>
-                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Организатор: " lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="gAm-ic-PTa">
+                        <stackView opaque="NO" contentMode="scaleToFill" spacing="15" translatesAutoresizingMaskIntoConstraints="NO" id="cF3-yK-xpd">
                             <rect key="frame" x="0.0" y="0.0" width="355" height="21.5"/>
-                            <fontDescription key="fontDescription" type="system" pointSize="18"/>
-                            <nil key="textColor"/>
-                            <nil key="highlightedColor"/>
-                        </label>
+                            <subviews>
+                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Организатор: " lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="gAm-ic-PTa">
+                                    <rect key="frame" x="0.0" y="0.0" width="318.5" height="21.5"/>
+                                    <fontDescription key="fontDescription" type="system" pointSize="18"/>
+                                    <nil key="textColor"/>
+                                    <nil key="highlightedColor"/>
+                                </label>
+                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="sBm-6w-QaF">
+                                    <rect key="frame" x="333.5" y="0.5" width="21.5" height="21"/>
+                                    <constraints>
+                                        <constraint firstAttribute="width" constant="21.5" id="0Df-Mo-14o"/>
+                                        <constraint firstAttribute="height" constant="21.5" id="HYf-N8-HhT"/>
+                                    </constraints>
+                                    <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                    <state key="normal" backgroundImage="paperplane" catalog="system"/>
+                                    <connections>
+                                        <action selector="subscribeButtonTap" destination="-1" eventType="touchUpInside" id="0SR-G4-n34"/>
+                                    </connections>
+                                </button>
+                            </subviews>
+                        </stackView>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Дата начала:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ZqL-bu-9hB">
                             <rect key="frame" x="0.0" y="41.5" width="355" height="21.5"/>
                             <fontDescription key="fontDescription" type="system" pointSize="18"/>
@@ -201,5 +219,6 @@
     </objects>
     <resources>
         <image name="chevron.left" catalog="system" width="96" height="128"/>
+        <image name="paperplane" catalog="system" width="128" height="121"/>
     </resources>
 </document>

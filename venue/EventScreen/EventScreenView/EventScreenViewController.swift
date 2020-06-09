@@ -25,6 +25,7 @@ class EventScreenViewController: UIViewController {
     @IBOutlet weak var editButton: UIButton!
     @IBOutlet weak var backButton: UIButton!
     @IBOutlet weak var goToMapButton: UIButton!
+    @IBOutlet weak var subscribeButton: UIButton!
     
     var index: Int = 0
     
@@ -91,6 +92,13 @@ class EventScreenViewController: UIViewController {
         //checkFollowUserStatus()
     }
     
+    @IBAction func subscribeButtonTap() {
+        alertAskConfirmation(title: "ВНИМАНИЕ !", message: "Вы хотите подписаться на данного организатора ?") { (result) in
+            if result {
+                /////code
+            }
+        }
+    }
     
     @IBAction func closeWindow() {
         DataService.shared.event = nil
