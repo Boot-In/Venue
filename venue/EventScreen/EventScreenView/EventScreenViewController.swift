@@ -31,6 +31,7 @@ class EventScreenViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        subscribeButton.isHidden = true ///пока не задействована
         
         goButton.isHidden = false
         cancelFollowButton.isHidden = true

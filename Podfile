@@ -15,6 +15,7 @@ target 'venue' do
   pod 'Firebase/RemoteConfig'
   pod 'Firebase/Analytics'
   pod 'IQKeyboardManagerSwift'
+  pod 'Firebase/Messaging'
     
 # pod 'SwiftyJSON', '~> 4.0'
     
