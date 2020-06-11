@@ -190,7 +190,7 @@ extension EventScreenViewController: EventScreenProtocol {
     func setTextToView(nickName: String, eventData: String, eventName: String, eventCategory: String, icon: String, eventDiscription: String, index: Int) {
         
         nickNameLabel.text = nickName
-        eventDataLabel.text = "Дата проведения: \(eventData)"
+        eventDataLabel.text = "Начало: \(eventData)"
         eventNameLabel.text = "Название: \(eventName)"
         eventCategoryLabel.text = "Категория: \(eventCategory)"
         eventDiscriptionTV.text = eventDiscription
