@@ -31,7 +31,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         setRemoteConfigure()
         
         // включение режима офлайн
-        Database.database().isPersistenceEnabled = true
+       // Database.database().isPersistenceEnabled = true
         
         // [START set_messaging_delegate]
         Messaging.messaging().delegate = self

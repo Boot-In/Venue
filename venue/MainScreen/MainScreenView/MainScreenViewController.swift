@@ -97,7 +97,9 @@ class MainScreenViewController: UIViewController {
     }
     
     @IBAction func publicEventCSAction() {
-       checkPublicStatus() 
+        DataService.shared.markerDidTapped = false
+        checkPublicStatus()
+        updateMarkerButton() 
     }
     
     func checkPublicStatus() {
